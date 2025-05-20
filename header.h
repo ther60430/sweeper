@@ -1,8 +1,8 @@
 #ifndef HEADER_H
 #define HEADER_H
-// Windows ͷ�ļ�
+// Windows 
 #include <windows.h>
-#include <mmsystem.h>             //ϵͳ��ý��ͷ�ļ�
+#include <mmsystem.h>             //六百六十六
 #pragma comment(lib, "winmm.lib") // ������ļ�
 // C ����ʱͷ�ļ�
 #include <iostream>
