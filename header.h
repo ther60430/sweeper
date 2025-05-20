@@ -1,13 +1,16 @@
-// Windows Í·ÎÄ¼þ
+#ifndef HEADER_H
+#define HEADER_H
+// Windows Í·ï¿½Ä¼ï¿½
 #include <windows.h>
-#include<mmsystem.h>       //ÏµÍ³¶àÃ½ÌåÍ·ÎÄ¼þ 
-#pragma comment(lib,"winmm.lib")						//µ¼Èë¿âÎÄ¼þ
-// C ÔËÐÐÊ±Í·ÎÄ¼þ
+#include <mmsystem.h>             //ÏµÍ³ï¿½ï¿½Ã½ï¿½ï¿½Í·ï¿½Ä¼ï¿½
+#pragma comment(lib, "winmm.lib") // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+// C ï¿½ï¿½ï¿½ï¿½Ê±Í·ï¿½Ä¼ï¿½
 #include <iostream>
-#include<vector>
+#include <vector>
 #include <malloc.h>
 #include <memory.h>
 #include <string.h>
 #include <graphics.h>
-#include<conio.h>
+#include <conio.h>
 using namespace std;
+#endif

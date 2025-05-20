@@ -1,19 +1,19 @@
 #include"header.h"
-IMAGE Cell;          //¸ñ×ÓÍ¼Æ¬
-IMAGE Landmine; //À×Í¼Æ¬
-IMAGE Flag;          //ÆìÖÄÍ¼Æ¬
+IMAGE Cell;          //æ ¼å­å›¾ç‰‡
+IMAGE Landmine; //é›·å›¾ç‰‡
+IMAGE Flag;          //æ——å¸œå›¾ç‰‡
 class SweeperGame
 {
     private:
-		int width, height;                  //ÆÁÄ»¿í¸ß
-		int count_thounder;               //À×Êı
-		bool is_game_over;               //ÓÎÏ·ÊÇ·ñ½áÊø
-		bool first_click;                     //ÊÇ·ñµÚÒ»´Îµã»÷
+		int width, height;                  //å±å¹•å®½é«˜
+		int count_thounder;               //é›·æ•°
+		bool is_game_over;               //æ¸¸æˆæ˜¯å¦ç»“æŸ
+		bool first_click;                     //æ˜¯å¦ç¬¬ä¸€æ¬¡ç‚¹å‡»
 	public:
-		void CreateWindows();              //´´½¨´°¿Ú
-		void InitGame();                        //³õÊ¼»¯ÓÎÏ·
-		void HandleInput();                  //´¦ÀíÊäÈë
-		void reveal(int x, int y);             //½Ò¿ª¸ñ×Ó
-		void mark(int x, int y);              //±ê¼ÇÀ×
-		void backgroundmusic();         //±³¾°ÒôÀÖ
+		void CreateWindows();              //åˆ›å»ºçª—å£
+		void InitGame();                        //åˆå§‹åŒ–æ¸¸æˆ
+		void HandleInput();                  //å¤„ç†è¾“å…¥
+		void reveal(int x, int y);             //æ­å¼€æ ¼å­
+		void mark(int x, int y);              //æ ‡è®°é›·
+		void backgroundmusic();         //èƒŒæ™¯éŸ³ä¹
 };
