@@ -1,11 +1,4 @@
 #include"header.h"
-
-struct blank
-{
-	int side_length;
-};
-
-
 IMAGE UnCell;         //未揭开格子图片
 IMAGE Cell;             //已揭开格子图片              
 IMAGE HoverCell;   //鼠标悬停格子图片
@@ -25,8 +18,6 @@ class settings
 public:
 	int width = 1200, height = 600;     //屏幕宽高
 	COLORREF  Backcolor =RGB(57,197,187);
-	int width = 1200, height = 600;//屏幕宽高
-	COLORREF  Backcolor =RGB(71,59,120);
 };
 
 class SweeperGame
@@ -77,9 +68,8 @@ void SweeperGame::InitGame()
 	loadimage(&num[5], _T("images/6.png"));
 	loadimage(&num[6], _T("images/7.png"));
 	loadimage(&num[7], _T("images/8.png"));
-	mciSendString("open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
-	mciSendString("play bgmusic repeat", NULL, 0, NULL);
-
+	mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
+	mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
 }
 
 int main()
