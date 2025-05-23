@@ -11,7 +11,7 @@ IMAGE Cell;             //已揭开格子图片
 IMAGE HoverCell;   //鼠标悬停格子图片
 IMAGE Landmine;   //雷图片
 IMAGE Flag;            //旗帜图片
-IMAGE GameOver; //游戏结束图片
+IMAGE Gamewithdraw; //游戏返回图片
 IMAGE Win;            //游戏胜利图片
 IMAGE GameStart;  //游戏开始图片
 IMAGE GamePause;  //游戏暂停图片
@@ -19,7 +19,7 @@ IMAGE GameContinue; //继续游戏图片
 IMAGE GameRestart;  //重新开始图片
 IMAGE GameExit;    //退出游戏图片
 IMAGE num[8];     //数字图片1-8
-
+IMAGE score;          //分数图片
 class settings
 {
 public:
@@ -57,11 +57,13 @@ void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);
 	setbkcolor(setting.Backcolor);
-	loadimage(&UnCell, _T("images/.png"));          //未揭开格子图片
-	loadimage(&Cell, _T("images/0.png"));            //已揭开格子图片
+	loadimage(&UnCell, _T("images/uncell.png"));          //未揭开格子图片
+	loadimage(&Cell, _T("images/cell.png"));            //已揭开格子图片
+	loadimage(&HoverCell, _T("images/hover.png"));                     //鼠标悬停格子图片
 	loadimage(&Landmine, _T("images/thounder.png"));              //雷图片
+	loadimage(&score, _T("images/history_scores.png"));         //分数图片
 	loadimage(&GameStart, _T("images/start.png"));              //游戏开始图片
-	loadimage(&GameOver, _T("images/.png"));                    //游戏结束图片
+	loadimage(&Gamewithdraw, _T("images/.png"));                    //游戏返回图片
 	loadimage(&GamePause, _T("images/pause.png"));           //游戏暂停图片
 	loadimage(&GameContinue, _T("images/.png"));            //继续游戏图片
 	loadimage(&GameRestart, _T("images/.png"));                   //重新开始图片
@@ -75,7 +77,7 @@ void SweeperGame::InitGame()
 	loadimage(&num[5], _T("images/6.png"));
 	loadimage(&num[6], _T("images/7.png"));
 	loadimage(&num[7], _T("images/8.png"));
-
+	mciSendString("open bgm.mp3", 0, 0, 0);
 }
 
 int main()
