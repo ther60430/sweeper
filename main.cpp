@@ -1,4 +1,11 @@
 #include"header.h"
+
+struct blank
+{
+	int side_length;
+};
+
+
 IMAGE UnCell;         //未揭开格子图片
 IMAGE Cell;             //已揭开格子图片
 IMAGE HoverCell;   //鼠标悬停格子图片
@@ -13,13 +20,23 @@ IMAGE GameContinue; //继续游戏图片
 IMAGE GameRestart;  //重新开始图片
 IMAGE GameExit;    //退出游戏图片
 IMAGE num[9];     //数字图片0~9
+
+class settings
+{
+public:
+	int width = 1200, height = 600;//屏幕宽高
+
+	COLORREF  Backcolor =RGB(57,197,187);
+};
+
 class SweeperGame
 {
     private:
-		int width, height;                  //屏幕宽高
+		                  
 		int count_thounder;               //雷数
 		bool is_game_over;               //游戏是否结束
 		bool first_click;                     //是否第一次点击
+		settings setting;
 	public:
 		void CreateWindows();              //创建窗口
 		void InitGame();                        //初始化游戏
@@ -27,4 +44,18 @@ class SweeperGame
 		void reveal(int x, int y);             //揭开格子
 		void mark(int x, int y);              //标记雷
 		void backgroundmusic();         //背景音乐
+		void run_game(void)
+		{
+				initgraph(setting.width, setting.height);
+				setbkcolor(setting.Backcolor);
+				cleardevice();
+
+				_getch();
+		}
 };
+
+int main()
+{
+	SweeperGame sg;
+	sg.run_game();
+}
