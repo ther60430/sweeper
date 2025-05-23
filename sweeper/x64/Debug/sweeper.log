@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  main.cpp
 C:\Users\30900\Desktop\sweeper\main.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\Users\30900\Desktop\sweeper\header.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -8,3 +9,11 @@ C:\Users\30900\Desktop\sweeper\header.h(1,1): warning C4819: 该文件包含不�
 =======
 ﻿  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
 >>>>>>> f2de528b08d206d516cd8e8be8446e0191a9f39c
+=======
+﻿  main.cpp
+D:\sweeper\main.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\sweeper\header.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“main.cpp”)
+  
+  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
+>>>>>>> bc4ba2084dd80ee8625e53cbdee71c5fa7336baa
