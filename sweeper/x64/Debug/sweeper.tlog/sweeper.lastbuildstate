@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.42.34433:TargetPlatformVersion=10.0.22621.0:
-Debug|x64|C:\Users\30900\Desktop\sweeper\|
-=======
 PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.43.34808:TargetPlatformVersion=10.0.22621.0:
 Debug|x64|D:\sweeper\|
->>>>>>> f2de528b08d206d516cd8e8be8446e0191a9f39c
