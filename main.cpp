@@ -25,7 +25,7 @@ class settings
 {
 public:
 	int width = 1200, height = 600;//屏幕宽高
-	COLORREF  Backcolor =RGB(252,21,47);
+	COLORREF  Backcolor =RGB(71,59,120);
 };
 
 class SweeperGame
