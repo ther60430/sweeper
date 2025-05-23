@@ -1,7 +1,18 @@
 #include"header.h"
-IMAGE Cell;          //格子图片
-IMAGE Landmine; //雷图片
-IMAGE Flag;          //旗帜图片
+IMAGE UnCell;         //未揭开格子图片
+IMAGE Cell;             //已揭开格子图片
+IMAGE HoverCell;   //鼠标悬停格子图片
+IMAGE Landmine;   //雷图片
+IMAGE Flag;            //旗帜图片
+IMAGE Background; //背景图片
+IMAGE GameOver; //游戏结束图片
+IMAGE Win;            //游戏胜利图片
+IMAGE GameStart;  //游戏开始图片
+IMAGE GamePause;  //游戏暂停图片
+IMAGE GameContinue; //继续游戏图片
+IMAGE GameRestart;  //重新开始图片
+IMAGE GameExit;    //退出游戏图片
+IMAGE num[9];     //数字图片0~9
 class SweeperGame
 {
     private:
