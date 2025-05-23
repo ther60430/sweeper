@@ -66,7 +66,7 @@ void SweeperGame::InitGame()
 	loadimage(&Gamewithdraw, _T("images/.png"));                    //游戏返回图片
 	loadimage(&GamePause, _T("images/pause.png"));           //游戏暂停图片
 	loadimage(&GameContinue, _T("images/.png"));            //继续游戏图片
-	loadimage(&GameRestart, _T("images/.png"));                   //重新开始图片
+	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
 	loadimage(&GameExit, _T("images/end.png"));               //退出游戏按钮图片
 	loadimage(&Flag, _T("images/flag.png"));             //旗帜图片
 	loadimage(&num[0], _T("images/1.png"));
