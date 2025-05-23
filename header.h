@@ -13,4 +13,7 @@
 #include <graphics.h>
 #include <conio.h>
 using namespace std;
+
+#include"fun.h"
+
 #endif

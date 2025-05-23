@@ -1,4 +1,5 @@
 #include"header.h"
+<<<<<<< HEAD
 IMAGE UnCell;         //未揭开格子图片
 IMAGE Cell;             //已揭开格子图片              
 IMAGE HoverCell;   //鼠标悬停格子图片
@@ -71,6 +72,9 @@ void SweeperGame::InitGame()
 	mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
 	mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
 }
+=======
+
+>>>>>>> 1a51e13bb7b1003ec3d92a00fde3a51c2dd4d610
 
 int main()
 {

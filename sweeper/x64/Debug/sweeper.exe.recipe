@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\code2022\game\sweeper\x64\Debug\sweeper.exe</FullPath>
+=======
+      <FullPath>D:\sweeper\x64\Debug\sweeper.exe</FullPath>
+>>>>>>> 1a51e13bb7b1003ec3d92a00fde3a51c2dd4d610
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
