@@ -1,7 +1,7 @@
 #include"header.h"
 
 IMAGE UnCell;         //未揭开格子图片
-IMAGE Cell;             //已揭开格子图片              
+IMAGE Cell;             //已揭开格子图片              O
 IMAGE HoverCell;   //鼠标悬停格子图片
 IMAGE Landmine;   //雷图片
 IMAGE Flag;            //旗帜图片
