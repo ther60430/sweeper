@@ -15,7 +15,7 @@ private:
 
 	int count_thounder;               //雷数
 	bool is_game_over;               //游戏是否结束
-	bool first_click;                     //是否第一次点击
+	                     //是否第一次点击
 	settings setting;
 public:
 	void InitGame();                        //初始化游戏
