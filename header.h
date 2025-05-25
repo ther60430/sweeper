@@ -17,22 +17,6 @@ using namespace std;
 
 #include"fun.h"
 
-struct Ccoordinate
-{
-    int x;
-    int y;
-};
-
-class Blank
-{
-public:
-    IMAGE img;
-    bool IsMine;
-    int NumMine;
-    bool first_click;
-    Ccoordinate top_left;
-    Ccoordinate bottom_right;
-};
 
 extern IMAGE Title;            //标题
 extern IMAGE UnCell;         //未揭开格子图片
@@ -48,6 +32,7 @@ extern IMAGE GameContinue; //继续游戏图片
 extern IMAGE GameRestart;  //重新开始图片
 extern IMAGE GameExit1, GameExit;    //退出游戏图片
 extern IMAGE num[8];     //数字图片1-8
-extern IMAGE score1, score;          //分数图片
+extern IMAGE history_scores1, history_scores;          //分数图片
+extern IMAGE BackGraound;//背景图片
 
 #endif

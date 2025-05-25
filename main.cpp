@@ -14,13 +14,14 @@ IMAGE GameContinue; //继续游戏图片
 IMAGE GameRestart;  //重新开始图片
 IMAGE GameExit1, GameExit;    //退出游戏图片
 IMAGE num[8];     //数字图片1 - 8
-IMAGE score1, score;          //分数图片
+IMAGE history_scores1, history_scores;          //分数图片
+IMAGE BackGraound;//背景图片
 
 int main()
 {
 	SweeperGame sg;
 	sg.InitGame();
 	sg.run_game();
-	sg.hoverstart();
+
 	_getch();
 }
