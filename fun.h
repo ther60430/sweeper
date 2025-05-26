@@ -61,8 +61,8 @@ public:
 	void mark(int x, int y);              //标记雷
 	void backgroundmusic();         //背景音乐
 	void run_game(void);            //运行游戏
-	int hoverstart0(void);                           //一级界面悬停函数
-	int hoverstart1a(void);                           //二a级界面悬停函数
+	int hoverstart1(void);                           //一级界面悬停函数
+	int hoverstart2a(void);                           //二a级界面悬停函数
 };
 
 #endif
