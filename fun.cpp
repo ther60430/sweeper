@@ -45,8 +45,8 @@ void SweeperGame::run_game(void)
     putimage(472, 300, &GameStart1, SRCCOPY);
 	putimage(472, 380, &GameExit1, SRCCOPY);
 	putimage(472, 460, &history_scores1, SRCCOPY);
-    
     FlushBatchDraw();
+
 	while (1)
 	{
         int flag = hoverstart();
@@ -58,7 +58,7 @@ void SweeperGame::run_game(void)
                     deleteimage(&GameStart1);
                     deleteimage(&GameExit1);
                     deleteimage(&history_scores);
-                    putimage(0, 0, &GameContinue, SRCCOPY);
+                    
                 }; break;
         }
 	}
