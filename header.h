@@ -34,5 +34,8 @@ extern IMAGE GameExit1, GameExit;    //退出游戏图片
 extern IMAGE num[8];     //数字图片1-8
 extern IMAGE history_scores1, history_scores;          //分数图片
 extern IMAGE BackGraound;//背景图片
-
+extern IMAGE Simple;//简单模式
+extern IMAGE Medium;//中等模式
+extern IMAGE Difficult;//困难模式
+extern IMAGE Withdraw;//返回上一页
 #endif

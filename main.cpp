@@ -16,6 +16,10 @@ IMAGE GameExit1, GameExit;    //退出游戏图片
 IMAGE num[8];     //数字图片1 - 8
 IMAGE history_scores1, history_scores;          //分数图片
 IMAGE BackGraound;//背景图片
+IMAGE Simple;//简单模式
+IMAGE Medium;//中等模式
+IMAGE Difficult;//困难模式
+IMAGE Withdraw;//返回上一页
 
 int main()
 {
