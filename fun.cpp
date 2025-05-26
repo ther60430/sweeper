@@ -27,22 +27,15 @@ void SweeperGame::InitGame()
 	loadimage(&num[5], _T("images/6.png"), 30, 30);
 	loadimage(&num[6], _T("images/7.png"), 30, 30);
 	loadimage(&num[7], _T("images/8.png"), 30, 30);
-    loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);
-    loadimage(&Simple, _T("images/Simple.png"), 256, 64);
-    loadimage(&Medium, _T("images/Medium.png"), 256, 64);
-    loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);
-    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);
-
-	mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
-	mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
-}
-
-void deleteimage(IMAGE* img)
-{
-	if (img)
-    {
-		img->Resize(0, 0);
-	}
+	loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //背景图片
+	loadimage(&Simple1, _T("images/Simple.png"), 256, 64);                                        //简单模式图片
+	loadimage(&Medium1, _T("images/Medium.png"), 256, 64);                                //中等模式图片
+	loadimage(&Difficult1, _T("images/Difficult.png"), 256, 64);                                 //困难模式图片
+    loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //简单模式悬停图片
+    loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //中等模式悬停图片
+    loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //困难模式悬停图片
+	loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //返回按钮图片
+    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
 }
 
 void SweeperGame::run_game(void)  
@@ -50,41 +43,50 @@ void SweeperGame::run_game(void)
     int flag0 = -1;
 	while (1)
 	{
-        cleardevice();
-        putimage(0, 0, &BackGraound, SRCCOPY);                  //第
-        putimage(200, 100, &Title, SRCCOPY);                    //一
-        putimage(472, 300, &GameStart1, SRCCOPY);               //级
-        putimage(472, 380, &history_scores1, SRCCOPY);          //画
-        putimage(472, 460, &GameExit1, SRCCOPY);                //面
-        FlushBatchDraw();                                       //
-        flag0 = hoverstart0();                                  //
-        
+		displayscreen1();				//一级画面显示函数
+		flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
         switch (flag0)
         {
             case 1:
                 {
                     int flag1;
-                    cleardevice();
-                    putimage(0, 0, &BackGraound, SRCCOPY);
-                    putimage(0, 0, &Withdraw, SRCCOPY);
-                    putimage(472, 300, &Simple, SRCCOPY);
-                    putimage(472, 380, &Medium, SRCCOPY);
-                    putimage(472, 460, &Difficult, SRCCOPY);
-                    flag1 = hoverstart1a();
+					displayscreen2();                   //二级画面显示函数
+					flag1 = hoverstart2();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
                     switch (flag1)
                     {
-                        case 4:break;
+                        case 4:
+                            break;
                     }
-                };break;
-            case 3:exit(1);
+                }
+                break;
+            case 3:
+                exit(1);
         }
 	}
-    
-        
-    
 }
 
-int SweeperGame::hoverstart0()
+void SweeperGame::displayscreen1()                //一级画面显示函数
+{
+    cleardevice();                                          //清屏
+    putimage(0, 0, &BackGraound, SRCCOPY);                  //背景图片
+    putimage(200, 100, &Title, SRCCOPY);                    //标题图片
+    putimage(472, 300, &GameStart1, SRCCOPY);               //游戏开始按钮
+    putimage(472, 380, &history_scores1, SRCCOPY);          //分数按钮
+    putimage(472, 460, &GameExit1, SRCCOPY);                //退出按钮
+    FlushBatchDraw();                                       //刷新屏幕
+}
+
+void SweeperGame::displayscreen2()                   //二级画面显示函数
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    putimage(0, 0, &Withdraw1, SRCCOPY);
+    putimage(472, 300, &Simple1, SRCCOPY);
+    putimage(472, 380, &Medium1, SRCCOPY);
+    putimage(472, 460, &Difficult1, SRCCOPY);
+}
+
+int SweeperGame::hoverstart1()                      //一级画面悬停及点击事件处理函数
 {
     ExMessage msg;
     while (true)
@@ -96,74 +98,68 @@ int SweeperGame::hoverstart0()
         bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
         // 检查鼠标是否在退出按钮上
         bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
-        
         switch (msg.message)
         {
-            case WM_MOUSEMOVE:
-                // 处理开始按钮悬停
-                if (inStartButton)
-                {
-                    putimage(472, 300, &GameStart, SRCCOPY);
-                }
-                else
-                {
-                    putimage(472, 300, &GameStart1, SRCCOPY);
-                }
-                // 处理分数按钮悬停
-                if (inScoreButton)
-                {
-                    putimage(472, 380, &history_scores1, SRCCOPY);
-                }
-                else
-                {
-                    putimage(472, 380, &history_scores, SRCCOPY);
-                }
-                // 处理退出按钮悬停
-                if (inExitButton)
-                {
-                    ExMessage msg1;
-                    msg1 = getmessage(EX_MOUSE);
-                    putimage(472, 460, &GameExit, SRCCOPY);
-                    if(msg1.message == WM_LBUTTONDOWN)
-                    {
-                        return 3;
-                    }
-                }
-                else
-                {
-                    putimage(472, 460, &GameExit1, SRCCOPY);
-                }
-                break;
-        }
-        
-        if (msg.message == WM_LBUTTONDOWN)
+        case WM_MOUSEMOVE:
+            // 处理开始按钮悬停
+            if (inStartButton)
+            {
+                putimage(472, 300, &GameStart, SRCCOPY);
+            }
+            else
+            {
+                putimage(472, 300, &GameStart1, SRCCOPY);
+            }
+            // 处理分数按钮悬停
+            if (inScoreButton)
+            {
+                putimage(472, 380, &history_scores1, SRCCOPY);
+            }
+            else
+            {
+                putimage(472, 380, &history_scores, SRCCOPY);
+            }
+            // 处理退出按钮悬停
+            if (inExitButton)
+            {
+                putimage(472, 460, &GameExit, SRCCOPY);
+            }
+            else
+            {
+                putimage(472, 460, &GameExit1, SRCCOPY);
+            }
+            break;
+        case WM_LBUTTONDOWN:
         {
-            if (msg.x >= 472 && msg.x <= 728 && msg.y >= 300 && msg.y <= 364)
+            // 处理点击事件
+            if (inStartButton)
                 return 1;
-            else if (msg.x >= 472 && msg.x <= 728 && msg.y >= 380 && msg.y <= 444)
+            else if (inScoreButton)
                 return 2;
-            else if (msg.x >= 472 && msg.x <= 728 && msg.y >= 460 && msg.y <= 524)
+            else if (inExitButton)
                 return 3;
+            break;
         }
-
+        }
     }
 }
 
-int SweeperGame::hoverstart1a()
-{
-    ExMessage msg;
-    while (true)
+    int SweeperGame::hoverstart2()                               // 二级画面悬停及点击事件处理函数
     {
-        msg = getmessage(EX_MOUSE);
-        // 检查鼠标是否在简单按钮上
-        bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // 检查鼠标是否在中等按钮上
-        bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
-        // 检查鼠标是否在困难按钮上
-        bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
-        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
-        switch (msg.message)
+        ExMessage msg;
+        while (true)
         {
+            msg = getmessage(EX_MOUSE);
+            // 检查鼠标是否在简单按钮上
+            bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
+            // 检查鼠标是否在中等按钮上
+            bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
+            // 检查鼠标是否在困难按钮上
+            bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
+            // 检查鼠标是否在返回按钮上
+            bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
+            switch (msg.message)
+            {
             case WM_MOUSEMOVE:
                 // 处理简单按钮悬停
                 if (inSimpleButton)
@@ -172,44 +168,47 @@ int SweeperGame::hoverstart1a()
                 }
                 else
                 {
-                    putimage(472, 300, &GameStart1, SRCCOPY);
+                    putimage(472, 300, &Simple1, SRCCOPY);
                 }
-                // 处理困难按钮悬停
+                // 处理中等按钮悬停
                 if (inMediumButton)
                 {
                     putimage(472, 380, &Medium, SRCCOPY);
                 }
                 else
                 {
-                    putimage(472, 380, &history_scores, SRCCOPY);
+                    putimage(472, 380, &Medium1, SRCCOPY);
                 }
-                // 处理退出按钮悬停
+                // 处理困难按钮悬停
                 if (inDifficultButton)
                 {
-                    ExMessage msg1;
-                    msg1 = getmessage(EX_MOUSE);
                     putimage(472, 460, &Difficult, SRCCOPY);
-                    if (msg1.message == WM_LBUTTONDOWN)
-                    {
-                        return 3;
-                    }
                 }
                 else
                 {
-                    putimage(472, 460, &GameExit1, SRCCOPY);
+                    putimage(472, 460, &Difficult1, SRCCOPY);
+                }
+                // 处理返回按钮悬停
+                if (inWithdrawButton)
+                {
+                    putimage(0, 0, &Withdraw, SRCCOPY);
+                }
+                else
+                {
+                    putimage(0, 0, &Withdraw1, SRCCOPY);
                 }
                 break;
-        }
-        if (msg.message == WM_LBUTTONDOWN)
-        {
-            if (msg.x >= 472 && msg.x <= 728 && msg.y >= 300 && msg.y <= 364)
-                return 1;
-            else if (msg.x >= 472 && msg.x <= 728 && msg.y >= 380 && msg.y <= 444)
-                return 2;
-            else if (msg.x >= 472 && msg.x <= 728 && msg.y >= 460 && msg.y <= 524)
-                return 3;
-            else if (msg.x >= 0 && msg.x <= 64 && msg.y >= 0 && msg.y <= 64)
-                return 4;
-        }
-    }
-}
+            case WM_LBUTTONDOWN:                        // 处理点击事件
+            {
+                if (inSimpleButton)
+                    return 1;
+                else if (inMediumButton)
+                    return 2;
+                else if (inDifficultButton)
+                    return 3;
+                else if (inWithdrawButton)
+                    return 4;
+            }
+         }
+     }
+}              

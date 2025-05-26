@@ -2,7 +2,7 @@
 #define FUN_H
 
 #include"header.h"
-
+#pragma once
 class Ccoordinate
 {
 public:
@@ -49,7 +49,6 @@ public:
 class SweeperGame
 {
 private:
-
 	int count_thounder;               //雷数
 	bool is_game_over;               //游戏是否结束
 	std::vector<Blanks> blank;
@@ -59,10 +58,11 @@ public:
 	void HandleInput();                  //处理输入
 	void reveal(int x, int y);             //揭开格子
 	void mark(int x, int y);              //标记雷
-	void backgroundmusic();         //背景音乐
 	void run_game(void);            //运行游戏
-	int hoverstart0(void);                           //一级界面悬停函数
-	int hoverstart1a(void);                           //二a级界面悬停函数
+	int hoverstart1(void);                           //一级界面悬停函数
+	int hoverstart2(void);                           //二级界面悬停函数
+	void displayscreen1(void);                  //一级界面显示函数
+	void displayscreen2(void);                  //二级界面显示函数
 };
 
 #endif
