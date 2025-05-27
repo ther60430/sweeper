@@ -18,25 +18,6 @@ void SweeperGame::InitGame()
 	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
 	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图片
 	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图片
-<<<<<<< HEAD
-	loadimage(&Flag, _T("images/flag.png"));             //旗帜图片
-	loadimage(&num[0], _T("images/1.png"));
-	loadimage(&num[1], _T("images/2.png"));
-	loadimage(&num[2], _T("images/3.png"));
-	loadimage(&num[3], _T("images/4.png"));
-	loadimage(&num[4], _T("images/5.png"));
-	loadimage(&num[5], _T("images/6.png"));
-	loadimage(&num[6], _T("images/7.png"));
-	loadimage(&num[7], _T("images/8.png"));
-	//mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
-	//mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
-}
-
-void deleteimage(IMAGE* img) {
-	if (img) {
-		img->Resize(0, 0);
-	}
-=======
 	loadimage(&Flag, _T("images/flag.png"),30,30);             //旗帜图片
 	loadimage(&num[0], _T("images/1.png"), 30, 30);
 	loadimage(&num[1], _T("images/2.png"), 30, 30);
@@ -55,7 +36,7 @@ void deleteimage(IMAGE* img) {
     loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //返回按钮图片
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
->>>>>>> 843b134daa670a8f996a8fafba303e33cefc5a90
+
 }
 
 void SweeperGame::run_game(void)  
@@ -72,8 +53,8 @@ void SweeperGame::run_game(void)
                     while (1)
                     {
                         int flag1 = -1;
-                        displayscreen2();                   //二级画面显示函数
-                        flag1 = hoverstart2();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                        displayscreen2a();                   //二级画面显示函数
+                        flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
                         switch (flag1)
                         {
                             
@@ -81,10 +62,8 @@ void SweeperGame::run_game(void)
                         if (flag1 == 4)
                             break;
                     }
-                    
                 }break;
-            case 3:
-                exit(1);
+            case 3:exit(1);
         }
 	}
 }
@@ -100,7 +79,7 @@ void SweeperGame::displayscreen1(void)                //一级画面显示函数
     FlushBatchDraw();                                       //刷新屏幕
 }
 
-void SweeperGame::displayscreen2(void)                   //二级画面显示函数
+void SweeperGame::displayscreen2a(void)                   //二级画面显示函数
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
@@ -168,71 +147,72 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
     }
 }
 
-    int SweeperGame::hoverstart2()                               // 二级画面悬停及点击事件处理函数
+int SweeperGame::hoverstart2a()                               // 二级画面悬停及点击事件处理函数
+{
+    ExMessage msg;
+    while (true)
     {
-        ExMessage msg;
-        while (true)
+        msg = getmessage(EX_MOUSE);
+        // 检查鼠标是否在简单按钮上
+        bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
+        // 检查鼠标是否在中等按钮上
+        bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
+        // 检查鼠标是否在困难按钮上
+        bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
+        // 检查鼠标是否在返回按钮上
+        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
+        switch (msg.message)
         {
-            msg = getmessage(EX_MOUSE);
-            // 检查鼠标是否在简单按钮上
-            bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-            // 检查鼠标是否在中等按钮上
-            bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
-            // 检查鼠标是否在困难按钮上
-            bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
-            // 检查鼠标是否在返回按钮上
-            bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
-            switch (msg.message)
-            {
             case WM_MOUSEMOVE:
-                // 处理简单按钮悬停
-                if (inSimpleButton)
                 {
-                    putimage(472, 300, &Simple, SRCCOPY);
-                }
-                else
-                {
-                    putimage(472, 300, &Simple1, SRCCOPY);
-                }
-                // 处理中等按钮悬停
-                if (inMediumButton)
-                {
-                    putimage(472, 380, &Medium, SRCCOPY);
-                }
-                else
-                {
-                    putimage(472, 380, &Medium1, SRCCOPY);
-                }
-                // 处理困难按钮悬停
-                if (inDifficultButton)
-                {
-                    putimage(472, 460, &Difficult, SRCCOPY);
-                }
-                else
-                {
-                    putimage(472, 460, &Difficult1, SRCCOPY);
-                }
-                // 处理返回按钮悬停
-                if (inWithdrawButton)
-                {
-                    putimage(0, 0, &Withdraw, SRCCOPY);
-                }
-                else
-                {
-                    putimage(0, 0, &Withdraw1, SRCCOPY);
-                }
-                break;
+                    // 处理简单按钮悬停
+                    if (inSimpleButton)
+                    {
+                        putimage(472, 300, &Simple, SRCCOPY);
+                    }
+                    else
+                    {
+                        putimage(472, 300, &Simple1, SRCCOPY);
+                    }
+                    // 处理中等按钮悬停
+                    if (inMediumButton)
+                    {
+                        putimage(472, 380, &Medium, SRCCOPY);
+                    }
+                    else
+                    {
+                        putimage(472, 380, &Medium1, SRCCOPY);
+                    }
+                    // 处理困难按钮悬停
+                    if (inDifficultButton)
+                    {
+                        putimage(472, 460, &Difficult, SRCCOPY);
+                    }
+                    else
+                    {
+                        putimage(472, 460, &Difficult1, SRCCOPY);
+                    }
+                    // 处理返回按钮悬停
+                    if (inWithdrawButton)
+                    {
+                        putimage(0, 0, &Withdraw, SRCCOPY);
+                    }
+                    else
+                    {
+                        putimage(0, 0, &Withdraw1, SRCCOPY);
+                    }
+                }break;
             case WM_LBUTTONDOWN:                        // 处理点击事件
-            {
-                if (inSimpleButton)
-                    return 1;
-                else if (inMediumButton)
-                    return 2;
-                else if (inDifficultButton)
-                    return 3;
-                else if (inWithdrawButton)
-                    return 4;
-            }
-         }
-     }
-}              
+                {
+                    if (inSimpleButton)
+                        return 1;
+                    else if (inMediumButton)
+                        return 2;
+                    else if (inDifficultButton)
+                        return 3;
+                    else if (inWithdrawButton)
+                        return 4;
+                }break;
+        }
+    }
+}
