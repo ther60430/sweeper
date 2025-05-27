@@ -19,15 +19,8 @@ public:
 class Blanks
 {
 public:
-<<<<<<< HEAD
-	IMAGE img;               
-	bool IsMine;         
-	int NumMine;
-	bool first_click;
-=======
 	IMAGE Before_img;
 	IMAGE After_img;
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
 	bool IsMine;
@@ -58,7 +51,7 @@ public:
 	}
 	void showUnCell(void)
 	{
-		putimage(top_left.x, top_left.y, &UnCell, SRCCOPY);
+		
 	}
 };
 
@@ -85,13 +78,7 @@ public:
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
-<<<<<<< HEAD
-	void displayscreen2a(void);                  //二级界面显示函数
-	void displayscreen2b(void);               //二级界面历史记录
-	void difficult();
-=======
-	void displayscreen2a(void);                  //二级界面显示函数                          //二a级界面悬停函数
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
+	void displayscreen2a(void);                  //二级界面显示函数                        
 };
 
 #endif

@@ -1,7 +1,5 @@
 ﻿  fun.cpp
-<<<<<<< HEAD
-D:\code2022\game\sweeper\fun.cpp(60,21): warning C4060: switch 语句没有包含“case”或“default”标签
+  main.cpp
+  正在生成代码...
+  LINK : 没有找到 D:\code2022\game\sweeper\x64\Debug\sweeper.exe 或上一个增量链接没有生成它；正在执行完全链接
   sweeper.vcxproj -> D:\code2022\game\sweeper\x64\Debug\sweeper.exe
-=======
-  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c

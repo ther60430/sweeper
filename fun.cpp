@@ -5,15 +5,9 @@ void SweeperGame::InitGame()
 	initgraph(setting.width, setting.height);                          //1200*600
 	loadimage(&Title, _T("images/title.png"), 800, 120);       //±êÌâÍ¼Æ¬
 	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //Î´½Ò¿ª¸ñ×ÓÍ¼Æ¬
-<<<<<<< HEAD
-	loadimage(&Cell, _T("images/cell.png"),30,30);            //ÒÑ½Ò¿ª¸ñ×ÓÍ¼Æ¬
-	loadimage(&HoverCell, _T("images/hover.png"),30,30);                     //Êó±êÐüÍ£¸ñ×ÓÍ¼Æ¬
-	loadimage(&Landmine, _T("images/thounder.png"));              //À×Í¼Æ¬
-=======
 	loadimage(&Cell, _T("images/cell.png"), 30, 30);            //ÒÑ½Ò¿ª¸ñ×ÓÍ¼Æ¬
 	loadimage(&HoverCell, _T("images/hover.png"), 30, 30);                     //Êó±êÐüÍ£¸ñ×ÓÍ¼Æ¬
 	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //À×Í¼Æ¬
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
     loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //·ÖÊýÐüÍ£Í¼Æ¬
 	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //·ÖÊýÍ¼Æ¬
 	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //ÓÎÏ·¿ªÊ¼Í¼Æ¬
@@ -40,83 +34,59 @@ void SweeperGame::InitGame()
     loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //¼òµ¥Ä£Ê½ÐüÍ£Í¼Æ¬
     loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //ÖÐµÈÄ£Ê½ÐüÍ£Í¼Æ¬
     loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //À§ÄÑÄ£Ê½ÐüÍ£Í¼Æ¬
-	loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //·µ»Ø°´Å¥Í¼Æ¬
-<<<<<<< HEAD
-    loadimage(&Withdraw, _T("images/Withdraw1.png"), 64, 64);                            //·µ»Ø°´Å¥ÐüÍ£Í¼Æ¬
-=======
+	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //·µ»Ø°´Å¥Í¼Æ¬
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //·µ»Ø°´Å¥ÐüÍ£Í¼Æ¬
 
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 }
 
-void SweeperGame::run_game(void)  
-{  
+void SweeperGame::run_game(void)
+{
     int flag0 = -1;
-	while (1)
-	{
-		displayscreen1();				//Ò»¼¶»­ÃæÏÔÊ¾º¯Êý
-		flag0 = hoverstart1();     //Ò»¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý       1/2/3                    
+    while (1)
+    {
+        displayscreen1();				//Ò»¼¶»­ÃæÏÔÊ¾º¯Êý
+        flag0 = hoverstart1();     //Ò»¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý       1/2/3                    
         switch (flag0)
         {
-            case 1:
-             {
-                while (1)
+        case 1:
+        {
+            while (1)
+            {
+                int flag1 = -1;
+                displayscreen2a();                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
+                flag1 = hoverstart2a();                   // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý             1/2/3/4
+                switch (flag1)
                 {
-<<<<<<< HEAD
-                    int flag1;
-                    displayscreen2a();                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
-                    flag1 = hoverstart2();                   // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý             1/2/3/4
-                    switch (flag1)
-                    {
-                        break;
-                    }
-                    if (flag1 == 4)
-                    {
-                        break;
-                    }
-                }
-             }break;
-            case 3:
-                exit(1);
-=======
+                case 1:
+                {
                     while (1)
                     {
-                        int flag1 = -1;
-                        displayscreen2a();                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
-                        flag1 = hoverstart2a();                   // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý             1/2/3/4
-                        switch (flag1)
+                        cleardevice();
+                        putimage(0, 0, &BackGraound, SRCCOPY);
+                        for (int i = 0; i < 9; i++)
                         {
-                            case 1:
-                                {
-                                    while (1)
-                                    {
-                                        cleardevice();
-                                        putimage(0, 0, &BackGraound, SRCCOPY);
-                                        for (int i = 0; i < 9; i++)
-                                        {
-                                            vector<Blanks> blank2;
-                                            for (int j = 0; j < 9; j++)
-                                            {
-                                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-                                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                                                Blanks temp(UnCell, Cell, t_l, b_r);
-                                                temp.show();
-                                                blank2.push_back(temp);
-                                            }
-                                            blank.push_back(blank2);
-                                        }
-                                        while (1);
-                                    }
-                                }break;
+                            vector<Blanks> blank2;
+                            for (int j = 0; j < 9; j++)
+                            {
+                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+                                Blanks temp(UnCell, Cell, t_l, b_r);
+                                temp.show();
+                                blank2.push_back(temp);
+                            }
+                            blank.push_back(blank2);
                         }
-                        if (flag1 == 4)
-                            break;
+                        while (1);
                     }
                 }break;
-            case 3:exit(1);
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
+                }
+                if (flag1 == 4)
+                    break;
+            }break;
+        case 3:exit(1);
         }
-	}
+        }
+    }
 }
 
 void SweeperGame::displayscreen1(void)                //Ò»¼¶»­ÃæÏÔÊ¾º¯Êý
@@ -130,11 +100,8 @@ void SweeperGame::displayscreen1(void)                //Ò»¼¶»­ÃæÏÔÊ¾º¯Êý
     FlushBatchDraw();                                       //Ë¢ÐÂÆÁÄ»
 }
 
-<<<<<<< HEAD
-void SweeperGame::displayscreen2a()                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
-=======
+
 void SweeperGame::displayscreen2a(void)                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
@@ -258,34 +225,6 @@ int SweeperGame::hoverstart2a()                               // ¶þ¼¶»­ÃæÐüÍ£¼°µ
                     }
                 }break;
             case WM_LBUTTONDOWN:                        // ´¦Àíµã»÷ÊÂ¼þ
-<<<<<<< HEAD
-            {
-                if (inSimpleButton)
-                    return 1;
-                else if (inMediumButton)
-                    return 2;
-                else if (inDifficultButton)
-                    return 3;
-                else if (inWithdrawButton)
-                    return 4;
-            }
-         }
-     }
-}              
-
-void SweeperGame::difficult()
-{
-    int starty = 60;
-    for (int i = 0; i < 16; i++)
-    {
-        int startx = 150;
-        for (int j = 0; j < 30; j++)
-        {
-            putimage(startx, starty, &UnCell, SRCCOPY);
-            startx += 30;
-        }
-        starty += 30;
-=======
                 {
                     if (inSimpleButton)
                         return 1;
@@ -297,6 +236,5 @@ void SweeperGame::difficult()
                         return 4;
                 }break;
         }
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
     }
 }
