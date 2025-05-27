@@ -327,11 +327,11 @@ int SweeperGame::hoverstart_simple(void)
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
+                                putimage(0, 0, &Withdraw, SRCCOPY);
                             }
                             else
                             {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
+                                putimage(0, 0, &Withdraw1, SRCCOPY);
                             }
                        }break;
 
@@ -379,11 +379,11 @@ int SweeperGame::hoverstart_middle(void)
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
+                                putimage(0, 0, &Withdraw, SRCCOPY);
                             }
                             else
                             {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
+                                putimage(0, 0, &Withdraw1, SRCCOPY);
                             }
                         }break;
 
@@ -431,11 +431,11 @@ int SweeperGame::hoverstart_difficult(void)
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
+                                putimage(0, 0, &Withdraw, SRCCOPY);
                             }
                             else
                             {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
+                                putimage(0, 0, &Withdraw1, SRCCOPY);
                             }
                         }break;
 
