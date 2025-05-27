@@ -19,22 +19,39 @@ public:
 class Blanks
 {
 public:
-	IMAGE img;
-	bool IsMine;
-	int NumMine;
-	bool first_click;
+	IMAGE Before_img;
+	IMAGE After_img;
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
-	Blanks(IMAGE i, bool Is = 0, int Num = 0, bool first = 0, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate())
-		:img(i), IsMine(Is), NumMine(Num), first_click(first), top_left(top), bottom_right(bottom){}
+	bool IsMine;
+	int NumMine;
+	bool isRevealed;
+	bool isFlag;
+	
+	Blanks(IMAGE B_i, IMAGE A_i, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
+		:Before_img(B_i), After_img(A_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed),isFlag(flag)  {}
 	Blanks(const Blanks &other)
 	{
-		img = other.img;
+		Before_img = other.Before_img;
+		After_img= other.After_img;
+		top_left = Ccoordinate(other.top_left);
+		bottom_right = Ccoordinate(other.bottom_right);
 		IsMine = other.IsMine;
 		NumMine = other.NumMine;
-		first_click = other.first_click;
-		top_left= Ccoordinate(other.top_left);
-		bottom_right = Ccoordinate(other.bottom_right);
+		isRevealed = other.isRevealed;
+		isFlag = other.isFlag;
+	}
+
+	void show(void)
+	{
+		if (isRevealed == 0)
+			putimage(top_left.x, top_left.y, &Before_img, SRCCOPY);
+		else
+			putimage(top_left.x, top_left.y, &After_img, SRCCOPY);
+	}
+	void showUnCell(void)
+	{
+		putimage(top_left.x, top_left.y, &UnCell, SRCCOPY);
 	}
 
 };
@@ -51,7 +68,7 @@ class SweeperGame
 private:
 	int count_thounder;               //雷数
 	bool is_game_over;               //游戏是否结束
-	std::vector<Blanks> blank;
+	vector<vector<Blanks>> blank;
 	settings setting;
 public:
 	void InitGame();                        //初始化游戏
@@ -60,9 +77,13 @@ public:
 	void mark(int x, int y);              //标记雷
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
-	int hoverstart2(void);                           //二级界面悬停函数
+	int hoverstart2a(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
+<<<<<<< HEAD
 	void displayscreen2(void);                  //二级界面显示函数
+=======
+	void displayscreen2a(void);                  //二级界面显示函数                          //二a级界面悬停函数
+>>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 };
 
 #endif

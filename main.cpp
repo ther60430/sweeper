@@ -20,6 +20,10 @@ IMAGE Simple1, Simple;//简单模式
 IMAGE Medium1, Medium;//中等模式
 IMAGE Difficult1, Difficult;//困难模式
 IMAGE Withdraw,Withdraw1;//返回上一页
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 
 int main()
 {
@@ -28,5 +32,4 @@ int main()
 	mciSendString(L"open \"bgm.mp3\"", NULL, 0, NULL);
 	mciSendString(L"play bgm.mp3 repeat", NULL, 0, NULL);
 	sg.run_game();
-	_getch();
 }
