@@ -1,10 +1,11 @@
 #ifndef HEADER_H
 #define HEADER_H
+
 // Windows 
 #include <windows.h>
-#include <mmsystem.h>             //å¤–éƒ¨åª’ä½“åº“
+#include <mmsystem.h>             //Íâ²¿Ã½Ìå¿â
 #pragma comment(lib, "winmm.lib")  
-// C ++è¿è¡Œæ–‡ä»¶
+// C ++ÔËĞĞÎÄ¼ş
 #include <iostream>
 #include <vector>
 #include <malloc.h>
@@ -16,4 +17,29 @@ using namespace std;
 
 #include"fun.h"
 
+
+extern IMAGE Title;            //±êÌâ
+extern IMAGE UnCell;         //Î´½Ò¿ª¸ñ×ÓÍ¼Æ¬
+extern IMAGE Cell;             //ÒÑ½Ò¿ª¸ñ×ÓÍ¼Æ¬              O
+extern IMAGE HoverCell;   //Êó±êĞüÍ£¸ñ×ÓÍ¼Æ¬
+extern IMAGE Landmine;   //À×Í¼Æ¬
+extern IMAGE Flag;            //ÆìÖÄÍ¼Æ¬
+extern IMAGE Gamewithdraw; //ÓÎÏ··µ»ØÍ¼Æ¬
+extern IMAGE Win;            //ÓÎÏ·Ê¤ÀûÍ¼Æ¬
+extern IMAGE GameStart, GameStart1;  //ÓÎÏ·¿ªÊ¼Í¼Æ¬
+extern IMAGE GamePause;  //ÓÎÏ·ÔİÍ£Í¼Æ¬
+extern IMAGE GameContinue; //¼ÌĞøÓÎÏ·Í¼Æ¬
+extern IMAGE GameRestart;  //ÖØĞÂ¿ªÊ¼Í¼Æ¬
+extern IMAGE GameExit, GameExit1;    //ÍË³öÓÎÏ·Í¼Æ¬
+extern IMAGE num[8];     //Êı×ÖÍ¼Æ¬1-8
+extern IMAGE history_scores, history_scores1;          //·ÖÊıÍ¼Æ¬
+extern IMAGE BackGraound;//±³¾°Í¼Æ¬
+extern IMAGE Simple1,Simple;//¼òµ¥Ä£Ê½
+extern IMAGE Medium1,Medium;//ÖĞµÈÄ£Ê½
+extern IMAGE Difficult1,Difficult;//À§ÄÑÄ£Ê½
+extern IMAGE Withdraw1,Withdraw;//·µ»ØÉÏÒ»Ò³
+extern IMAGE Simple,Simple1;//¼òµ¥Ä£Ê½
+extern IMAGE Medium, Medium1;//ÖĞµÈÄ£Ê½
+extern IMAGE Difficult, Difficult1;//À§ÄÑÄ£Ê½
+extern IMAGE Withdraw;//·µ»ØÉÏÒ»Ò³
 #endif

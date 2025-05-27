@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  fun.cpp
 C:\Users\30900\Desktop\sweeper\header.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   (编译源文件“fun.cpp”)
@@ -6,3 +7,11 @@ C:\Users\30900\Desktop\sweeper\header.h(1,1): warning C4819: 该文件包含不�
   (编译源文件“fun.cpp”)
   
   sweeper.vcxproj -> C:\Users\30900\Desktop\sweeper\x64\Debug\sweeper.exe
+=======
+﻿  main.cpp
+<<<<<<< HEAD
+  sweeper.vcxproj -> D:\code2022\game\sweeper\x64\Debug\sweeper.exe
+=======
+  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
+>>>>>>> 089297baaac6e15656eddaad208e8e839cde3422
+>>>>>>> 843b134daa670a8f996a8fafba303e33cefc5a90
