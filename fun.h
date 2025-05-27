@@ -63,6 +63,7 @@ public:
 	int hoverstart2(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
 	void displayscreen2(void);                  //二级界面显示函数
+	int hoverstart2a(void);                           //二a级界面悬停函数
 };
 
 #endif
