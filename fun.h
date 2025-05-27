@@ -19,8 +19,8 @@ public:
 class Blanks
 {
 public:
-	IMAGE img;
-	bool IsMine;
+	IMAGE img;               
+	bool IsMine;         
 	int NumMine;
 	bool first_click;
 	Ccoordinate top_left;
@@ -36,7 +36,6 @@ public:
 		top_left= Ccoordinate(other.top_left);
 		bottom_right = Ccoordinate(other.bottom_right);
 	}
-
 };
 
 class settings
@@ -51,7 +50,7 @@ class SweeperGame
 private:
 	int count_thounder;               //雷数
 	bool is_game_over;               //游戏是否结束
-	std::vector<Blanks> blank;
+	vector<vector<Blanks>> blank;
 	settings setting;
 public:
 	void InitGame();                        //初始化游戏
@@ -62,8 +61,9 @@ public:
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
-	void displayscreen2(void);                  //二级界面显示函数
-	int hoverstart2a(void);                           //二a级界面悬停函数
+	void displayscreen2a(void);                  //二级界面显示函数
+	void displayscreen2b(void);               //二级界面历史记录
+	void difficult();
 };
 
 #endif

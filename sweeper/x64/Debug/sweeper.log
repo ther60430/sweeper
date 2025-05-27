@@ -1,6 +1,3 @@
-﻿  main.cpp
-<<<<<<< HEAD
+﻿  fun.cpp
+D:\code2022\game\sweeper\fun.cpp(60,21): warning C4060: switch 语句没有包含“case”或“default”标签
   sweeper.vcxproj -> D:\code2022\game\sweeper\x64\Debug\sweeper.exe
-=======
-  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
->>>>>>> 089297baaac6e15656eddaad208e8e839cde3422

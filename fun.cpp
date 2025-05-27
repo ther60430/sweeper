@@ -4,9 +4,9 @@ void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
 	loadimage(&Title, _T("images/title.png"), 800, 120);       //标题图片
-	loadimage(&UnCell, _T("images/uncell.png"));          //未揭开格子图片
-	loadimage(&Cell, _T("images/cell.png"));            //已揭开格子图片
-	loadimage(&HoverCell, _T("images/hover.png"));                     //鼠标悬停格子图片
+	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //未揭开格子图片
+	loadimage(&Cell, _T("images/cell.png"),30,30);            //已揭开格子图片
+	loadimage(&HoverCell, _T("images/hover.png"),30,30);                     //鼠标悬停格子图片
 	loadimage(&Landmine, _T("images/thounder.png"));              //雷图片
     loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //分数悬停图片
 	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //分数图片
@@ -35,7 +35,7 @@ void SweeperGame::InitGame()
     loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //中等模式悬停图片
     loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //返回按钮图片
-    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
+    loadimage(&Withdraw, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮悬停图片
 }
 
 void SweeperGame::run_game(void)  
@@ -48,17 +48,22 @@ void SweeperGame::run_game(void)
         switch (flag0)
         {
             case 1:
+             {
+                while (1)
                 {
                     int flag1;
-					displayscreen2();                   //二级画面显示函数
-					flag1 = hoverstart2();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                    displayscreen2a();                   //二级画面显示函数
+                    flag1 = hoverstart2();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
                     switch (flag1)
                     {
-                        case 4:
-                            break;
+                        break;
+                    }
+                    if (flag1 == 4)
+                    {
+                        break;
                     }
                 }
-                break;
+             }break;
             case 3:
                 exit(1);
         }
@@ -76,7 +81,7 @@ void SweeperGame::displayscreen1()                //一级画面显示函数
     FlushBatchDraw();                                       //刷新屏幕
 }
 
-void SweeperGame::displayscreen2()                   //二级画面显示函数
+void SweeperGame::displayscreen2a()                   //二级画面显示函数
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
@@ -212,3 +217,18 @@ int SweeperGame::hoverstart1()                      //一级画面悬停及点击事件处理
          }
      }
 }              
+
+void SweeperGame::difficult()
+{
+    int starty = 60;
+    for (int i = 0; i < 16; i++)
+    {
+        int startx = 150;
+        for (int j = 0; j < 30; j++)
+        {
+            putimage(startx, starty, &UnCell, SRCCOPY);
+            startx += 30;
+        }
+        starty += 30;
+    }
+}

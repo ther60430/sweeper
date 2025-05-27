@@ -20,7 +20,7 @@ using namespace std;
 
 extern IMAGE Title;            //标题
 extern IMAGE UnCell;         //未揭开格子图片
-extern IMAGE Cell;             //已揭开格子图片              O
+extern IMAGE Cell;             //已揭开格子图片              
 extern IMAGE HoverCell;   //鼠标悬停格子图片
 extern IMAGE Landmine;   //雷图片
 extern IMAGE Flag;            //旗帜图片
