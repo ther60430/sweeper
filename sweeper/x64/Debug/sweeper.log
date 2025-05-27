@@ -2,22 +2,22 @@
 D:\sweeper\fun.h(52,12): warning C4804: “-”: 在操作中使用类型“bool”不安全
   (编译源文件“fun.cpp”)
   
-D:\sweeper\fun.cpp(294,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\sweeper\fun.cpp(305,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(305,35): warning C4244:         with
-D:\sweeper\fun.cpp(305,35): warning C4244:         [
-D:\sweeper\fun.cpp(305,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(305,35): warning C4244:         ]
-D:\sweeper\fun.cpp(335,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(335,35): warning C4244:         with
-D:\sweeper\fun.cpp(335,35): warning C4244:         [
-D:\sweeper\fun.cpp(335,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(335,35): warning C4244:         ]
-D:\sweeper\fun.cpp(364,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(364,35): warning C4244:         with
-D:\sweeper\fun.cpp(364,35): warning C4244:         [
-D:\sweeper\fun.cpp(364,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(364,35): warning C4244:         ]
+D:\sweeper\fun.cpp(480,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\sweeper\fun.cpp(491,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(491,35): warning C4244:         with
+D:\sweeper\fun.cpp(491,35): warning C4244:         [
+D:\sweeper\fun.cpp(491,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(491,35): warning C4244:         ]
+D:\sweeper\fun.cpp(521,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(521,35): warning C4244:         with
+D:\sweeper\fun.cpp(521,35): warning C4244:         [
+D:\sweeper\fun.cpp(521,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(521,35): warning C4244:         ]
+D:\sweeper\fun.cpp(550,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(550,35): warning C4244:         with
+D:\sweeper\fun.cpp(550,35): warning C4244:         [
+D:\sweeper\fun.cpp(550,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(550,35): warning C4244:         ]
   main.cpp
 D:\sweeper\fun.h(52,12): warning C4804: “-”: 在操作中使用类型“bool”不安全
   (编译源文件“main.cpp”)

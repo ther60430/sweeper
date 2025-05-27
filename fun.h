@@ -31,7 +31,7 @@ public:
 	bool isRevealed;
 	bool isFlag;
 	
-	Blanks(IMAGE B_i, IMAGE A_i, IMAGE H_Ii,IMAGE M_i, IMAGE F_i, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
+	Blanks(IMAGE B_i=NULL, IMAGE A_i = NULL, IMAGE H_Ii = NULL,IMAGE M_i = NULL, IMAGE F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
 		:Before_img(B_i), After_img(A_i), Hover_Img(H_Ii), Mine_Img(M_i),Flag_Img(F_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
 	Blanks(const Blanks &other)
 	{
@@ -87,7 +87,9 @@ class SweeperGame
 private:
 	int count_thounder;               //雷数
 	bool is_game_over;               //游戏是否结束
-	vector<vector<Blanks>> blank;
+	vector<vector<Blanks>> blank_simple;
+	vector<vector<Blanks>> blank_middle;
+	vector<vector<Blanks>> blank_difficult;
 	settings setting;
 public:
 	void InitGame();                        //初始化游戏
@@ -97,8 +99,14 @@ public:
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
-	int hoverstart_simple(void);			//简单难度悬停
+
+	int hoverstart_simple(void);
+	int hoverstart_middle(void);
+	int hoverstart_difficult(void);
+
 	void displayscreen1(void);                  //一级界面显示函数
+	void displayscreen_middle(void);        
+	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
 	void Raise_Mines(void);
