@@ -1,4 +1,5 @@
 ﻿  fun.cpp
+<<<<<<< HEAD
 D:\sweeper\fun.h(54,37): error C2065: “UnCell”: 未声明的标识符
   (编译源文件“fun.cpp”)
   
@@ -7,3 +8,12 @@ D:\sweeper\fun.h(54,37): error C2065: “UnCell”: 未声明的标识符
   (编译源文件“main.cpp”)
   
   正在生成代码...
+=======
+<<<<<<< HEAD
+  main.cpp
+  正在生成代码...
+  sweeper.vcxproj -> C:\Users\30900\Desktop\sweeper\x64\Debug\sweeper.exe
+=======
+  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
+>>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
+>>>>>>> 1e18eeb1c1a19653914c0b15aadb890fab68d30d

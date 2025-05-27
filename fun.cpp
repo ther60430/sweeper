@@ -18,6 +18,28 @@ void SweeperGame::InitGame()
 	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
 	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图片
 	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图片
+<<<<<<< HEAD
+	loadimage(&Flag, _T("images/flag.png"));             //旗帜图片
+	loadimage(&num[0], _T("images/1.png"));
+	loadimage(&num[1], _T("images/2.png"));
+	loadimage(&num[2], _T("images/3.png"));
+	loadimage(&num[3], _T("images/4.png"));
+	loadimage(&num[4], _T("images/5.png"));
+	loadimage(&num[5], _T("images/6.png"));
+	loadimage(&num[6], _T("images/7.png"));
+	loadimage(&num[7], _T("images/8.png"));
+    loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //背景图片
+    loadimage(&Simple1, _T("images/Simple.png"), 256, 64);                                        //简单模式图片
+    loadimage(&Medium1, _T("images/Medium.png"), 256, 64);                                //中等模式图片
+    loadimage(&Difficult1, _T("images/Difficult.png"), 256, 64); //困难模式图片
+        loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //简单模式悬停图片
+    loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //中等模式悬停图片
+    loadimage(&Difficult, _T("images/Difficult.png"), 256, 64); //困难模式悬停图片
+        loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //返回按钮图片
+    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
+}
+
+=======
 	loadimage(&Flag, _T("images/flag.png"),30,30);             //旗帜图片
 	loadimage(&num[0], _T("images/1.png"), 30, 30);
 	loadimage(&num[1], _T("images/2.png"), 30, 30);
@@ -38,6 +60,7 @@ void SweeperGame::InitGame()
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
 
 }
+>>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 
 void SweeperGame::run_game(void)  
 {  
