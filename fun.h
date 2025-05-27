@@ -82,8 +82,10 @@ public:
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
+	int hoverstart_simple(void);
 	void displayscreen1(void);                  //一级界面显示函数
-	void displayscreen2a(void);                  //二级界面显示函数                        
+	void displayscreen2a(void);                  //二级界面显示函数    
+	void displayscreen_simple(void);			//简单难度展示及Blank类生成
 };
 
 #endif

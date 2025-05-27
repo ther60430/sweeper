@@ -61,24 +61,9 @@ void SweeperGame::run_game(void)
                 {
                     while (1)
                     {
-                        cleardevice();
-                        putimage(0, 0, &BackGraound, SRCCOPY);
-                        for (int i = 0; i < 9; i++)
-                        {
-
-                            vector<Blanks> blank2;
-                            for (int j = 0; j < 9; j++)
-                            {
-                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                                Blanks temp(UnCell, Cell,HoverCell, t_l, b_r);
-                                temp.show();
-                                blank2.push_back(temp);
-                            }
-                            blank.push_back(blank2);
-
-                        }
-                        while (1);
+                        displayscreen_simple();//¼òµ¥ÄÑ¶ÈÕ¹Ê¾¼°BlankÀàÉú³É
+                        hoverstart_simple();
+                        hoverstart_simple();
                     }
                 }break;
                 }
@@ -102,7 +87,6 @@ void SweeperGame::displayscreen1(void)                //Ò»¼¶»­ÃæÏÔÊ¾º¯Êý
     FlushBatchDraw();                                       //Ë¢ÐÂÆÁÄ»
 }
 
-
 void SweeperGame::displayscreen2a(void)                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
 {
     cleardevice();
@@ -111,6 +95,25 @@ void SweeperGame::displayscreen2a(void)                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
     putimage(472, 300, &Simple1, SRCCOPY);
     putimage(472, 380, &Medium1, SRCCOPY);
     putimage(472, 460, &Difficult1, SRCCOPY);
+}
+
+void SweeperGame::displayscreen_simple(void)
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    for (int i = 0; i < 9; i++)
+    {
+        vector<Blanks> blank2;
+        for (int j = 0; j < 9; j++)
+        {
+            Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+            Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+            Blanks temp(UnCell, Cell, HoverCell, t_l, b_r);
+            temp.show();
+            blank2.push_back(temp);
+        }
+        blank.push_back(blank2);
+    }
 }
 
 int SweeperGame::hoverstart1(void)                      //Ò»¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý
@@ -171,7 +174,7 @@ int SweeperGame::hoverstart1(void)                      //Ò»¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ
     }
 }
 
-int SweeperGame::hoverstart2a()                               // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý
+int SweeperGame::hoverstart2a(void)                               // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý
 {
     ExMessage msg;
     while (true)
@@ -237,6 +240,44 @@ int SweeperGame::hoverstart2a()                               // ¶þ¼¶»­ÃæÐüÍ£¼°µ
                     else if (inWithdrawButton)
                         return 4;
                 }break;
+        }
+    }
+}
+
+int SweeperGame::hoverstart_simple(void)
+{
+    ExMessage msg;
+    while (1)
+    {
+        msg = getmessage(EX_MOUSE);
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                switch (msg.message)
+                {
+                    case WM_MOUSEMOVE:
+                        {
+                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            {
+                                if (blank[i][j].isRevealed == 0)
+                                    blank[i][j].showUnCell();
+                            }
+                            else
+                            {
+                                blank[i][j].show();
+                            }
+                        }break;
+
+                    case WM_LBUTTONDOWN:
+                        {
+                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            {
+                                    blank[i][j].isRevealed = 1;
+                            }
+                        }
+                }
+            }
         }
     }
 }
