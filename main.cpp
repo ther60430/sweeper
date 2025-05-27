@@ -20,16 +20,10 @@ IMAGE Simple1, Simple;//简单模式
 IMAGE Medium1, Medium;//中等模式
 IMAGE Difficult1, Difficult;//困难模式
 IMAGE Withdraw,Withdraw1;//返回上一页
-IMAGE Simple, Simple1;//简单模式
-IMAGE Medium, Medium1;//中等模式
-IMAGE Difficult, Difficult1;//困难模式
-IMAGE Withdraw;//返回上一页
 
 int main()
 {
 	SweeperGame sg;
-	mciSendString(L"open bgm.mp3", NULL, 0, NULL);
-	mciSendString(L"play bgm.mp3 repeat", NULL, 0, NULL);
 	sg.InitGame();
 	mciSendString(L"open \"bgm.mp3\"", NULL, 0, NULL);
 	mciSendString(L"play bgm.mp3 repeat", NULL, 0, NULL);

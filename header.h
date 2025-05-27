@@ -38,8 +38,4 @@ extern IMAGE Simple1,Simple;//简单模式
 extern IMAGE Medium1,Medium;//中等模式
 extern IMAGE Difficult1,Difficult;//困难模式
 extern IMAGE Withdraw1,Withdraw;//返回上一页
-extern IMAGE Simple,Simple1;//简单模式
-extern IMAGE Medium, Medium1;//中等模式
-extern IMAGE Difficult, Difficult1;//困难模式
-extern IMAGE Withdraw;//返回上一页
 #endif
