@@ -62,7 +62,7 @@ void SweeperGame::run_game(void)
                     while (1)
                     {
                         displayscreen_simple();//简单难度展示及Blank类生成
-                        hoverstart_simple();
+                        Raise_Mines();
                         hoverstart_simple();
                     }
                 }break;
@@ -108,7 +108,7 @@ void SweeperGame::displayscreen_simple(void)
         {
             Ccoordinate t_l(465 + j * 30, 165 + i * 30);
             Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-            Blanks temp(UnCell, Cell, HoverCell, t_l, b_r);
+            Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
             temp.show();
             blank2.push_back(temp);
         }
@@ -273,11 +273,114 @@ int SweeperGame::hoverstart_simple(void)
                         {
                             if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
                             {
-                                    blank[i][j].isRevealed = 1;
+                                blank[i][j].isRevealed = 1;
+                            }
+                        }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            {
+                                blank[i][j].flag();
                             }
                         }
                 }
             }
         }
+    }
+}
+
+void SweeperGame::Raise_Mines(void)
+{
+    int size = blank[0].size();
+    switch (size)
+    {
+        case 9:
+            {
+                int num = 12;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i >0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+                    
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if(vec[k++]=='1')
+                            blank[i][j].IsMine = 1;
+                    }
+                }
+                
+            }break;
+        case 16:
+            {
+                int num = 51;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank[i][j].IsMine = 1;
+                    }
+                }
+            }break;
+        case 30:
+            {
+                int num = 120;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank[i][j].IsMine = 1;
+                    }
+                }
+            }break;
     }
 }

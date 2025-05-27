@@ -21,7 +21,9 @@ class Blanks
 public:
 	IMAGE Before_img;
 	IMAGE After_img;
-	IMAGE HoverImg;
+	IMAGE Hover_Img;
+	IMAGE Mine_Img;
+	IMAGE Flag_Img;
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
 	bool IsMine;
@@ -29,13 +31,15 @@ public:
 	bool isRevealed;
 	bool isFlag;
 	
-	Blanks(IMAGE B_i, IMAGE A_i, IMAGE H_I, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
-		:Before_img(B_i), After_img(A_i), HoverImg(H_I), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
+	Blanks(IMAGE B_i, IMAGE A_i, IMAGE H_Ii,IMAGE M_i, IMAGE F_i, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
+		:Before_img(B_i), After_img(A_i), Hover_Img(H_Ii), Mine_Img(M_i),Flag_Img(F_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
 	Blanks(const Blanks &other)
 	{
 		Before_img = other.Before_img;
 		After_img= other.After_img;
-		HoverImg = other.HoverImg;
+		Hover_Img = other.Hover_Img;
+		Mine_Img = other.Mine_Img;
+		Flag_Img = other.Flag_Img;
 		top_left = Ccoordinate(other.top_left);
 		bottom_right = Ccoordinate(other.bottom_right);
 		IsMine = other.IsMine;
@@ -43,19 +47,30 @@ public:
 		isRevealed = other.isRevealed;
 		isFlag = other.isFlag;
 	}
-
+	void flag(void)
+	{
+		isFlag = -isFlag;
+		if(isFlag&& isRevealed==0)
+			putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+	}
 	void show(void)
 	{
 		if (isRevealed == 0)
 			putimage(top_left.x, top_left.y, &Before_img, SRCCOPY);
 		else
-			putimage(top_left.x, top_left.y, &After_img, SRCCOPY);
+		{
+			if(IsMine)
+				putimage(top_left.x, top_left.y, &Mine_Img, SRCCOPY);
+			else
+				putimage(top_left.x, top_left.y, &After_img, SRCCOPY);
+		}
+			
 	}
 	
 	void showUnCell(void)
 	{
 
-		putimage(top_left.x, top_left.y, &HoverImg, SRCCOPY);
+		putimage(top_left.x, top_left.y, &Hover_Img, SRCCOPY);
 
 	}
 };
@@ -82,10 +97,11 @@ public:
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
-	int hoverstart_simple(void);
+	int hoverstart_simple(void);			//简单难度悬停
 	void displayscreen1(void);                  //一级界面显示函数
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
+	void Raise_Mines(void);
 };
 
 #endif
