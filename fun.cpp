@@ -43,8 +43,8 @@ void SweeperGame::InitGame()
 	loadimage(&num[5], _T("images/6.png"));
 	loadimage(&num[6], _T("images/7.png"));
 	loadimage(&num[7], _T("images/8.png"));
-	mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
-	mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
+	//mciSendString(L"open \"bgm.mp3\"alias bgmusic", NULL, 0, NULL);
+	//mciSendString(L"play bgmusic repeat", NULL, 0, NULL);
 }
 
 void deleteimage(IMAGE* img) {
