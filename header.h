@@ -13,6 +13,9 @@
 #include <string.h>
 #include <graphics.h>
 #include <conio.h>
+#include <random>
+#include <chrono>
+
 using namespace std;
 
 #include"fun.h"

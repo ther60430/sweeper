@@ -61,8 +61,9 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
-                                flag1 = hoverstart_simple();
+                                flag2 = hoverstart_simple();
                                 break;
                             }
                         }break;
@@ -70,8 +71,9 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                int flag2;
                                 displayscreen_middle();
-                                flag1=hoverstart_middle();
+                                flag2 = hoverstart_middle();
                                 break;
                             }
                         }break;
@@ -79,9 +81,10 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                int flag2;
                                 displayscreen_difficult();
-                               flag1= hoverstart_difficult();
-                               break;
+                                flag2 = hoverstart_difficult();
+                                break;
                             }
                         }break;
                 }
@@ -119,18 +122,21 @@ void SweeperGame::displayscreen_simple(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    for (int i = 0; i < 9; i++)
+    if (blank_simple.size() != 9)
     {
-        vector<Blanks> blank2;
-        for (int j = 0; j < 9; j++)
+        for (int i = 0; i < 9; i++)
         {
-            Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-            Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-            Blanks temp(UnCell, Cell, HoverCell, t_l, b_r);
-            temp.show();
-            blank2.push_back(temp);
+            vector<Blanks> blank2;
+            for (int j = 0; j < 9; j++)
+            {
+                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                temp.show();
+                blank2.push_back(temp);
+            }
+            blank_simple.push_back(blank2);
         }
-        blank.push_back(blank2);
     }
 }
 
@@ -266,18 +272,21 @@ void SweeperGame::displayscreen_middle(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    for (int i = 0; i < 16; i++)
+    if (blank_middle.size() != 16)
     {
-        vector<Blanks> blank1;
-        for (int j = 0; j < 16; j++)
+        for (int i = 0; i < 16; i++)
         {
-            Ccoordinate t_l(360 + j* 30, 60 + i* 30);
-            Ccoordinate b_r(390 + j* 30, 90 + i* 30);
-            Blanks blank2(UnCell, Cell,HoverCell, t_l, b_r);
-            blank2.show();
-            blank1.push_back(blank2);
+            vector<Blanks> blank1;
+            for (int j = 0; j < 16; j++)
+            {
+                Ccoordinate t_l(360 + j * 30, 60 + i * 30);
+                Ccoordinate b_r(390 + j * 30, 90 + i * 30);
+                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                blank2.show();
+                blank1.push_back(blank2);
+            }
+            blank_middle.push_back(blank1);
         }
-        blank.push_back(blank1);
     }
 }
 
@@ -285,18 +294,21 @@ void SweeperGame::displayscreen_difficult(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    for (int i = 0; i < 16; i++)
+    if (blank_difficult.size() != 16)
     {
-        vector<Blanks> blank1;
-        for (int j = 0; j < 30; j++)
+        for (int i = 0; i < 16; i++)
         {
-            Ccoordinate t_l(150 + j * 30, 60 + i * 30);
-            Ccoordinate b_r(180 + j * 30, 90 + i * 30);
-            Blanks blank2(UnCell, Cell,HoverCell, t_l, b_r);
-            blank2.show();
-            blank1.push_back(blank2);
+            vector<Blanks> blank1;
+            for (int j = 0; j < 30; j++)
+            {
+                Ccoordinate t_l(150 + j * 30, 60 + i * 30);
+                Ccoordinate b_r(180 + j * 30, 90 + i * 30);
+                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                blank2.show();
+                blank1.push_back(blank2);
+            }
+            blank_difficult.push_back(blank1);
         }
-        blank.push_back(blank1);
     }
 }
 
@@ -307,7 +319,6 @@ int SweeperGame::hoverstart_simple(void)
     while (1)
     {
         msg = getmessage(EX_MOUSE);
-        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -316,14 +327,14 @@ int SweeperGame::hoverstart_simple(void)
                 {
                     case WM_MOUSEMOVE:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
                             {
-                                if (blank[i][j].isRevealed == 0)
-                                    blank[i][j].showUnCell();
+                                if (blank_simple[i][j].isRevealed == 0)
+                                    blank_simple[i][j].showUnCell();
                             }
                             else
                             {
-                                blank[i][j].show();
+                                blank_simple[i][j].show();
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -337,14 +348,22 @@ int SweeperGame::hoverstart_simple(void)
 
                     case WM_LBUTTONDOWN:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
                             {
-                                    blank[i][j].isRevealed = 1;
+                                blank_simple[i][j].isRevealed = 1;
                             }
-                            else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
+                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
                                 return -1;
                             }
+                        }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
+                            {
+                                blank_simple[i][j].flag();
+                            }
+                            
                         }
                 }
             }
@@ -368,14 +387,14 @@ int SweeperGame::hoverstart_middle(void)
                 {
                     case WM_MOUSEMOVE:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
                             {
-                                if (blank[i][j].isRevealed == 0)
-                                    blank[i][j].showUnCell();
+                                if (blank_middle[i][j].isRevealed == 0)
+                                    blank_middle[i][j].showUnCell();
                             }
                             else
                             {
-                                blank[i][j].show();
+                                blank_middle[i][j].show();
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -389,9 +408,9 @@ int SweeperGame::hoverstart_middle(void)
 
                     case WM_LBUTTONDOWN:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
                             {
-                                blank[i][j].isRevealed = 1;
+                                blank_middle[i][j].isRevealed = 1;
                             }
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -420,14 +439,14 @@ int SweeperGame::hoverstart_difficult(void)
                 {
                     case WM_MOUSEMOVE:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
                             {
-                                if (blank[i][j].isRevealed == 0)
-                                    blank[i][j].showUnCell();
+                                if (blank_difficult[i][j].isRevealed == 0)
+                                    blank_difficult[i][j].showUnCell();
                             }
                             else
                             {
-                                blank[i][j].show();
+                                blank_difficult[i][j].show();
                             }
                             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -441,9 +460,9 @@ int SweeperGame::hoverstart_difficult(void)
 
                     case WM_LBUTTONDOWN:
                         {
-                            if (msg.x >= blank[i][j].top_left.x && msg.y >= blank[i][j].top_left.y && msg.x <= blank[i][j].bottom_right.x && msg.y <= blank[i][j].bottom_right.y)
+                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
                             {
-                                blank[i][j].isRevealed = 1;
+                                blank_difficult[i][j].isRevealed = 1;
                             }
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -453,5 +472,101 @@ int SweeperGame::hoverstart_difficult(void)
                 }
             }
         }
+    }
+}
+
+void SweeperGame::Raise_Mines(void)
+{
+    int size = blank_simple[0].size();
+    switch (size)
+    {
+        case 9:
+            {
+                int num = 12;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i >0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+                    
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if(vec[k++]=='1')
+                            blank_simple[i][j].IsMine = 1;
+                    }
+                }
+                
+            }break;
+        case 16:
+            {
+                int num = 51;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_simple[i][j].IsMine = 1;
+                    }
+                }
+            }break;
+        case 30:
+            {
+                int num = 120;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_simple[i][j].IsMine = 1;
+                    }
+                }
+            }break;
     }
 }
