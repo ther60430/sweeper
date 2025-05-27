@@ -21,6 +21,7 @@ class Blanks
 public:
 	IMAGE Before_img;
 	IMAGE After_img;
+	IMAGE HoverImg;
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
 	bool IsMine;
@@ -28,12 +29,13 @@ public:
 	bool isRevealed;
 	bool isFlag;
 	
-	Blanks(IMAGE B_i, IMAGE A_i, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
-		:Before_img(B_i), After_img(A_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed),isFlag(flag)  {}
+	Blanks(IMAGE B_i, IMAGE A_i, IMAGE H_I, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
+		:Before_img(B_i), After_img(A_i), HoverImg(H_I), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
 	Blanks(const Blanks &other)
 	{
 		Before_img = other.Before_img;
 		After_img= other.After_img;
+		HoverImg = other.HoverImg;
 		top_left = Ccoordinate(other.top_left);
 		bottom_right = Ccoordinate(other.bottom_right);
 		IsMine = other.IsMine;
@@ -49,9 +51,10 @@ public:
 		else
 			putimage(top_left.x, top_left.y, &After_img, SRCCOPY);
 	}
+	
 	void showUnCell(void)
 	{
-		putimage(top_left.x, top_left.y, &UnCell, SRCCOPY);
+		putimage(top_left.x, top_left.y, &HoverImg, SRCCOPY);
 	}
 
 };
