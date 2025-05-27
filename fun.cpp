@@ -4,10 +4,10 @@ void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
 	loadimage(&Title, _T("images/title.png"), 800, 120);       //标题图片
-	loadimage(&UnCell, _T("images/uncell.png"));          //未揭开格子图片
-	loadimage(&Cell, _T("images/cell.png"));            //已揭开格子图片
-	loadimage(&HoverCell, _T("images/hover.png"));                     //鼠标悬停格子图片
-	loadimage(&Landmine, _T("images/thounder.png"));              //雷图片
+	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //未揭开格子图片
+	loadimage(&Cell, _T("images/cell.png"), 30, 30);            //已揭开格子图片
+	loadimage(&HoverCell, _T("images/hover.png"), 30, 30);                     //鼠标悬停格子图片
+	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //雷图片
     loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //分数悬停图片
 	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //分数图片
 	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //游戏开始图片
@@ -57,7 +57,28 @@ void SweeperGame::run_game(void)
                         flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
                         switch (flag1)
                         {
-                            
+                            case 1:
+                                {
+                                    while (1)
+                                    {
+                                        cleardevice();
+                                        putimage(0, 0, &BackGraound, SRCCOPY);
+                                        for (int i = 0; i < 9; i++)
+                                        {
+                                            vector<Blanks> blank2;
+                                            for (int j = 0; j < 9; j++)
+                                            {
+                                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+                                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+                                                Blanks temp(UnCell, Cell, t_l, b_r);
+                                                temp.show();
+                                                blank2.push_back(temp);
+                                            }
+                                            blank.push_back(blank2);
+                                        }
+                                        while (1);
+                                    }
+                                }break;
                         }
                         if (flag1 == 4)
                             break;

@@ -1,5 +1,2 @@
 ﻿  fun.cpp
-D:\sweeper\fun.cpp(61,25): warning C4060: switch 语句没有包含“case”或“default”标签
-  main.cpp
-  正在生成代码...
   sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
