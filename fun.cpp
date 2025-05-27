@@ -29,11 +29,11 @@ void SweeperGame::InitGame()
 	loadimage(&num[7], _T("images/8.png"), 30, 30);
 	loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //±³¾°Í¼Æ¬
 	loadimage(&Simple1, _T("images/Simple1.png"), 256, 64);                                        //¼òµ¥Ä£Ê½Í¼Æ¬
-	loadimage(&Medium1, _T("images/Medium1.png"), 256, 64);                                //ÖÐµÈÄ£Ê½Í¼Æ¬
-	loadimage(&Difficult1, _T("images/Difficult1.png"), 256, 64);                                 //À§ÄÑÄ£Ê½Í¼Æ¬
+	loadimage(&Medium1, _T("images/middle2.png"), 256, 64);                                //ÖÐµÈÄ£Ê½Í¼Æ¬
+	loadimage(&Difficult1, _T("images/difficult2.png"), 256, 64);                                 //À§ÄÑÄ£Ê½Í¼Æ¬
     loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //¼òµ¥Ä£Ê½ÐüÍ£Í¼Æ¬
-    loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //ÖÐµÈÄ£Ê½ÐüÍ£Í¼Æ¬
-    loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //À§ÄÑÄ£Ê½ÐüÍ£Í¼Æ¬
+    loadimage(&Medium, _T("images/middle1.png"), 256, 64);                                //ÖÐµÈÄ£Ê½ÐüÍ£Í¼Æ¬
+    loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //À§ÄÑÄ£Ê½ÐüÍ£Í¼Æ¬
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //·µ»Ø°´Å¥Í¼Æ¬
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //·µ»Ø°´Å¥ÐüÍ£Í¼Æ¬
 
@@ -56,30 +56,32 @@ void SweeperGame::run_game(void)
                 displayscreen2a();                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
                 flag1 = hoverstart2a();                   // ¶þ¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý             1/2/3/4
                 switch (flag1)
-                {
+               {
                 case 1:
                 {
                     while (1)
                     {
-                        cleardevice();
-                        putimage(0, 0, &BackGraound, SRCCOPY);
-                        for (int i = 0; i < 9; i++)
-                        {
-                            vector<Blanks> blank2;
-                            for (int j = 0; j < 9; j++)
-                            {
-                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                                Blanks temp(UnCell, Cell, t_l, b_r);
-                                temp.show();
-                                blank2.push_back(temp);
-                            }
-                            blank.push_back(blank2);
-                        }
+                        displayscreen_simple();
                         while (1);
                     }
-                }break;
+                case 2:
+                {
+                    while (1)
+                    {
+                        displayscreen_middle();
+                        while (1);
+                    }
                 }
+                case 3:
+                {
+                    while (1)
+                    {
+                        displayscreen_difficult();
+                        while (1);
+                    }
+                }
+               }break;
+             }
                 if (flag1 == 4)
                     break;
             }break;
@@ -236,5 +238,62 @@ int SweeperGame::hoverstart2a()                               // ¶þ¼¶»­ÃæÐüÍ£¼°µ
                         return 4;
                 }break;
         }
+    }
+}
+
+void SweeperGame::displayscreen_simple()
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    for (int i = 0; i < 9; i++)
+    {
+        vector<Blanks> blank2;
+        for (int j = 0; j < 9; j++)
+        {
+            Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+            Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+            Blanks temp(UnCell, Cell, t_l, b_r);
+            temp.show();
+            blank2.push_back(temp);
+        }
+        blank.push_back(blank2);
+    }
+}
+
+void SweeperGame::displayscreen_middle()
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    for (int i = 0; i < 16; i++)
+    {
+        vector<Blanks> blank1;
+        for (int j = 0; j < 16; j++)
+        {
+            Ccoordinate t_l(360 + j* 30, 60 + i* 30);
+            Ccoordinate b_r(390 + j* 30, 90 + i* 30);
+            Blanks blank2(UnCell, Cell, t_l, b_r);
+            blank2.show();
+            blank1.push_back(blank2);
+        }
+        blank.push_back(blank1);
+    }
+}
+
+void SweeperGame::displayscreen_difficult()
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    for (int i = 0; i < 16; i++)
+    {
+        vector<Blanks> blank1;
+        for (int j = 0; j < 30; j++)
+        {
+            Ccoordinate t_l(150 + j * 30, 60 + i * 30);
+            Ccoordinate b_r(180 + j * 30, 90 + i * 30);
+            Blanks blank2(UnCell, Cell, t_l, b_r);
+            blank2.show();
+            blank1.push_back(blank2);
+        }
+        blank.push_back(blank1);
     }
 }

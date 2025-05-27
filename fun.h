@@ -78,7 +78,10 @@ public:
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
-	void displayscreen2a(void);                  //二级界面显示函数                        
+	void displayscreen2a(void);                  //二级界面显示函数
+	void displayscreen_simple();
+	void displayscreen_middle();        
+	void displayscreen_difficult();
 };
 
 #endif
