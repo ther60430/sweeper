@@ -18,7 +18,6 @@ void SweeperGame::InitGame()
 	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
 	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图片
 	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图片
-
 	loadimage(&Flag, _T("images/flag.png"),30,30);             //旗帜图片
 	loadimage(&num[0], _T("images/1.png"), 30, 30);
 	loadimage(&num[1], _T("images/2.png"), 30, 30);
@@ -35,60 +34,61 @@ void SweeperGame::InitGame()
     loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //简单模式悬停图片
     loadimage(&Medium, _T("images/Medium.png"), 256, 64);                                //中等模式悬停图片
     loadimage(&Difficult, _T("images/Difficult.png"), 256, 64);                                 //困难模式悬停图片
-	loadimage(&Withdraw1, _T("images/Withdraw.png"), 64, 64);                            //返回按钮图片
+	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮图片
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
 
 }
 
-
-void SweeperGame::run_game(void)  
-{  
+void SweeperGame::run_game(void)
+{
     int flag0 = -1;
-	while (1)
-	{
-		displayscreen1();				//一级画面显示函数
-		flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
+    while (1)
+    {
+        displayscreen1();				//一级画面显示函数
+        flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
         switch (flag0)
         {
-            case 1:
+        case 1:
+        {
+            while (1)
+            {
+                int flag1 = -1;
+                displayscreen2a();                   //二级画面显示函数
+                flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                switch (flag1)
+                {
+                case 1:
                 {
                     while (1)
                     {
-                        int flag1 = -1;
-                        displayscreen2a();                   //二级画面显示函数
-                        flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
-                        switch (flag1)
+                        cleardevice();
+                        putimage(0, 0, &BackGraound, SRCCOPY);
+                        for (int i = 0; i < 9; i++)
                         {
-                            case 1:
-                                {
-                                    while (1)
-                                    {
-                                        cleardevice();
-                                        putimage(0, 0, &BackGraound, SRCCOPY);
-                                        for (int i = 0; i < 9; i++)
-                                        {
-                                            vector<Blanks> blank2;
-                                            for (int j = 0; j < 9; j++)
-                                            {
-                                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-                                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                                                Blanks temp(UnCell, Cell, HoverCell, t_l, b_r);
-                                                temp.show();
-                                                blank2.push_back(temp);
-                                            }
-                                            blank.push_back(blank2);
-                                        }
-                                        while (1);
-                                    }
-                                }break;
+
+                            vector<Blanks> blank2;
+                            for (int j = 0; j < 9; j++)
+                            {
+                                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+                                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+                                Blanks temp(UnCell, Cell,HoverCell, t_l, b_r);
+                                temp.show();
+                                blank2.push_back(temp);
+                            }
+                            blank.push_back(blank2);
+
                         }
-                        if (flag1 == 4)
-                            break;
+                        while (1);
                     }
                 }break;
-            case 3:exit(1);
+                }
+                if (flag1 == 4)
+                    break;
+            }break;
+        case 3:exit(1);
         }
-	}
+        }
+    }
 }
 
 void SweeperGame::displayscreen1(void)                //一级画面显示函数
@@ -101,6 +101,7 @@ void SweeperGame::displayscreen1(void)                //一级画面显示函数
     putimage(472, 460, &GameExit1, SRCCOPY);                //退出按钮
     FlushBatchDraw();                                       //刷新屏幕
 }
+
 
 void SweeperGame::displayscreen2a(void)                   //二级画面显示函数
 {

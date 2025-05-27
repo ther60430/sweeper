@@ -21,6 +21,7 @@ IMAGE Medium1, Medium;//中等模式
 IMAGE Difficult1, Difficult;//困难模式
 IMAGE Withdraw,Withdraw1;//返回上一页
 
+
 int main()
 {
 	SweeperGame sg;

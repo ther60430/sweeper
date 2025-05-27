@@ -54,9 +54,10 @@ public:
 	
 	void showUnCell(void)
 	{
-		putimage(top_left.x, top_left.y, &HoverImg, SRCCOPY);
-	}
 
+		putimage(top_left.x, top_left.y, &HoverImg, SRCCOPY);
+
+	}
 };
 
 class settings
@@ -82,9 +83,7 @@ public:
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
-
-	void displayscreen2a(void);                  //二级界面显示函数                          //二a级界面悬停函数
-
+	void displayscreen2a(void);                  //二级界面显示函数                        
 };
 
 #endif
