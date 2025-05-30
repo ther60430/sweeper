@@ -36,7 +36,6 @@ void SweeperGame::InitGame()
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //鍥伴毦妯″紡鎮仠鍥剧墖
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //杩斿洖鎸夐挳鍥剧墖
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //杩斿洖鎸夐挳鎮仠鍥剧墖
-
 }
 
 void SweeperGame::run_game(void)
@@ -62,13 +61,9 @@ void SweeperGame::run_game(void)
                             while (1)
                             {
                                 int flag2;
-<<<<<<< HEAD
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines();
-=======
-                                displayscreen_simple();//绠�鍗曢毦搴﹀睍绀哄強Blank绫荤敓鎴?
                                 Raise_Mines(1);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_simple();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_simple);
@@ -81,11 +76,8 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
-<<<<<<< HEAD
                                 Raise_Mines();
-=======
                                 Raise_Mines(2);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_middle();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_middle);
@@ -98,11 +90,8 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
-<<<<<<< HEAD
                                 Raise_Mines();
-=======
                                 Raise_Mines(3);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_difficult();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_difficult);
@@ -311,7 +300,6 @@ void SweeperGame::displayscreen_middle(void)
         }
     }
 }
-
 
 void SweeperGame::displayscreen_difficult(void)
 {

@@ -20,10 +20,6 @@ IMAGE Simple1, Simple;//简单模式
 IMAGE Medium1, Medium;//中等模式
 IMAGE Difficult1, Difficult;//困难模式
 IMAGE Withdraw,Withdraw1;//返回上一页
-<<<<<<< HEAD
-=======
-
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
 
 int main()
 {
