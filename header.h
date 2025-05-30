@@ -13,6 +13,9 @@
 #include <string.h>
 #include <graphics.h>
 #include <conio.h>
+#include <random>
+#include <chrono>
+
 using namespace std;
 
 #include"fun.h"
@@ -20,7 +23,7 @@ using namespace std;
 
 extern IMAGE Title;            //标题
 extern IMAGE UnCell;         //未揭开格子图片
-extern IMAGE Cell;             //已揭开格子图片              O
+extern IMAGE Cell;             //已揭开格子图片              
 extern IMAGE HoverCell;   //鼠标悬停格子图片
 extern IMAGE Landmine;   //雷图片
 extern IMAGE Flag;            //旗帜图片
@@ -38,4 +41,8 @@ extern IMAGE Simple1,Simple;//简单模式
 extern IMAGE Medium1,Medium;//中等模式
 extern IMAGE Difficult1,Difficult;//困难模式
 extern IMAGE Withdraw1,Withdraw;//返回上一页
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b5f7a54c03aee1ff19c6ed37616943ab61f41ff
 #endif

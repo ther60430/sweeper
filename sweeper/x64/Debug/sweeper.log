@@ -1,4 +1,5 @@
 ﻿  fun.cpp
+<<<<<<< HEAD
   main.cpp
 C:\Users\30900\Desktop\sweeper\fun.h(54,37): error C2065: “UnCell”: 未声明的标识符
   (编译源文件“fun.cpp”)
@@ -7,3 +8,30 @@ C:\Users\30900\Desktop\sweeper\fun.h(54,37): error C2065: “UnCell”: 未声�
   (编译源文件“main.cpp”)
   
   正在生成代码...
+=======
+D:\sweeper\fun.h(52,12): warning C4804: “-”: 在操作中使用类型“bool”不安全
+  (编译源文件“fun.cpp”)
+  
+D:\sweeper\fun.cpp(480,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\sweeper\fun.cpp(491,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(491,35): warning C4244:         with
+D:\sweeper\fun.cpp(491,35): warning C4244:         [
+D:\sweeper\fun.cpp(491,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(491,35): warning C4244:         ]
+D:\sweeper\fun.cpp(521,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(521,35): warning C4244:         with
+D:\sweeper\fun.cpp(521,35): warning C4244:         [
+D:\sweeper\fun.cpp(521,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(521,35): warning C4244:         ]
+D:\sweeper\fun.cpp(550,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(550,35): warning C4244:         with
+D:\sweeper\fun.cpp(550,35): warning C4244:         [
+D:\sweeper\fun.cpp(550,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(550,35): warning C4244:         ]
+  main.cpp
+D:\sweeper\fun.h(52,12): warning C4804: “-”: 在操作中使用类型“bool”不安全
+  (编译源文件“main.cpp”)
+  
+  正在生成代码...
+  sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
+>>>>>>> 1b5f7a54c03aee1ff19c6ed37616943ab61f41ff
