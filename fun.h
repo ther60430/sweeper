@@ -79,11 +79,7 @@ public:
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
 	void displayscreen1(void);                  //一级界面显示函数
-<<<<<<< HEAD
-	void displayscreen2(void);                  //二级界面显示函数
-=======
 	void displayscreen2a(void);                  //二级界面显示函数                          //二a级界面悬停函数
->>>>>>> 1741e5a9e5929fd57a854be52eae04713d4b0b8c
 };
 
 #endif
