@@ -36,7 +36,6 @@ void SweeperGame::InitGame()
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮图片
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
-
 }
 
 void SweeperGame::run_game(void)
@@ -298,7 +297,6 @@ void SweeperGame::displayscreen_middle(void)
         }
     }
 }
-
 
 void SweeperGame::displayscreen_difficult(void)
 {
