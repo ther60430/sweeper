@@ -3,22 +3,22 @@
 void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
-	loadimage(&Title, _T("images/title.png"), 800, 120);       //æ ‡é¢˜å›¾ç‰‡
-	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //æœªæ­å¼€æ ¼å­å›¾ç‰‡
-	loadimage(&Cell, _T("images/cell.png"), 30, 30);            //å·²æ­å¼€æ ¼å­å›¾ç‰‡
-	loadimage(&HoverCell, _T("images/hover.png"), 30, 30);                     //é¼ æ ‡æ‚¬åœæ ¼å­å›¾ç‰‡
-	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //é›·å›¾ç‰‡
-    loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //åˆ†æ•°æ‚¬åœå›¾ç‰‡
-	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //åˆ†æ•°å›¾ç‰‡
-	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //æ¸¸æˆå¼€å§‹å›¾ç‰‡
-	loadimage(&GameStart, _T("images/start.png"), 256, 64);              //æ¸¸æˆå¼€å§‹æ‚¬åœå›¾ç‰‡
-	loadimage(&Gamewithdraw, _T("images/withdraw.png"));                    //æ¸¸æˆè¿”å›å›¾ç‰‡
-	loadimage(&GamePause, _T("images/pause.png"));           //æ¸¸æˆæš‚åœå›¾ç‰‡
-	loadimage(&GameContinue, _T("images/go.png"));            //ç»§ç»­æ¸¸æˆå›¾ç‰‡
-	loadimage(&GameRestart, _T("images/replay.png"));                   //é‡æ–°å¼€å§‹å›¾ç‰‡
-	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //é€€å‡ºæ¸¸æˆæŒ‰é’®å›¾ç‰‡
-	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //é€€å‡ºæ¸¸æˆæŒ‰é’®æ‚¬åœå›¾ç‰‡
-	loadimage(&Flag, _T("images/flag.png"),30,30);             //æ——å¸œå›¾ç‰‡
+	loadimage(&Title, _T("images/title.png"), 800, 120);       //±êÌâÍ¼Æ¬
+	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //Î´½Ò¿ª¸ñ×ÓÍ¼Æ¬
+	loadimage(&Cell, _T("images/cell.png"), 30, 30);            //ÒÑ½Ò¿ª¸ñ×ÓÍ¼Æ¬
+	loadimage(&HoverCell, _T("images/hover.png"), 30, 30);                     //Êó±êĞüÍ£¸ñ×ÓÍ¼Æ¬
+	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //À×Í¼Æ¬
+    loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //·ÖÊıĞüÍ£Í¼Æ¬
+	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //·ÖÊıÍ¼Æ¬
+	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //ÓÎÏ·¿ªÊ¼Í¼Æ¬
+	loadimage(&GameStart, _T("images/start.png"), 256, 64);              //ÓÎÏ·¿ªÊ¼ĞüÍ£Í¼Æ¬
+	loadimage(&Gamewithdraw, _T("images/withdraw.png"));                    //ÓÎÏ··µ»ØÍ¼Æ¬
+	loadimage(&GamePause, _T("images/pause.png"));           //ÓÎÏ·ÔİÍ£Í¼Æ¬
+	loadimage(&GameContinue, _T("images/go.png"));            //¼ÌĞøÓÎÏ·Í¼Æ¬
+	loadimage(&GameRestart, _T("images/replay.png"));                   //ÖØĞÂ¿ªÊ¼Í¼Æ¬
+	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //ÍË³öÓÎÏ·°´Å¥Í¼Æ¬
+	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //ÍË³öÓÎÏ·°´Å¥ĞüÍ£Í¼Æ¬
+	loadimage(&Flag, _T("images/flag.png"),30,30);             //ÆìÖÄÍ¼Æ¬
 	loadimage(&num[0], _T("images/1.png"), 30, 30);
 	loadimage(&num[1], _T("images/2.png"), 30, 30);
 	loadimage(&num[2], _T("images/3.png"), 30, 30);
@@ -27,15 +27,15 @@ void SweeperGame::InitGame()
 	loadimage(&num[5], _T("images/6.png"), 30, 30);
 	loadimage(&num[6], _T("images/7.png"), 30, 30);
 	loadimage(&num[7], _T("images/8.png"), 30, 30);
-	loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //èƒŒæ™¯å›¾ç‰‡
-	loadimage(&Simple1, _T("images/Simple1.png"), 256, 64);                                        //ç®€å•æ¨¡å¼å›¾ç‰‡
-	loadimage(&Medium1, _T("images/middle2.png"), 256, 64);                                //ä¸­ç­‰æ¨¡å¼å›¾ç‰‡
-	loadimage(&Difficult1, _T("images/difficult2.png"), 256, 64);                                 //å›°éš¾æ¨¡å¼å›¾ç‰‡
-    loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //ç®€å•æ¨¡å¼æ‚¬åœå›¾ç‰‡
-    loadimage(&Medium, _T("images/middle1.png"), 256, 64);                                //ä¸­ç­‰æ¨¡å¼æ‚¬åœå›¾ç‰‡
-    loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //å›°éš¾æ¨¡å¼æ‚¬åœå›¾ç‰‡
-	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //è¿”å›æŒ‰é’®å›¾ç‰‡
-    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //è¿”å›æŒ‰é’®æ‚¬åœå›¾ç‰‡
+	loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //±³¾°Í¼Æ¬
+	loadimage(&Simple1, _T("images/Simple1.png"), 256, 64);                                        //¼òµ¥Ä£Ê½Í¼Æ¬
+	loadimage(&Medium1, _T("images/middle2.png"), 256, 64);                                //ÖĞµÈÄ£Ê½Í¼Æ¬
+	loadimage(&Difficult1, _T("images/difficult2.png"), 256, 64);                                 //À§ÄÑÄ£Ê½Í¼Æ¬
+    loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //¼òµ¥Ä£Ê½ĞüÍ£Í¼Æ¬
+    loadimage(&Medium, _T("images/middle1.png"), 256, 64);                                //ÖĞµÈÄ£Ê½ĞüÍ£Í¼Æ¬
+    loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //À§ÄÑÄ£Ê½ĞüÍ£Í¼Æ¬
+	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //·µ»Ø°´Å¥Í¼Æ¬
+    loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //·µ»Ø°´Å¥ĞüÍ£Í¼Æ¬
 }
 
 void SweeperGame::run_game(void)
@@ -43,8 +43,8 @@ void SweeperGame::run_game(void)
     int flag0 = -1;
     while (1)
     {
-        displayscreen1();				//ä¸€çº§ç”»é¢æ˜¾ç¤ºå‡½æ•°
-        flag0 = hoverstart1();     //ä¸€çº§ç”»é¢æ‚¬åœåŠç‚¹å‡»äº‹ä»¶å¤„ç†å‡½æ•°       1/2/3                    
+        displayscreen1();				//Ò»¼¶»­ÃæÏÔÊ¾º¯Êı
+        flag0 = hoverstart1();     //Ò»¼¶»­ÃæĞüÍ£¼°µã»÷ÊÂ¼ş´¦Àíº¯Êı       1/2/3                    
         switch (flag0)
         {
         case 1:
@@ -52,8 +52,8 @@ void SweeperGame::run_game(void)
             while (1)
             {
                 int flag1;
-                displayscreen2a();                   //äºŒçº§ç”»é¢æ˜¾ç¤ºå‡½æ•°
-                flag1 = hoverstart2a();                   // äºŒçº§ç”»é¢æ‚¬åœåŠç‚¹å‡»äº‹ä»¶å¤„ç†å‡½æ•°             1/2/3/4
+                displayscreen2a();                   //¶ş¼¶»­ÃæÏÔÊ¾º¯Êı
+                flag1 = hoverstart2a();                   // ¶ş¼¶»­ÃæĞüÍ£¼°µã»÷ÊÂ¼ş´¦Àíº¯Êı             1/2/3/4
                 switch (flag1)
                 {
                     case 1:
@@ -61,13 +61,8 @@ void SweeperGame::run_game(void)
                             while (1)
                             {
                                 int flag2;
-<<<<<<< HEAD
                                 displayscreen_simple();//¼òµ¥ÄÑ¶ÈÕ¹Ê¾¼°BlankÀàÉú³É
-                                Raise_Mines();
-=======
-                                displayscreen_simple();//ç®€å•éš¾åº¦å±•ç¤ºåŠBlankç±»ç”Ÿæˆ
                                 Raise_Mines(1);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_simple();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_simple);
@@ -80,11 +75,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
-<<<<<<< HEAD
-                                Raise_Mines();
-=======
                                 Raise_Mines(2);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_middle();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_middle);
@@ -97,11 +88,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
-<<<<<<< HEAD
-                                Raise_Mines();
-=======
                                 Raise_Mines(3);
->>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_difficult();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_difficult);
@@ -118,18 +105,18 @@ void SweeperGame::run_game(void)
      }
  }
 
-void SweeperGame::displayscreen1(void)                //ä¸€çº§ç”»é¢æ˜¾ç¤ºå‡½æ•°
+void SweeperGame::displayscreen1(void)                //Ò»¼¶»­ÃæÏÔÊ¾º¯Êı
 {
-    cleardevice();                                          //æ¸…å±
-    putimage(0, 0, &BackGraound, SRCCOPY);                  //èƒŒæ™¯å›¾ç‰‡
-    putimage(200, 100, &Title, SRCCOPY);                    //æ ‡é¢˜å›¾ç‰‡
-    putimage(472, 300, &GameStart1, SRCCOPY);               //æ¸¸æˆå¼€å§‹æŒ‰é’®
-    putimage(472, 380, &history_scores1, SRCCOPY);          //åˆ†æ•°æŒ‰é’®
-    putimage(472, 460, &GameExit1, SRCCOPY);                //é€€å‡ºæŒ‰é’®
-    FlushBatchDraw();                                       //åˆ·æ–°å±å¹•
+    cleardevice();                                          //ÇåÆÁ
+    putimage(0, 0, &BackGraound, SRCCOPY);                  //±³¾°Í¼Æ¬
+    putimage(200, 100, &Title, SRCCOPY);                    //±êÌâÍ¼Æ¬
+    putimage(472, 300, &GameStart1, SRCCOPY);               //ÓÎÏ·¿ªÊ¼°´Å¥
+    putimage(472, 380, &history_scores1, SRCCOPY);          //·ÖÊı°´Å¥
+    putimage(472, 460, &GameExit1, SRCCOPY);                //ÍË³ö°´Å¥
+    FlushBatchDraw();                                       //Ë¢ĞÂÆÁÄ»
 }
 
-void SweeperGame::displayscreen2a(void)                   //äºŒçº§ç”»é¢æ˜¾ç¤ºå‡½æ•°
+void SweeperGame::displayscreen2a(void)                   //¶ş¼¶»­ÃæÏÔÊ¾º¯Êı
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
@@ -161,22 +148,22 @@ void SweeperGame::displayscreen_simple(void)
     }
 }
 
-int SweeperGame::hoverstart1(void)                      //ä¸€çº§ç”»é¢æ‚¬åœåŠç‚¹å‡»äº‹ä»¶å¤„ç†å‡½æ•°
+int SweeperGame::hoverstart1(void)                      //Ò»¼¶»­ÃæĞüÍ£¼°µã»÷ÊÂ¼ş´¦Àíº¯Êı
 {
     ExMessage msg;
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨å¼€å§‹æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚ¿ªÊ¼°´Å¥ÉÏ
         bool inStartButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨åˆ†æ•°æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚ·ÖÊı°´Å¥ÉÏ
         bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨é€€å‡ºæŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚÍË³ö°´Å¥ÉÏ
         bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
         switch (msg.message)
         {
         case WM_MOUSEMOVE:
-            // å¤„ç†å¼€å§‹æŒ‰é’®æ‚¬åœ
+            // ´¦Àí¿ªÊ¼°´Å¥ĞüÍ£
             if (inStartButton)
             {
                 putimage(472, 300, &GameStart, SRCCOPY);
@@ -185,7 +172,7 @@ int SweeperGame::hoverstart1(void)                      //ä¸€çº§ç”»é¢æ‚¬åœåŠç
             {
                 putimage(472, 300, &GameStart1, SRCCOPY);
             }
-            // å¤„ç†åˆ†æ•°æŒ‰é’®æ‚¬åœ
+            // ´¦Àí·ÖÊı°´Å¥ĞüÍ£
             if (inScoreButton)
             {
                 putimage(472, 380, &history_scores1, SRCCOPY);
@@ -194,7 +181,7 @@ int SweeperGame::hoverstart1(void)                      //ä¸€çº§ç”»é¢æ‚¬åœåŠç
             {
                 putimage(472, 380, &history_scores, SRCCOPY);
             }
-            // å¤„ç†é€€å‡ºæŒ‰é’®æ‚¬åœ
+            // ´¦ÀíÍË³ö°´Å¥ĞüÍ£
             if (inExitButton)
             {
                 putimage(472, 460, &GameExit, SRCCOPY);
@@ -206,7 +193,7 @@ int SweeperGame::hoverstart1(void)                      //ä¸€çº§ç”»é¢æ‚¬åœåŠç
             break;
         case WM_LBUTTONDOWN:
         {
-            // å¤„ç†ç‚¹å‡»äº‹ä»¶
+            // ´¦Àíµã»÷ÊÂ¼ş
             if (inStartButton)
                 return 1;
             else if (inScoreButton)
@@ -219,25 +206,25 @@ int SweeperGame::hoverstart1(void)                      //ä¸€çº§ç”»é¢æ‚¬åœåŠç
     }
 }
 
-int SweeperGame::hoverstart2a(void)                               // äºŒçº§ç”»é¢æ‚¬åœåŠç‚¹å‡»äº‹ä»¶å¤„ç†å‡½æ•°
+int SweeperGame::hoverstart2a(void)                               // ¶ş¼¶»­ÃæĞüÍ£¼°µã»÷ÊÂ¼ş´¦Àíº¯Êı
 {
     ExMessage msg;
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨ç®€å•æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚ¼òµ¥°´Å¥ÉÏ
         bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨ä¸­ç­‰æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚÖĞµÈ°´Å¥ÉÏ
         bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨å›°éš¾æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚÀ§ÄÑ°´Å¥ÉÏ
         bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
-        // æ£€æŸ¥é¼ æ ‡æ˜¯å¦åœ¨è¿”å›æŒ‰é’®ä¸Š
+        // ¼ì²éÊó±êÊÇ·ñÔÚ·µ»Ø°´Å¥ÉÏ
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
         switch (msg.message)
         {
             case WM_MOUSEMOVE:
                 {
-                    // å¤„ç†ç®€å•æŒ‰é’®æ‚¬åœ
+                    // ´¦Àí¼òµ¥°´Å¥ĞüÍ£
                     if (inSimpleButton)
                     {
                         putimage(472, 300, &Simple, SRCCOPY);
@@ -246,7 +233,7 @@ int SweeperGame::hoverstart2a(void)                               // äºŒçº§ç”»é
                     {
                         putimage(472, 300, &Simple1, SRCCOPY);
                     }
-                    // å¤„ç†ä¸­ç­‰æŒ‰é’®æ‚¬åœ
+                    // ´¦ÀíÖĞµÈ°´Å¥ĞüÍ£
                     if (inMediumButton)
                     {
                         putimage(472, 380, &Medium, SRCCOPY);
@@ -255,7 +242,7 @@ int SweeperGame::hoverstart2a(void)                               // äºŒçº§ç”»é
                     {
                         putimage(472, 380, &Medium1, SRCCOPY);
                     }
-                    // å¤„ç†å›°éš¾æŒ‰é’®æ‚¬åœ
+                    // ´¦ÀíÀ§ÄÑ°´Å¥ĞüÍ£
                     if (inDifficultButton)
                     {
                         putimage(472, 460, &Difficult, SRCCOPY);
@@ -264,7 +251,7 @@ int SweeperGame::hoverstart2a(void)                               // äºŒçº§ç”»é
                     {
                         putimage(472, 460, &Difficult1, SRCCOPY);
                     }
-                    // å¤„ç†è¿”å›æŒ‰é’®æ‚¬åœ
+                    // ´¦Àí·µ»Ø°´Å¥ĞüÍ£
                     if (inWithdrawButton)
                     {
                         putimage(0, 0, &Withdraw, SRCCOPY);
@@ -274,7 +261,7 @@ int SweeperGame::hoverstart2a(void)                               // äºŒçº§ç”»é
                         putimage(0, 0, &Withdraw1, SRCCOPY);
                     }
                 }break;
-            case WM_LBUTTONDOWN:                        // å¤„ç†ç‚¹å‡»äº‹ä»¶
+            case WM_LBUTTONDOWN:                        // ´¦Àíµã»÷ÊÂ¼ş
                 {
                     if (inSimpleButton)
                         return 1;
@@ -295,10 +282,11 @@ void SweeperGame::displayscreen_middle(void)
     putimage(0, 0, &BackGraound, SRCCOPY);
     if (blank_middle.size() != 16)
     {
-        for (int i = 0; i < 16; i++)
+		blank_middle.clear(); // Çå³ı¾ÉÊı¾İ
+        for (int i = 0; i <=15; ++i)
         {
             vector<Blanks> blank1;
-            for (int j = 0; j < 16; j++)
+            for (int j = 0; j <=15; ++j)
             {
                 Ccoordinate t_l(360 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(390 + j * 30, 90 + i * 30);
@@ -313,46 +301,23 @@ void SweeperGame::displayscreen_middle(void)
 
 void SweeperGame::displayscreen_difficult(void)
 {
-    const int START_X = 150;
-    const int START_Y = 60;
-    const int CELL_SIZE = 30;
-    // æ¸…é™¤å±å¹•å¹¶ç»˜åˆ¶èƒŒæ™¯
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-
-    // å®Œå…¨é‡ç½®ç½‘æ ¼è€Œä¸æ˜¯éƒ¨åˆ†æ£€æŸ¥
-    if (blank_difficult.size() != 16 ||
-        any_of(blank_difficult.begin(), blank_difficult.end(),
-            [](const auto& row) { return row.size() != 30; })) {
-
-        // æ¸…é™¤æ—§æ•°æ®
-        blank_difficult.clear();
-        blank_difficult.reserve(16);
-
-        // åˆ›å»ºæ–°ç½‘æ ¼
-        for (int i = 0; i < 16; i++) {
-            vector<Blanks> row;
-            row.reserve(30);
-
-            for (int j = 0; j < 30; j++) {
-                // åæ ‡è®¡ç®— - ä½¿ç”¨å¸¸é‡æ›¿ä»£ç¡¬ç¼–ç å€¼
-                Ccoordinate t_l(START_X + j * CELL_SIZE, START_Y + i * CELL_SIZE);
-                Ccoordinate b_r(START_X + (j + 1) * CELL_SIZE, START_Y + (i + 1) * CELL_SIZE);
-
-                // åˆ›å»ºæ ¼å­å¹¶æ·»åŠ åˆ°è¡Œ
-                Blanks blank(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
-                row.push_back(blank);
+    if (blank_difficult.size() != 20)
+    {
+        blank_difficult.clear(); // Çå³ı¾ÉÊı¾İ
+        for (int i = 0; i <= 19; ++i)
+        {
+            vector<Blanks> blank1;
+            for (int j = 0; j <= 19; ++j)
+            {
+                Ccoordinate t_l(360 + j * 30, 60 + i * 30);
+                Ccoordinate b_r(390 + j * 30, 90 + i * 30);
+                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                blank2.show();
+                blank1.push_back(blank2);
             }
-
-            // æ·»åŠ è¡Œåˆ°ç½‘æ ¼
-            blank_difficult.push_back(row);
-        }
-
-        // æ˜¾ç¤ºæ‰€æœ‰æ ¼å­
-        for (auto& row : blank_difficult) {
-            for (auto& cell : row) {
-                cell.show();
-            }
+            blank_difficult.push_back(blank1);
         }
     }
 }
@@ -362,7 +327,7 @@ int SweeperGame::hoverstart_simple(void)
     ExMessage msg;
     putimage(0, 0, &Withdraw1, SRCCOPY);
 
-    // æ£€æŸ¥vectoræ˜¯å¦å·²åˆå§‹åŒ–
+    // ¼ì²évectorÊÇ·ñÒÑ³õÊ¼»¯
     if (blank_simple.empty() || blank_simple.size() != 9 ||
         any_of(blank_simple.begin(), blank_simple.end(),
             [](const auto& row) { return row.size() != 9; })) {
@@ -375,15 +340,15 @@ int SweeperGame::hoverstart_simple(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // æ›´æ–°è¿”å›æŒ‰é’®çŠ¶æ€
+        // ¸üĞÂ·µ»Ø°´Å¥×´Ì¬
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // æå‰æ£€æŸ¥æ˜¯å¦ç‚¹å‡»è¿”å›æŒ‰é’®
+        // ÌáÇ°¼ì²éÊÇ·ñµã»÷·µ»Ø°´Å¥
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
 
-        // æŸ¥æ‰¾é¼ æ ‡æ‰€åœ¨çš„æ ¼å­
+        // ²éÕÒÊó±êËùÔÚµÄ¸ñ×Ó
         int mouseRow = -1, mouseCol = -1;
         if (msg.x >= blank_simple[0][0].top_left.x &&
             msg.y >= blank_simple[0][0].top_left.y &&
@@ -393,9 +358,9 @@ int SweeperGame::hoverstart_simple(void)
             mouseRow = (msg.y - blank_simple[0][0].top_left.y) / 30;
             mouseCol = (msg.x - blank_simple[0][0].top_left.x) / 30;
 
-            // ç¡®ä¿ç´¢å¼•åœ¨æœ‰æ•ˆèŒƒå›´å†…
+            // È·±£Ë÷ÒıÔÚÓĞĞ§·¶Î§ÄÚ
             if (mouseRow >= 0 && mouseRow < 9 && mouseCol >= 0 && mouseCol < 9) {
-                // å¤„ç†é¼ æ ‡äº‹ä»¶
+                // ´¦ÀíÊó±êÊÂ¼ş
                 switch (msg.message)
                 {
                     case WM_MOUSEMOVE:
@@ -424,7 +389,7 @@ int SweeperGame::hoverstart_simple(void)
             }
         }
 
-        // é‡ç»˜å…¶ä»–æ ¼å­
+        // ÖØ»æÆäËû¸ñ×Ó
         if (msg.message == WM_MOUSEMOVE) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -442,7 +407,7 @@ int SweeperGame::hoverstart_middle(void)
     ExMessage msg;
     putimage(0, 0, &Withdraw1, SRCCOPY);
 
-    // æ£€æŸ¥vectoræ˜¯å¦å·²åˆå§‹åŒ–
+    // ¼ì²évectorÊÇ·ñÒÑ³õÊ¼»¯
     if (blank_middle.empty() || blank_middle.size() != 16 ||
         any_of(blank_middle.begin(), blank_middle.end(),
             [](const auto& row) { return row.size() != 16; })) {
@@ -455,15 +420,15 @@ int SweeperGame::hoverstart_middle(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // æ›´æ–°è¿”å›æŒ‰é’®çŠ¶æ€
+        // ¸üĞÂ·µ»Ø°´Å¥×´Ì¬
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // æå‰æ£€æŸ¥æ˜¯å¦ç‚¹å‡»è¿”å›æŒ‰é’®
+        // ÌáÇ°¼ì²éÊÇ·ñµã»÷·µ»Ø°´Å¥
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
 
-        // æŸ¥æ‰¾é¼ æ ‡æ‰€åœ¨çš„æ ¼å­
+        // ²éÕÒÊó±êËùÔÚµÄ¸ñ×Ó
         int mouseRow = -1, mouseCol = -1;
         if (msg.x >= blank_middle[0][0].top_left.x &&
             msg.y >= blank_middle[0][0].top_left.y &&
@@ -473,9 +438,9 @@ int SweeperGame::hoverstart_middle(void)
             mouseRow = (msg.y - blank_middle[0][0].top_left.y) / 30;
             mouseCol = (msg.x - blank_middle[0][0].top_left.x) / 30;
 
-            // ç¡®ä¿ç´¢å¼•åœ¨æœ‰æ•ˆèŒƒå›´å†…
+            // È·±£Ë÷ÒıÔÚÓĞĞ§·¶Î§ÄÚ
             if (mouseRow >= 0 && mouseRow < 16 && mouseCol >= 0 && mouseCol < 16) {
-                // å¤„ç†é¼ æ ‡äº‹ä»¶
+                // ´¦ÀíÊó±êÊÂ¼ş
                 switch (msg.message)
                 {
                     case WM_MOUSEMOVE:
@@ -504,7 +469,7 @@ int SweeperGame::hoverstart_middle(void)
             }
         }
 
-        // é‡ç»˜å…¶ä»–æ ¼å­
+        // ÖØ»æÆäËû¸ñ×Ó
         if (msg.message == WM_MOUSEMOVE) {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
@@ -522,7 +487,7 @@ int SweeperGame::hoverstart_difficult(void)
     ExMessage msg;
     putimage(0, 0, &Withdraw1, SRCCOPY);
 
-    // æ£€æŸ¥vectoræ˜¯å¦å·²åˆå§‹åŒ–
+    // ¼ì²évectorÊÇ·ñÒÑ³õÊ¼»¯
     if (blank_difficult.empty() || blank_difficult.size() != 16 ||
         any_of(blank_difficult.begin(), blank_difficult.end(),
             [](const auto& row) { return row.size() != 30; })) {
@@ -535,15 +500,15 @@ int SweeperGame::hoverstart_difficult(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // æ›´æ–°è¿”å›æŒ‰é’®çŠ¶æ€
+        // ¸üĞÂ·µ»Ø°´Å¥×´Ì¬
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // æå‰æ£€æŸ¥æ˜¯å¦ç‚¹å‡»è¿”å›æŒ‰é’®
+        // ÌáÇ°¼ì²éÊÇ·ñµã»÷·µ»Ø°´Å¥
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
 
-        // æŸ¥æ‰¾é¼ æ ‡æ‰€åœ¨çš„æ ¼å­
+        // ²éÕÒÊó±êËùÔÚµÄ¸ñ×Ó
         int mouseRow = -1, mouseCol = -1;
         if (msg.x >= blank_difficult[0][0].top_left.x &&
             msg.y >= blank_difficult[0][0].top_left.y &&
@@ -553,9 +518,9 @@ int SweeperGame::hoverstart_difficult(void)
             mouseRow = (msg.y - blank_difficult[0][0].top_left.y) / 30;  
             mouseCol = (msg.x - blank_difficult[0][0].top_left.x) / 30;
 
-            // ç¡®ä¿ç´¢å¼•åœ¨æœ‰æ•ˆèŒƒå›´å†…
+            // È·±£Ë÷ÒıÔÚÓĞĞ§·¶Î§ÄÚ
             if (mouseRow >= 0 && mouseRow < 16 && mouseCol >= 0 && mouseCol < 30) {
-                // å¤„ç†é¼ æ ‡äº‹ä»¶
+                // ´¦ÀíÊó±êÊÂ¼ş
                 switch (msg.message)
                 {
                     case WM_MOUSEMOVE:
@@ -584,7 +549,7 @@ int SweeperGame::hoverstart_difficult(void)
             }
         }
 
-        // é‡ç»˜å…¶ä»–æ ¼å­
+        // ÖØ»æÆäËû¸ñ×Ó
         if (msg.message == WM_MOUSEMOVE) {
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 30; j++) {
@@ -617,12 +582,12 @@ void SweeperGame::Raise_Mines(int num)
                 for (int i = 80; i >0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twisterç®—æ³•
+                    mt19937 generator(seed);  // Mersenne TwisterËã·¨
 
-                    // ç”Ÿæˆ0-içš„å‡åŒ€åˆ†å¸ƒæ•´æ•°
+                    // Éú³É0-iµÄ¾ùÔÈ·Ö²¼ÕûÊı
                     uniform_int_distribution<int> distribution(0, i);
 
-                    // ç”Ÿæˆå¹¶è¾“å‡ºéšæœºæ•°
+                    // Éú³É²¢Êä³öËæ»úÊı
                     int j = distribution(generator);
                     
                     swap(vec[i], vec[j]);
@@ -647,12 +612,12 @@ void SweeperGame::Raise_Mines(int num)
                 for (int i = 255; i > 0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twisterç®—æ³•
+                    mt19937 generator(seed);  // Mersenne TwisterËã·¨
 
-                    // ç”Ÿæˆ0-içš„å‡åŒ€åˆ†å¸ƒæ•´æ•°
+                    // Éú³É0-iµÄ¾ùÔÈ·Ö²¼ÕûÊı
                     uniform_int_distribution<int> distribution(0, i);
 
-                    // ç”Ÿæˆå¹¶è¾“å‡ºéšæœºæ•°
+                    // Éú³É²¢Êä³öËæ»úÊı
                     int j = distribution(generator);
 
                     swap(vec[i], vec[j]);
@@ -676,12 +641,12 @@ void SweeperGame::Raise_Mines(int num)
                 for (int i = 479; i > 0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twisterç®—æ³•
+                    mt19937 generator(seed);  // Mersenne TwisterËã·¨
 
-                    // ç”Ÿæˆ0-içš„å‡åŒ€åˆ†å¸ƒæ•´æ•°
+                    // Éú³É0-iµÄ¾ùÔÈ·Ö²¼ÕûÊı
                     uniform_int_distribution<int> distribution(0, i);
 
-                    // ç”Ÿæˆå¹¶è¾“å‡ºéšæœºæ•°
+                    // Éú³É²¢Êä³öËæ»úÊı
                     int j = distribution(generator);
 
                     swap(vec[i], vec[j]);
