@@ -63,7 +63,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
-                                Raise_Mines();
+                                Raise_Mines(1);
                                 flag2 = hoverstart_simple();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_simple);
@@ -76,7 +76,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
-                                Raise_Mines();
+                                Raise_Mines(2);
                                 flag2 = hoverstart_middle();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_middle);
@@ -89,7 +89,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
-                                Raise_Mines();
+                                Raise_Mines(3);
                                 flag2 = hoverstart_difficult();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_difficult);
@@ -508,9 +508,15 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
-void SweeperGame::Raise_Mines(void)
+void SweeperGame::Raise_Mines(int num)
 {
-    int size = blank_simple[0].size();
+    int size = 0;
+    switch (num)
+    {
+        case 1:size = blank_simple[0].size(); break;
+        case 2:size = blank_middle[0].size(); break;
+        case 3:size = blank_difficult[0].size(); break;
+    }
     switch (size)
     {
         case 9:
@@ -546,10 +552,10 @@ void SweeperGame::Raise_Mines(void)
         case 16:
             {
                 int num = 51;
-                vector<char> vec(81, '0');
+                vector<char> vec(256, '0');
                 for (int i = 0; i < num; i++)
                     vec[i] = '1';
-                for (int i = 80; i > 0; i--)
+                for (int i = 255; i > 0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
                     mt19937 generator(seed);  // Mersenne Twister算法
@@ -563,22 +569,22 @@ void SweeperGame::Raise_Mines(void)
                     swap(vec[i], vec[j]);
                 }
                 int k = 0;
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 16; i++)
                 {
-                    for (int j = 0; j < 9; j++)
+                    for (int j = 0; j < 16; j++)
                     {
                         if (vec[k++] == '1')
-                            blank_simple[i][j].IsMine = 1;
+                            blank_middle[i][j].IsMine = 1;
                     }
                 }
             }break;
         case 30:
             {
                 int num = 120;
-                vector<char> vec(81, '0');
+                vector<char> vec(480, '0');
                 for (int i = 0; i < num; i++)
                     vec[i] = '1';
-                for (int i = 80; i > 0; i--)
+                for (int i = 479; i > 0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
                     mt19937 generator(seed);  // Mersenne Twister算法
@@ -597,7 +603,7 @@ void SweeperGame::Raise_Mines(void)
                     for (int j = 0; j < 9; j++)
                     {
                         if (vec[k++] == '1')
-                            blank_simple[i][j].IsMine = 1;
+                            blank_difficult[i][j].IsMine = 1;
                     }
                 }
             }break;
