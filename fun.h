@@ -49,14 +49,20 @@ public:
 	}
 	void flag(void)
 	{
-		isFlag = -isFlag;
-		if(isFlag&& isRevealed==0)
-			putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+		if (isFlag)
+			isFlag = false;
+		else
+			isFlag = true;
 	}
 	void show(void)
 	{
 		if (isRevealed == 0)
+		{
+		if (isFlag && isRevealed == 0)
+				putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+		else
 			putimage(top_left.x, top_left.y, &Before_img, SRCCOPY);
+		}
 		else
 		{
 			if(IsMine)
@@ -69,7 +75,6 @@ public:
 	
 	void showUnCell(void)
 	{
-
 		putimage(top_left.x, top_left.y, &Hover_Img, SRCCOPY);
 
 	}
@@ -104,12 +109,22 @@ public:
 	int hoverstart_middle(void);
 	int hoverstart_difficult(void);
 
+<<<<<<< HEAD
 	void displayscreen1(void);                  //一级界面显示函数                                           
+=======
+	void displayscreen1(void);                  //一级界面显示函数
+
+>>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
 	void displayscreen_middle(void);        
 	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
+<<<<<<< HEAD
 	void Raise_Mines(void);
+=======
+	void Raise_Mines(int num);
+
+>>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
 };
 
 #endif
