@@ -49,14 +49,20 @@ public:
 	}
 	void flag(void)
 	{
-		isFlag = -isFlag;
-		if(isFlag&& isRevealed==0)
-			putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+		if (isFlag)
+			isFlag = false;
+		else
+			isFlag = true;
 	}
 	void show(void)
 	{
 		if (isRevealed == 0)
+		{
+		if (isFlag && isRevealed == 0)
+				putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+		else
 			putimage(top_left.x, top_left.y, &Before_img, SRCCOPY);
+		}
 		else
 		{
 			if(IsMine)

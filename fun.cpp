@@ -63,7 +63,10 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
+                                Raise_Mines();
                                 flag2 = hoverstart_simple();
+                                vector<vector<Blanks>> temp;
+                                swap(temp, blank_simple);
                                 break;
                             }
                         }break;
@@ -73,7 +76,10 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
+                                Raise_Mines();
                                 flag2 = hoverstart_middle();
+                                vector<vector<Blanks>> temp;
+                                swap(temp, blank_middle);
                                 break;
                             }
                         }break;
@@ -83,7 +89,10 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
+                                Raise_Mines();
                                 flag2 = hoverstart_difficult();
+                                vector<vector<Blanks>> temp;
+                                swap(temp, blank_difficult);
                                 break;
                             }
                         }break;
@@ -329,14 +338,16 @@ int SweeperGame::hoverstart_simple(void)
                         {
                             if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
                             {
-                                if (blank_simple[i][j].isRevealed == 0)
+                                if (blank_simple[i][j].isRevealed ==0 && !blank_simple[i][j].isFlag)
                                     blank_simple[i][j].showUnCell();
+                                else
+                                    blank_simple[i][j].show();
                             }
                             else
                             {
                                 blank_simple[i][j].show();
                             }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
+                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                             {
                                 putimage(0, 0, &Withdraw, SRCCOPY);
                             }
@@ -350,20 +361,22 @@ int SweeperGame::hoverstart_simple(void)
                         {
                             if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
                             {
-                                blank_simple[i][j].isRevealed = 1;
+                                if(!blank_simple[i][j].isFlag)
+                                    blank_simple[i][j].isRevealed = 1;
                             }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
+                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                             {
                                 return -1;
                             }
                         }break;
+                        
                     case WM_RBUTTONDOWN:
                         {
                             if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
                             {
                                 blank_simple[i][j].flag();
+                                break;
                             }
-                            
                         }
                 }
             }
@@ -389,14 +402,16 @@ int SweeperGame::hoverstart_middle(void)
                         {
                             if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
                             {
-                                if (blank_middle[i][j].isRevealed == 0)
+                                if (blank_middle[i][j].isRevealed == 0 && !blank_middle[i][j].isFlag)
                                     blank_middle[i][j].showUnCell();
+                                else
+                                    blank_middle[i][j].show();
                             }
                             else
                             {
                                 blank_middle[i][j].show();
                             }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
+                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                             {
                                 putimage(0, 0, &Withdraw, SRCCOPY);
                             }
@@ -415,6 +430,14 @@ int SweeperGame::hoverstart_middle(void)
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
                                 return -1;
+                            }
+                        }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
+                            {
+                                blank_middle[i][j].flag();
+                                break;
                             }
                         }
                 }
@@ -441,14 +464,16 @@ int SweeperGame::hoverstart_difficult(void)
                         {
                             if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
                             {
-                                if (blank_difficult[i][j].isRevealed == 0)
+                                if (blank_difficult[i][j].isRevealed == 0 && !blank_difficult[i][j].isFlag)
                                     blank_difficult[i][j].showUnCell();
+                                else
+                                    blank_difficult[i][j].show();
                             }
                             else
                             {
                                 blank_difficult[i][j].show();
                             }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
+                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                             {
                                 putimage(0, 0, &Withdraw, SRCCOPY);
                             }
@@ -467,6 +492,14 @@ int SweeperGame::hoverstart_difficult(void)
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
                                 return -1;
+                            }
+                        }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
+                            {
+                                blank_difficult[i][j].flag();
+                                break;
                             }
                         }
                 }
