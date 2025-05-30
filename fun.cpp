@@ -135,16 +135,16 @@ void SweeperGame::displayscreen_simple(void)
     {
         for (int i = 0; i < 9; i++)
         {
-            vector<Blanks> blank2;
+            vector<Blanks> blank1;
             for (int j = 0; j < 9; j++)
             {
                 Ccoordinate t_l(465 + j * 30, 165 + i * 30);
                 Ccoordinate b_r(495 + j * 30, 195 + i * 30);
                 Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
                 temp.show();
-                blank2.push_back(temp);
+                blank1.push_back(temp);
             }
-            blank_simple.push_back(blank2);
+            blank_simple.push_back(blank1);
         }
     }
 }
@@ -290,9 +290,9 @@ void SweeperGame::displayscreen_middle(void)
             {
                 Ccoordinate t_l(360 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(390 + j * 30, 90 + i * 30);
-                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
-                blank2.show();
-                blank1.push_back(blank2);
+                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                temp.show();
+                blank1.push_back(temp);
             }
             blank_middle.push_back(blank1);
         }
@@ -303,18 +303,20 @@ void SweeperGame::displayscreen_difficult(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    if (blank_difficult.size() != 16)
+    if (blank_difficult.size() != 30)
     {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 30; i++)
         {
             vector<Blanks> blank1;
             for (int j = 0; j < 30; j++)
             {
                 Ccoordinate t_l(150 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
-                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
-                blank2.show();
-                blank1.push_back(blank2);
+                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                temp.show();
+                cout << i << ',' << j << endl;
+                blank1.push_back(temp);
+                cout << '$'  << endl;
             }
             blank_difficult.push_back(blank1);
         }
@@ -425,7 +427,8 @@ int SweeperGame::hoverstart_middle(void)
                         {
                             if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
                             {
-                                blank_middle[i][j].isRevealed = 1;
+                                if (!blank_middle[i][j].isFlag)
+                                    blank_middle[i][j].isRevealed = 1;
                             }
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {
@@ -487,7 +490,8 @@ int SweeperGame::hoverstart_difficult(void)
                         {
                             if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
                             {
-                                blank_difficult[i][j].isRevealed = 1;
+                                if (!blank_difficult[i][j].isFlag)
+                                    blank_difficult[i][j].isRevealed = 1;
                             }
                             else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
                             {

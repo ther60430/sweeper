@@ -19,24 +19,24 @@ public:
 class Blanks
 {
 public:
-	IMAGE Before_img;
-	IMAGE After_img;
-	IMAGE Hover_Img;
-	IMAGE Mine_Img;
-	IMAGE Flag_Img;
+	IMAGE Before_img = NULL;
+	IMAGE After_img = NULL;
+	IMAGE Hover_Img = NULL;
+	IMAGE Mine_Img = NULL;
+	IMAGE Flag_Img = NULL;
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
 	bool IsMine;
 	int NumMine;
 	bool isRevealed;
 	bool isFlag;
-	
-	Blanks(IMAGE B_i=NULL, IMAGE A_i = NULL, IMAGE H_Ii = NULL,IMAGE M_i = NULL, IMAGE F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = 0, int Num = 0, bool Revealed = 0,bool flag=0 )
+
+	Blanks(IMAGE B_i=NULL, IMAGE A_i = NULL, IMAGE H_Ii = NULL,IMAGE M_i = NULL, IMAGE F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = false, int Num = false, bool Revealed = false,bool flag=false )
 		:Before_img(B_i), After_img(A_i), Hover_Img(H_Ii), Mine_Img(M_i),Flag_Img(F_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
 	Blanks(const Blanks &other)
 	{
 		Before_img = other.Before_img;
-		After_img= other.After_img;
+		After_img = other.After_img;
 		Hover_Img = other.Hover_Img;
 		Mine_Img = other.Mine_Img;
 		Flag_Img = other.Flag_Img;
