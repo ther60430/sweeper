@@ -63,6 +63,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
+                                Raise_Mines();
                                 flag2 = hoverstart_simple();
                                 break;
                             }
@@ -316,56 +317,89 @@ int SweeperGame::hoverstart_simple(void)
 {
     ExMessage msg;
     putimage(0,0,&Withdraw1, SRCCOPY);
+    // 初始化当前悬停的格子坐标
+    int currentHoverX = -1;
+    int currentHoverY = -1;
+
     while (1)
     {
         msg = getmessage(EX_MOUSE);
-        for (int i = 0; i < 9; i++)
+
+        // 首先检查返回按钮，避免嵌套在循环中
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
         {
-            for (int j = 0; j < 9; j++)
+            if (msg.message == WM_MOUSEMOVE)
             {
+                putimage(0, 0, &Withdraw, SRCCOPY);
+            }
+            else if (msg.message == WM_LBUTTONDOWN)
+            {
+                return -1;
+            }
+            continue; // 已处理返回按钮，跳过格子处理
+        }
+        else
+        {
+            if (msg.message == WM_MOUSEMOVE)
+            {
+                putimage(0, 0, &Withdraw1, SRCCOPY);
+            }
+        }
+
+        // 计算鼠标所在的格子坐标
+        int gridX = -1, gridY = -1;
+        if (msg.x >= blank_simple[0][0].top_left.x &&msg.y >= blank_simple[0][0].top_left.y &&
+            msg.x <= blank_simple[8][8].bottom_right.x && msg.y <= blank_simple[8][8].bottom_right.y)
+        {
+            gridX = (msg.x - blank_simple[0][0].top_left.x) / 30;
+            gridY = (msg.y - blank_simple[0][0].top_left.y) / 30;
+
+            // 确保坐标在有效范围内
+            if (gridX >= 0 && gridX < 9 && gridY >= 0 && gridY < 9)
+            {
+                // 处理鼠标事件
                 switch (msg.message)
                 {
                     case WM_MOUSEMOVE:
+                        // 只有当悬停的格子变化时才更新显示
+                        if (gridX != currentHoverX || gridY != currentHoverY)
                         {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
+                            // 恢复之前悬停的格子
+                            if (currentHoverX >= 0 && currentHoverY >= 0)
                             {
-                                if (blank_simple[i][j].isRevealed == 0)
-                                    blank_simple[i][j].showUnCell();
+                                blank_simple[currentHoverX][currentHoverY].show();
                             }
-                            else
+
+                            // 显示新的悬停格子
+                            if (!blank_simple[gridX][gridY].isRevealed)
                             {
-                                blank_simple[i][j].show();
+                                blank_simple[gridX][gridY].showUnCell();
                             }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
-                            {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
-                            }
-                            else
-                            {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
-                            }
-                       }break;
+
+                            currentHoverX = gridX;
+                            currentHoverY = gridY;
+                        }
+                        break;
 
                     case WM_LBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
-                            {
-                                blank_simple[i][j].isRevealed = 1;
-                            }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
-                            {
-                                return -1;
-                            }
-                        }break;
+                        blank_simple[gridX][gridY].isRevealed = 1;
+                        break;
+
                     case WM_RBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
-                            {
-                                blank_simple[i][j].flag();
-                            }
-                            
-                        }
+                        blank_simple[gridX][gridY].flag();
+                        break;
                 }
+            }
+        }
+
+        // 如果鼠标移出了游戏区域，重置悬停状态
+        if (msg.message == WM_MOUSEMOVE && (gridX < 0 || gridY < 0))
+        {
+            if (currentHoverX >= 0 && currentHoverY >= 0)
+            {
+                blank_simple[currentHoverX][currentHoverY].show();
+                currentHoverX = -1;
+                currentHoverY = -1;
             }
         }
     }

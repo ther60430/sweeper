@@ -69,7 +69,6 @@ public:
 	
 	void showUnCell(void)
 	{
-
 		putimage(top_left.x, top_left.y, &Hover_Img, SRCCOPY);
 
 	}
