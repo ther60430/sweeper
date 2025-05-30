@@ -7,17 +7,17 @@ void SweeperGame::InitGame()
 	loadimage(&UnCell, _T("images/uncell.png"),30,30);          //未揭开格子图片
 	loadimage(&Cell, _T("images/cell.png"), 30, 30);            //已揭开格子图片
 	loadimage(&HoverCell, _T("images/hover.png"), 30, 30);                     //鼠标悬停格子图片
-	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //雷图片
+	loadimage(&Landmine, _T("images/thounder.png"), 30, 30);              //雷图�?
     loadimage(&history_scores1, _T("images/history_scores1.png"), 256, 64);         //分数悬停图片
 	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //分数图片
-	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //游戏开始图片
-	loadimage(&GameStart, _T("images/start.png"), 256, 64);              //游戏开始悬停图片
+	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //游戏开始图�?
+	loadimage(&GameStart, _T("images/start.png"), 256, 64);              //游戏开始悬停图�?
 	loadimage(&Gamewithdraw, _T("images/withdraw.png"));                    //游戏返回图片
 	loadimage(&GamePause, _T("images/pause.png"));           //游戏暂停图片
 	loadimage(&GameContinue, _T("images/go.png"));            //继续游戏图片
-	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
-	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图片
-	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图片
+	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图�?
+	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图�?
+	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图�?
 	loadimage(&Flag, _T("images/flag.png"),30,30);             //旗帜图片
 	loadimage(&num[0], _T("images/1.png"), 30, 30);
 	loadimage(&num[1], _T("images/2.png"), 30, 30);
@@ -28,10 +28,10 @@ void SweeperGame::InitGame()
 	loadimage(&num[6], _T("images/7.png"), 30, 30);
 	loadimage(&num[7], _T("images/8.png"), 30, 30);
 	loadimage(&BackGraound, _T("images/BackGround.png"), 1200, 600);                  //背景图片
-	loadimage(&Simple1, _T("images/Simple1.png"), 256, 64);                                        //简单模式图片
+	loadimage(&Simple1, _T("images/Simple1.png"), 256, 64);                                        //简单模式图�?
 	loadimage(&Medium1, _T("images/middle2.png"), 256, 64);                                //中等模式图片
 	loadimage(&Difficult1, _T("images/difficult2.png"), 256, 64);                                 //困难模式图片
-    loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //简单模式悬停图片
+    loadimage(&Simple, _T("images/Simple.png"), 256, 64);                                        //简单模式悬停图�?
     loadimage(&Medium, _T("images/middle1.png"), 256, 64);                                //中等模式悬停图片
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮图片
@@ -44,7 +44,7 @@ void SweeperGame::run_game(void)
     int flag0 = -1;
     while (1)
     {
-        displayscreen1();				//一级画面显示函数
+        displayscreen1();				//一级画面显示函�?
         flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
         switch (flag0)
         {
@@ -54,7 +54,7 @@ void SweeperGame::run_game(void)
             {
                 int flag1;
                 displayscreen2a();                   //二级画面显示函数
-                flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函�?            1/2/3/4
                 switch (flag1)
                 {
                     case 1:
@@ -66,7 +66,7 @@ void SweeperGame::run_game(void)
                                 displayscreen_simple();//���Ѷ�չʾ��Blank������
                                 Raise_Mines();
 =======
-                                displayscreen_simple();//简单难度展示及Blank类生成
+                                displayscreen_simple();//简单难度展示及Blank类生�?
                                 Raise_Mines(1);
 >>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_simple();
@@ -119,14 +119,14 @@ void SweeperGame::run_game(void)
      }
  }
 
-void SweeperGame::displayscreen1(void)                //一级画面显示函数
+void SweeperGame::displayscreen1(void)                //一级画面显示函�?
 {
     cleardevice();                                          //清屏
     putimage(0, 0, &BackGraound, SRCCOPY);                  //背景图片
     putimage(200, 100, &Title, SRCCOPY);                    //标题图片
-    putimage(472, 300, &GameStart1, SRCCOPY);               //游戏开始按钮
+    putimage(472, 300, &GameStart1, SRCCOPY);               //游戏开始按�?
     putimage(472, 380, &history_scores1, SRCCOPY);          //分数按钮
-    putimage(472, 460, &GameExit1, SRCCOPY);                //退出按钮
+    putimage(472, 460, &GameExit1, SRCCOPY);                //退出按�?
     FlushBatchDraw();                                       //刷新屏幕
 }
 
@@ -170,14 +170,14 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及�
         msg = getmessage(EX_MOUSE);
         // 检查鼠标是否在开始按钮上
         bool inStartButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // 检查鼠标是否在分数按钮上
+        // 检查鼠标是否在分数按钮�?
         bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
         // 检查鼠标是否在退出按钮上
         bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
         switch (msg.message)
         {
         case WM_MOUSEMOVE:
-            // 处理开始按钮悬停
+            // 处理开始按钮悬�?
             if (inStartButton)
             {
                 putimage(472, 300, &GameStart, SRCCOPY);
@@ -195,7 +195,7 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及�
             {
                 putimage(472, 380, &history_scores, SRCCOPY);
             }
-            // 处理退出按钮悬停
+            // 处理退出按钮悬�?
             if (inExitButton)
             {
                 putimage(472, 460, &GameExit, SRCCOPY);
@@ -220,7 +220,7 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及�
     }
 }
 
-int SweeperGame::hoverstart2a(void)                               // 二级画面悬停及点击事件处理函数
+int SweeperGame::hoverstart2a(void)                               // 二级画面悬停及点击事件处理函�?
 {
     ExMessage msg;
     while (true)
@@ -228,17 +228,17 @@ int SweeperGame::hoverstart2a(void)                               // 二级画�
         msg = getmessage(EX_MOUSE);
         // 检查鼠标是否在简单按钮上
         bool inSimpleButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // 检查鼠标是否在中等按钮上
+        // 检查鼠标是否在中等按钮�?
         bool inMediumButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
-        // 检查鼠标是否在困难按钮上
+        // 检查鼠标是否在困难按钮�?
         bool inDifficultButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
-        // 检查鼠标是否在返回按钮上
+        // 检查鼠标是否在返回按钮�?
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
         switch (msg.message)
         {
             case WM_MOUSEMOVE:
                 {
-                    // 处理简单按钮悬停
+                    // 处理简单按钮悬�?
                     if (inSimpleButton)
                     {
                         putimage(472, 300, &Simple, SRCCOPY);
@@ -318,30 +318,30 @@ void SweeperGame::displayscreen_difficult(void)
     const int START_X = 150;
     const int START_Y = 60;
     const int CELL_SIZE = 30;
-    // 清除屏幕并绘制背景
+    // 清除屏幕并绘制背�?
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
 
-    // 完全重置网格而不是部分检查
+    // 完全重置网格而不是部分检�?
     if (blank_difficult.size() != 16 ||
         any_of(blank_difficult.begin(), blank_difficult.end(),
             [](const auto& row) { return row.size() != 30; })) {
 
-        // 清除旧数据
+        // 清除旧数�?
         blank_difficult.clear();
         blank_difficult.reserve(16);
 
-        // 创建新网格
+        // 创建新网�?
         for (int i = 0; i < 16; i++) {
             vector<Blanks> row;
             row.reserve(30);
 
             for (int j = 0; j < 30; j++) {
-                // 坐标计算 - 使用常量替代硬编码值
+                // 坐标计算 - 使用常量替代硬编码�?
                 Ccoordinate t_l(START_X + j * CELL_SIZE, START_Y + i * CELL_SIZE);
                 Ccoordinate b_r(START_X + (j + 1) * CELL_SIZE, START_Y + (i + 1) * CELL_SIZE);
 
-                // 创建格子并添加到行
+                // 创建格子并添加到�?
                 Blanks blank(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
                 row.push_back(blank);
             }
@@ -350,7 +350,7 @@ void SweeperGame::displayscreen_difficult(void)
             blank_difficult.push_back(row);
         }
 
-        // 显示所有格子
+        // 显示所有格�?
         for (auto& row : blank_difficult) {
             for (auto& cell : row) {
                 cell.show();
@@ -377,10 +377,10 @@ int SweeperGame::hoverstart_simple(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // 更新返回按钮状态
+        // 更新返回按钮状�?
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // 提前检查是否点击返回按钮
+        // 提前检查是否点击返回按�?
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
@@ -457,10 +457,10 @@ int SweeperGame::hoverstart_middle(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // 更新返回按钮状态
+        // 更新返回按钮状�?
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // 提前检查是否点击返回按钮
+        // 提前检查是否点击返回按�?
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
@@ -537,10 +537,10 @@ int SweeperGame::hoverstart_difficult(void)
         msg = getmessage(EX_MOUSE);
         bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
 
-        // 更新返回按钮状态
+        // 更新返回按钮状�?
         putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
 
-        // 提前检查是否点击返回按钮
+        // 提前检查是否点击返回按�?
         if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
             return -1;
         }
