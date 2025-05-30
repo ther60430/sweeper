@@ -104,16 +104,12 @@ public:
 	int hoverstart_middle(void);
 	int hoverstart_difficult(void);
 
-	void displayscreen1(void);                  //一级界面显示函数
-<<<<<<< HEAD
-	void displayscreen2a(void);                  //二级界面显示函数                          //二a级界面悬停函数
-=======
+	void displayscreen1(void);                  //一级界面显示函数                                           
 	void displayscreen_middle(void);        
 	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
 	void Raise_Mines(void);
->>>>>>> 1b5f7a54c03aee1ff19c6ed37616943ab61f41ff
 };
 
 #endif

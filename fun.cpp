@@ -63,6 +63,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
+                                Raise_Mines();
                                 flag2 = hoverstart_simple();
                                 break;
                             }
@@ -73,6 +74,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
+                                Raise_Mines();
                                 flag2 = hoverstart_middle();
                                 break;
                             }
@@ -83,6 +85,7 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
+                                Raise_Mines();
                                 flag2 = hoverstart_difficult();
                                 break;
                             }
