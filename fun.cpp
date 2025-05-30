@@ -61,8 +61,13 @@ void SweeperGame::run_game(void)
                             while (1)
                             {
                                 int flag2;
+<<<<<<< HEAD
+                                displayscreen_simple();//¼òµ¥ÄÑ¶ÈÕ¹Ê¾¼°BlankÀàÉú³É
+                                Raise_Mines();
+=======
                                 displayscreen_simple();//ç®€å•éš¾åº¦å±•ç¤ºåŠBlankç±»ç”Ÿæˆ
                                 Raise_Mines(1);
+>>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_simple();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_simple);
@@ -75,7 +80,11 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_middle();
+<<<<<<< HEAD
+                                Raise_Mines();
+=======
                                 Raise_Mines(2);
+>>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_middle();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_middle);
@@ -88,7 +97,11 @@ void SweeperGame::run_game(void)
                             {
                                 int flag2;
                                 displayscreen_difficult();
+<<<<<<< HEAD
+                                Raise_Mines();
+=======
                                 Raise_Mines(3);
+>>>>>>> 8f2f06d42bcf5b8c66260031a9f15d2f968324a4
                                 flag2 = hoverstart_difficult();
                                 vector<vector<Blanks>> temp;
                                 swap(temp, blank_difficult);
