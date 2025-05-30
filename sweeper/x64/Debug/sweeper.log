@@ -15,4 +15,6 @@ D:\sweeper\fun.cpp(583,35): warning C4244:         with
 D:\sweeper\fun.cpp(583,35): warning C4244:         [
 D:\sweeper\fun.cpp(583,35): warning C4244:             _Rep=std::chrono::system_clock::rep
 D:\sweeper\fun.cpp(583,35): warning C4244:         ]
+  main.cpp
+  正在生成代码...
   sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
