@@ -1,5 +1,4 @@
 #include"header.h"
-
 void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
