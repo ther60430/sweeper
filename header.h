@@ -20,7 +20,7 @@ using namespace std;
 
 #include"fun.h"
 
-
+/*
 extern IMAGE Title;            //标题
 extern IMAGE UnCell;         //未揭开格子图片
 extern IMAGE Cell;             //已揭开格子图片              
@@ -41,5 +41,5 @@ extern IMAGE Simple1,Simple;//简单模式
 extern IMAGE Medium1,Medium;//中等模式
 extern IMAGE Difficult1,Difficult;//困难模式
 extern IMAGE Withdraw1,Withdraw;//返回上一页
-
+*/
 #endif

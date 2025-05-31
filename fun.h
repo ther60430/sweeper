@@ -33,7 +33,7 @@ public:
 
 	Blanks(IMAGE B_i=NULL, IMAGE A_i = NULL, IMAGE H_Ii = NULL,IMAGE M_i = NULL, IMAGE F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = false, int Num = false, bool Revealed = false,bool flag=false )
 		:Before_img(B_i), After_img(A_i), Hover_Img(H_Ii), Mine_Img(M_i),Flag_Img(F_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
-	Blanks(const Blanks &other)
+	Blanks(const Blanks& other)
 	{
 		Before_img = other.Before_img;
 		After_img = other.After_img;
@@ -97,6 +97,27 @@ private:
 	vector<vector<Blanks>> blank_middle;
 	vector<vector<Blanks>> blank_difficult;
 	settings setting;
+	IMAGE Title;            //标题
+	IMAGE UnCell;         //未揭开格子图片
+	IMAGE Cell;             //已揭开格子图片              
+	IMAGE HoverCell;   //鼠标悬停格子图片
+	IMAGE Landmine;   //雷图片
+	IMAGE Flag;            //旗帜图片
+	IMAGE Gamewithdraw; //游戏返回图片
+	IMAGE Win;            //游戏胜利图片
+	IMAGE GameStart, GameStart1;  //游戏开始图片
+	IMAGE GamePause;  //游戏暂停图片
+	IMAGE GameContinue; //继续游戏图片
+	IMAGE GameRestart;  //重新开始图片
+	IMAGE GameExit, GameExit1;    //退出游戏图片
+	IMAGE num[8];     //数字图片1-8
+	IMAGE history_scores, history_scores1;          //分数图片
+	IMAGE BackGraound;//背景图片
+	IMAGE Simple1, Simple;//简单模式
+	IMAGE Medium1, Medium;//中等模式
+	IMAGE Difficult1, Difficult;//困难模式
+	IMAGE Withdraw1, Withdraw;//返回上一页
+
 public:
 	void InitGame();                        //初始化游戏
 	void HandleInput();                  //处理输入

@@ -303,9 +303,9 @@ void SweeperGame::displayscreen_difficult(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    if (blank_difficult.size() != 30)
+    if (blank_difficult.size() != 16)
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 16; i++)
         {
             vector<Blanks> blank1;
             for (int j = 0; j < 30; j++)
@@ -602,9 +602,9 @@ void SweeperGame::Raise_Mines(int num)
                     swap(vec[i], vec[j]);
                 }
                 int k = 0;
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 16; i++)
                 {
-                    for (int j = 0; j < 9; j++)
+                    for (int j = 0; j < 30; j++)
                     {
                         if (vec[k++] == '1')
                             blank_difficult[i][j].IsMine = 1;

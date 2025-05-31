@@ -1,22 +1,21 @@
 ﻿  fun.cpp
+D:\sweeper\fun.cpp(90,37): warning C4101: “flag2”: 未引用的局部变量
+D:\sweeper\fun.cpp(518,43): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+D:\sweeper\fun.cpp(519,43): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
 D:\sweeper\fun.cpp(520,43): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-D:\sweeper\fun.cpp(521,43): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-D:\sweeper\fun.cpp(522,46): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-D:\sweeper\fun.cpp(534,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(534,35): warning C4244:         with
-D:\sweeper\fun.cpp(534,35): warning C4244:         [
-D:\sweeper\fun.cpp(534,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(534,35): warning C4244:         ]
-D:\sweeper\fun.cpp(564,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(564,35): warning C4244:         with
-D:\sweeper\fun.cpp(564,35): warning C4244:         [
-D:\sweeper\fun.cpp(564,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(564,35): warning C4244:         ]
-D:\sweeper\fun.cpp(593,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(593,35): warning C4244:         with
-D:\sweeper\fun.cpp(593,35): warning C4244:         [
-D:\sweeper\fun.cpp(593,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(593,35): warning C4244:         ]
-  main.cpp
-  正在生成代码...
+D:\sweeper\fun.cpp(532,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(532,35): warning C4244:         with
+D:\sweeper\fun.cpp(532,35): warning C4244:         [
+D:\sweeper\fun.cpp(532,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(532,35): warning C4244:         ]
+D:\sweeper\fun.cpp(562,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(562,35): warning C4244:         with
+D:\sweeper\fun.cpp(562,35): warning C4244:         [
+D:\sweeper\fun.cpp(562,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(562,35): warning C4244:         ]
+D:\sweeper\fun.cpp(591,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(591,35): warning C4244:         with
+D:\sweeper\fun.cpp(591,35): warning C4244:         [
+D:\sweeper\fun.cpp(591,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(591,35): warning C4244:         ]
   sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
