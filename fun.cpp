@@ -140,7 +140,7 @@ void SweeperGame::displayscreen_simple(void)
             {
                 Ccoordinate t_l(465 + j * 30, 165 + i * 30);
                 Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.show();
                 blank1.push_back(temp);
             }
@@ -290,7 +290,7 @@ void SweeperGame::displayscreen_middle(void)
             {
                 Ccoordinate t_l(360 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(390 + j * 30, 90 + i * 30);
-                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.show();
                 blank1.push_back(temp);
             }
@@ -312,7 +312,7 @@ void SweeperGame::displayscreen_difficult(void)
             {
                 Ccoordinate t_l(150 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
-                Blanks temp(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.show();
                 cout << i << ',' << j << endl;
                 blank1.push_back(temp);
@@ -514,7 +514,7 @@ int SweeperGame::hoverstart_difficult(void)
 
 void SweeperGame::Raise_Mines(int num)
 {
-    int size = 0;
+    size_t size = 0;
     switch (num)
     {
         case 1:size = blank_simple[0].size(); break;

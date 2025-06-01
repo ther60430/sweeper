@@ -7,6 +7,7 @@
 #pragma comment(lib, "winmm.lib")  
 // C ++运行文件
 #include <iostream>
+#include <array>
 #include <vector>
 #include <malloc.h>
 #include <memory.h>

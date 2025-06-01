@@ -19,11 +19,11 @@ public:
 class Blanks
 {
 public:
-	IMAGE Before_img = NULL;
-	IMAGE After_img = NULL;
-	IMAGE Hover_Img = NULL;
-	IMAGE Mine_Img = NULL;
-	IMAGE Flag_Img = NULL;
+	IMAGE *Before_img = NULL;
+	IMAGE *After_img = NULL;
+	IMAGE *Hover_Img = NULL;
+	IMAGE *Mine_Img = NULL;
+	IMAGE *Flag_Img = NULL;
 	Ccoordinate top_left;
 	Ccoordinate bottom_right;
 	bool IsMine;
@@ -31,7 +31,7 @@ public:
 	bool isRevealed;
 	bool isFlag;
 
-	Blanks(IMAGE B_i=NULL, IMAGE A_i = NULL, IMAGE H_Ii = NULL,IMAGE M_i = NULL, IMAGE F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = false, int Num = false, bool Revealed = false,bool flag=false )
+	Blanks(IMAGE *B_i=NULL, IMAGE *A_i = NULL, IMAGE *H_Ii = NULL, IMAGE *M_i = NULL, IMAGE *F_i = NULL, Ccoordinate top = Ccoordinate(), Ccoordinate bottom = Ccoordinate(), bool Is = false, int Num = false, bool Revealed = false,bool flag=false )
 		:Before_img(B_i), After_img(A_i), Hover_Img(H_Ii), Mine_Img(M_i),Flag_Img(F_i), top_left(top), bottom_right(bottom), IsMine(Is), NumMine(Num), isRevealed(Revealed), isFlag(flag) {}
 	Blanks(const Blanks& other)
 	{
@@ -59,16 +59,16 @@ public:
 		if (isRevealed == 0)
 		{
 		if (isFlag && isRevealed == 0)
-				putimage(top_left.x, top_left.y, &Flag_Img, SRCCOPY);
+				putimage(top_left.x, top_left.y, Flag_Img, SRCCOPY);
 		else
-			putimage(top_left.x, top_left.y, &Before_img, SRCCOPY);
+			putimage(top_left.x, top_left.y, Before_img, SRCCOPY);
 		}
 		else
 		{
 			if(IsMine)
-				putimage(top_left.x, top_left.y, &Mine_Img, SRCCOPY);
+				putimage(top_left.x, top_left.y, Mine_Img, SRCCOPY);
 			else
-				putimage(top_left.x, top_left.y, &After_img, SRCCOPY);
+				putimage(top_left.x, top_left.y, After_img, SRCCOPY);
 		}
 			
 	}
@@ -76,7 +76,7 @@ public:
 	void showUnCell(void)
 	{
 
-		putimage(top_left.x, top_left.y, &Hover_Img, SRCCOPY);
+		putimage(top_left.x, top_left.y, Hover_Img, SRCCOPY);
 
 	}
 };
