@@ -281,15 +281,15 @@ void SweeperGame::displayscreen_middle(void)
 {
     cleardevice();
     putimage(0, 0, &BackGraound, SRCCOPY);
-    if (blank_middle.size() != 16)
+    if (blank_middle.size() != 18)
     {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 18; i++)
         {
             vector<Blanks> blank1;
-            for (int j = 0; j < 16; j++)
+            for (int j = 0; j < 18; j++)
             {
-                Ccoordinate t_l(360 + j * 30, 60 + i * 30);
-                Ccoordinate b_r(390 + j * 30, 90 + i * 30);
+                Ccoordinate t_l(360 + j * 30, 30 + i * 30);
+                Ccoordinate b_r(390 + j * 30, 60 + i * 30);
                 Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.show();
                 blank1.push_back(temp);
@@ -314,9 +314,7 @@ void SweeperGame::displayscreen_difficult(void)
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
                 Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.show();
-                cout << i << ',' << j << endl;
                 blank1.push_back(temp);
-                cout << '$'  << endl;
             }
             blank_difficult.push_back(blank1);
         }
@@ -553,13 +551,13 @@ void SweeperGame::Raise_Mines(int num)
                 }
                 
             }break;
-        case 16:
+        case 18:
             {
-                int num = 51;
-                vector<char> vec(256, '0');
+                int num = 64;
+                vector<char> vec(324, '0');
                 for (int i = 0; i < num; i++)
                     vec[i] = '1';
-                for (int i = 255; i > 0; i--)
+                for (int i = 323; i > 0; i--)
                 {
                     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
                     mt19937 generator(seed);  // Mersenne TwisterÀ„∑®
@@ -573,9 +571,9 @@ void SweeperGame::Raise_Mines(int num)
                     swap(vec[i], vec[j]);
                 }
                 int k = 0;
-                for (int i = 0; i < 16; i++)
+                for (int i = 0; i < 18; i++)
                 {
-                    for (int j = 0; j < 16; j++)
+                    for (int j = 0; j < 18; j++)
                     {
                         if (vec[k++] == '1')
                             blank_middle[i][j].IsMine = 1;
