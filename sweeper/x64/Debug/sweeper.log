@@ -1,17 +1,17 @@
 ﻿  fun.cpp
-D:\sweeper\fun.cpp(532,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(532,35): warning C4244:         with
-D:\sweeper\fun.cpp(532,35): warning C4244:         [
-D:\sweeper\fun.cpp(532,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(532,35): warning C4244:         ]
-D:\sweeper\fun.cpp(562,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(562,35): warning C4244:         with
-D:\sweeper\fun.cpp(562,35): warning C4244:         [
-D:\sweeper\fun.cpp(562,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(562,35): warning C4244:         ]
-D:\sweeper\fun.cpp(591,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(591,35): warning C4244:         with
-D:\sweeper\fun.cpp(591,35): warning C4244:         [
-D:\sweeper\fun.cpp(591,35): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(591,35): warning C4244:         ]
+D:\sweeper\fun.cpp(517,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(517,35): warning C4244:         with
+D:\sweeper\fun.cpp(517,35): warning C4244:         [
+D:\sweeper\fun.cpp(517,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(517,35): warning C4244:         ]
+D:\sweeper\fun.cpp(547,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(547,35): warning C4244:         with
+D:\sweeper\fun.cpp(547,35): warning C4244:         [
+D:\sweeper\fun.cpp(547,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(547,35): warning C4244:         ]
+D:\sweeper\fun.cpp(576,35): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(576,35): warning C4244:         with
+D:\sweeper\fun.cpp(576,35): warning C4244:         [
+D:\sweeper\fun.cpp(576,35): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(576,35): warning C4244:         ]
   sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe

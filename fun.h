@@ -54,14 +54,14 @@ public:
 		else
 			isFlag = true;
 	}
-	void show(void)
+	void select_show(void)
 	{
 		if (isRevealed == 0)
 		{
-		if (isFlag && isRevealed == 0)
+			if (isFlag==1)
 				putimage(top_left.x, top_left.y, Flag_Img, SRCCOPY);
-		else
-			putimage(top_left.x, top_left.y, Before_img, SRCCOPY);
+			else
+				putimage(top_left.x, top_left.y, Hover_Img, SRCCOPY);
 		}
 		else
 		{
@@ -72,11 +72,20 @@ public:
 		}
 			
 	}
-	
-	void showUnCell(void)
+	void Unselect_show(void)
 	{
-
-		putimage(top_left.x, top_left.y, Hover_Img, SRCCOPY);
+		if (isRevealed == 0)
+		{
+			if (isFlag == 1)
+				putimage(top_left.x, top_left.y, Flag_Img, SRCCOPY);
+			else
+				putimage(top_left.x, top_left.y, Before_img, SRCCOPY);
+		}
+		else
+			if (IsMine)
+				putimage(top_left.x, top_left.y, Mine_Img, SRCCOPY);
+			else
+				putimage(top_left.x, top_left.y, After_img, SRCCOPY);
 
 	}
 };

@@ -127,28 +127,6 @@ void SweeperGame::displayscreen2a(void)                   //¶þ¼¶»­ÃæÏÔÊ¾º¯Êý
     putimage(472, 460, &Difficult1, SRCCOPY);
 }
 
-void SweeperGame::displayscreen_simple(void)
-{
-    cleardevice();
-    putimage(0, 0, &BackGraound, SRCCOPY);
-    if (blank_simple.size() != 9)
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            vector<Blanks> blank1;
-            for (int j = 0; j < 9; j++)
-            {
-                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
-                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
-                Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
-                temp.show();
-                blank1.push_back(temp);
-            }
-            blank_simple.push_back(blank1);
-        }
-    }
-}
-
 int SweeperGame::hoverstart1(void)                      //Ò»¼¶»­ÃæÐüÍ£¼°µã»÷ÊÂ¼þ´¦Àíº¯Êý
 {
     ExMessage msg;
@@ -277,6 +255,28 @@ int SweeperGame::hoverstart2a(void)                               // ¶þ¼¶»­ÃæÐüÍ
     }
 }
 
+void SweeperGame::displayscreen_simple(void)
+{
+    cleardevice();
+    putimage(0, 0, &BackGraound, SRCCOPY);
+    if (blank_simple.size() != 9)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            vector<Blanks> blank1;
+            for (int j = 0; j < 9; j++)
+            {
+                Ccoordinate t_l(465 + j * 30, 165 + i * 30);
+                Ccoordinate b_r(495 + j * 30, 195 + i * 30);
+                Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
+                temp.select_show();
+                blank1.push_back(temp);
+            }
+            blank_simple.push_back(blank1);
+        }
+    }
+}
+
 void SweeperGame::displayscreen_middle(void)
 {
     cleardevice();
@@ -291,7 +291,7 @@ void SweeperGame::displayscreen_middle(void)
                 Ccoordinate t_l(360 + j * 30, 30 + i * 30);
                 Ccoordinate b_r(390 + j * 30, 60 + i * 30);
                 Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
-                temp.show();
+                temp.select_show();
                 blank1.push_back(temp);
             }
             blank_middle.push_back(blank1);
@@ -313,7 +313,7 @@ void SweeperGame::displayscreen_difficult(void)
                 Ccoordinate t_l(150 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
                 Blanks temp(&UnCell, &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
-                temp.show();
+                temp.select_show();
                 blank1.push_back(temp);
             }
             blank_difficult.push_back(blank1);
@@ -324,187 +324,172 @@ void SweeperGame::displayscreen_difficult(void)
 int SweeperGame::hoverstart_simple(void)
 {
     ExMessage msg;
-    putimage(0,0,&Withdraw1, SRCCOPY);
+    
+    
     while (1)
     {
         msg = getmessage(EX_MOUSE);
+        
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+            {
+                return -1;
+            }
+        }
+
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
             {
-                switch (msg.message)
-                {
-                    case WM_MOUSEMOVE:
-                        {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
-                            {
-                                if (blank_simple[i][j].isRevealed ==0 && !blank_simple[i][j].isFlag)
-                                    blank_simple[i][j].showUnCell();
-                                else
-                                    blank_simple[i][j].show();
-                            }
-                            else
-                            {
-                                blank_simple[i][j].show();
-                            }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
-                            {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
-                            }
-                            else
-                            {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
-                            }
-                       }break;
-
-                    case WM_LBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
-                            {
-                                if(!blank_simple[i][j].isFlag)
-                                    blank_simple[i][j].isRevealed = 1;
-                            }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
-                            {
-                                return -1;
-                            }
-                        }break;
-                        
-                    case WM_RBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_simple[i][j].top_left.x && msg.y >= blank_simple[i][j].top_left.y && msg.x <= blank_simple[i][j].bottom_right.x && msg.y <= blank_simple[i][j].bottom_right.y)
-                            {
-                                blank_simple[i][j].flag();
-                                break;
-                            }
-                        }
-                }
+                blank_simple[i][j].Unselect_show();
             }
         }
+        if (msg.x > 465 && msg.y > 165 && msg.x < 735 && msg.y < 435)
+        {
+            int posX = (msg.x - 465) / 30;
+            int posY = (msg.y - 165) / 30;
+            switch (msg.message)
+            {
+                case WM_MOUSEMOVE:
+                    {
+                        blank_simple[posY][posX].select_show();
+
+                    }break;
+
+                case WM_LBUTTONDOWN:
+                    {
+                        
+                        if (blank_simple[posY][posX].isFlag==0)
+                            blank_simple[posY][posX].isRevealed = 1;
+                    }break;
+
+                case WM_RBUTTONDOWN:
+                    {
+                        blank_simple[posY][posX].flag();
+                    }break;
+            }
+        }
+            
     }
 }
 
 int SweeperGame::hoverstart_middle(void)
 {
     ExMessage msg;
-    putimage(0, 0, &Withdraw1, SRCCOPY);
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
-        for (int i = 0; i < 16; i++)
-        {
-            for (int j = 0; j < 16; j++)
-            {
-                switch (msg.message)
-                {
-                    case WM_MOUSEMOVE:
-                        {
-                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
-                            {
-                                if (blank_middle[i][j].isRevealed == 0 && !blank_middle[i][j].isFlag)
-                                    blank_middle[i][j].showUnCell();
-                                else
-                                    blank_middle[i][j].show();
-                            }
-                            else
-                            {
-                                blank_middle[i][j].show();
-                            }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
-                            {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
-                            }
-                            else
-                            {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
-                            }
-                        }break;
 
-                    case WM_LBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
-                            {
-                                if (!blank_middle[i][j].isFlag)
-                                    blank_middle[i][j].isRevealed = 1;
-                            }
-                            else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
-                            {
-                                return -1;
-                            }
-                        }break;
-                    case WM_RBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_middle[i][j].top_left.x && msg.y >= blank_middle[i][j].top_left.y && msg.x <= blank_middle[i][j].bottom_right.x && msg.y <= blank_middle[i][j].bottom_right.y)
-                            {
-                                blank_middle[i][j].flag();
-                                break;
-                            }
-                        }
-                }
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+            {
+                return -1;
             }
         }
+
+        for (int i = 0; i < 18; i++)
+        {
+            for (int j = 0; j < 18; j++)
+            {
+                blank_middle[i][j].Unselect_show();
+            }
+        }
+        if (msg.x > 360 && msg.y > 30 && msg.x < 900&& msg.y < 570)
+        {
+            int posX = (msg.x - 360) / 30;
+            int posY = (msg.y - 30) / 30;
+            switch (msg.message)
+            {
+                case WM_MOUSEMOVE:
+                    {
+                        blank_middle[posY][posX].select_show();
+                    }break;
+
+                case WM_LBUTTONDOWN:
+                    {
+                        if (blank_middle[posY][posX].isFlag == 0)
+                            blank_middle[posY][posX].isRevealed = 1;
+                    }break;
+
+                case WM_RBUTTONDOWN:
+                    {
+                        blank_middle[posY][posX].flag();
+                    }break;
+            }
+        }
+        
     }
 }
 
 int SweeperGame::hoverstart_difficult(void)
 {
     ExMessage msg;
-    putimage(0, 0, &Withdraw1, SRCCOPY);
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
+
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
+            {
+                return -1;
+            }
+        }
+
         for (int i = 0; i < 16; i++)
         {
             for (int j = 0; j < 30; j++)
             {
-                switch (msg.message)
-                {
-                    case WM_MOUSEMOVE:
-                        {
-                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
-                            {
-                                if (blank_difficult[i][j].isRevealed == 0 && !blank_difficult[i][j].isFlag)
-                                    blank_difficult[i][j].showUnCell();
-                                else
-                                    blank_difficult[i][j].show();
-                            }
-                            else
-                            {
-                                blank_difficult[i][j].show();
-                            }
-                            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//·µ»Ø
-                            {
-                                putimage(0, 0, &Withdraw, SRCCOPY);
-                            }
-                            else
-                            {
-                                putimage(0, 0, &Withdraw1, SRCCOPY);
-                            }
-                        }break;
+                blank_difficult[i][j].Unselect_show();
+            }
+        }
+        if (msg.x > 150 && msg.y > 60 && msg.x < 1050 && msg.y < 540)
+        {
+            int posX = (msg.x - 150) / 30;
+            int posY = (msg.y - 60) / 30;
+            switch (msg.message)
+            {
+                case WM_MOUSEMOVE:
+                    {
+                        blank_difficult[posY][posX].select_show();
+                    }break;
 
-                    case WM_LBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
-                            {
-                                if (!blank_difficult[i][j].isFlag)
-                                    blank_difficult[i][j].isRevealed = 1;
-                            }
-                            else if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)
-                            {
-                                return -1;
-                            }
-                        }break;
-                    case WM_RBUTTONDOWN:
-                        {
-                            if (msg.x >= blank_difficult[i][j].top_left.x && msg.y >= blank_difficult[i][j].top_left.y && msg.x <= blank_difficult[i][j].bottom_right.x && msg.y <= blank_difficult[i][j].bottom_right.y)
-                            {
-                                blank_difficult[i][j].flag();
-                                break;
-                            }
-                        }
-                }
+                case WM_LBUTTONDOWN:
+                    {
+                        if (blank_difficult[posY][posX].isFlag == 0)
+                            blank_difficult[posY][posX].isRevealed = 1;
+                    }break;
+
+                case WM_RBUTTONDOWN:
+                    {
+                        blank_difficult[posY][posX].flag();
+                    }break;
             }
         }
     }
