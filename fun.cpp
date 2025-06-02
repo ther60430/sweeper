@@ -410,6 +410,21 @@ int SweeperGame::hoverstart_simple(void)
                                     ExpandEmptyCells_simple(posY, posX);
                                 }
                                 blank_simple[posY][posX].isRevealed = 1;
+                                if(blank_simple[posY][posX].IsMine == 1) //如果点到雷
+                                {
+                                    for (int i = 1; i <= 9; i++)
+                                    {
+                                        for (int j = 1; j <= 9; j++)
+                                        {
+                                            if(blank_simple[i][j].IsMine == 1) //显示所有雷
+                                            {
+                                                blank_simple[i][j].isRevealed = 1;
+											}
+                                        }
+                                    }
+
+                                    return -1;
+								}
                             }
                         }
                         else if (firstclick_simple == 0&& blank_simple[posY][posX].isFlag==0)                 //第一次左键点击
@@ -575,7 +590,7 @@ int SweeperGame::hoverstart_difficult(void)
 
                 case WM_LBUTTONDOWN:
                     {
-                        if (firstclick_difficult == 1)
+						if (firstclick_difficult == 1)                         //非第一次点击
                         {
                             if (blank_difficult[posY][posX].isFlag == 0)
                             {
