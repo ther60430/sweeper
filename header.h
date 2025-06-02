@@ -19,6 +19,7 @@
 using namespace std;
 
 #include"fun.h"
+<<<<<<< HEAD
 
 
 extern IMAGE Title;            //标题
@@ -42,4 +43,6 @@ extern IMAGE Medium1,Medium;//中等模式
 extern IMAGE Difficult1,Difficult;//困难模式
 extern IMAGE Withdraw1,Withdraw;//返回上一页
 
+=======
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 #endif

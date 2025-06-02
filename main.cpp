@@ -1,5 +1,6 @@
 #include"header.h"
 
+<<<<<<< HEAD
 IMAGE Title;            //标题
 IMAGE UnCell;         //未翻开格子图片
 IMAGE Cell;             //已翻开格子图片              
@@ -21,6 +22,8 @@ IMAGE Medium1, Medium;//中等模式
 IMAGE Difficult1, Difficult;//困难模式
 IMAGE Withdraw,Withdraw1;//返回上一页
 
+=======
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 
 int main()
 {
