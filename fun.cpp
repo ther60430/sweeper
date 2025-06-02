@@ -1,5 +1,4 @@
 #include"header.h"
-
 void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
@@ -147,16 +146,23 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
         // 检查鼠标是否在开始按钮上
         bool inStartButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
         // 检查鼠标是否在分数按钮上
+<<<<<<< HEAD
+=======
 
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
         // 检查鼠标是否在退出按钮上
         bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
         switch (msg.message)
         {
         case WM_MOUSEMOVE:
+<<<<<<< HEAD
+            // 处理开始按钮悬停
+=======
 
             // 处理开始按钮悬停
 
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             if (inStartButton)
             {
                 putimage(472, 300, &GameStart, SRCCOPY);
@@ -174,6 +180,10 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
             {
                 putimage(472, 380, &history_scores, SRCCOPY);
             }
+<<<<<<< HEAD
+
+=======
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             // 处理退出按钮悬停
             if (inExitButton)
             {
@@ -200,7 +210,10 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
 }
 
 int SweeperGame::hoverstart2a(void)                               // 二级画面悬停及点击事件处理函数
+<<<<<<< HEAD
+=======
 
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 {
     ExMessage msg;
     while (true)
@@ -339,6 +352,13 @@ void SweeperGame::displayscreen_difficult(void)
             vector<Blanks> blank1;
             for (int j = 0; j < 32; j++)
             {
+<<<<<<< HEAD
+                Ccoordinate t_l(360 + j * 30, 60 + i * 30);
+                Ccoordinate b_r(390 + j * 30, 90 + i * 30);
+                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
+                blank2.show();
+                blank1.push_back(blank2);
+=======
                 Ccoordinate t_l(150 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
                 if (i == 0 || i == 17 || j == 0 || j == 31)           //边界格子不显示
@@ -351,6 +371,7 @@ void SweeperGame::displayscreen_difficult(void)
                 Blanks temp(&UnCell, &num[0], &num[1], &num[2], &num[3], &num[4], &num[5], &num[6], &num[7], &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.select_show();
                 blank1.push_back(temp);
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             }
             blank_difficult.push_back(blank1);
         }
@@ -364,6 +385,16 @@ int SweeperGame::hoverstart_simple(void)
     while (1)
     {
         msg = getmessage(EX_MOUSE);
+<<<<<<< HEAD
+        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
+
+        // 更新返回按钮状态
+        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
+
+        // 提前检查是否点击返回按钮
+        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
+            return -1;
+=======
         
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
@@ -379,6 +410,7 @@ int SweeperGame::hoverstart_simple(void)
             {
                 return -1;
             }
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         }
 
         for (int i = 0; i < 11; i++)
@@ -467,6 +499,14 @@ int SweeperGame::hoverstart_middle(void)
     {
         msg = getmessage(EX_MOUSE);
 
+<<<<<<< HEAD
+        // 更新返回按钮状态
+        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
+
+        // 提前检查是否点击返回按钮
+        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
+            return -1;
+=======
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
             putimage(0, 0, &Withdraw, SRCCOPY);
@@ -481,6 +521,7 @@ int SweeperGame::hoverstart_middle(void)
             {
                 return -1;
             }
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         }
 
         for (int i = 0; i < 18; i++)
@@ -554,9 +595,18 @@ int SweeperGame::hoverstart_difficult(void)
     {
         msg = getmessage(EX_MOUSE);
 
+<<<<<<< HEAD
+        // 更新返回按钮状态
+        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
+
+        // 提前检查是否点击返回按钮
+        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
+            return -1;
+=======
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
             putimage(0, 0, &Withdraw, SRCCOPY);
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         }
         else
         {

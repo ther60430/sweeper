@@ -154,11 +154,19 @@ public:
 	int hoverstart_simple(void);
 	int hoverstart_middle(void);
 	int hoverstart_difficult(void);
+<<<<<<< HEAD
+
+                                       
+=======
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 	void displayscreen1(void);                  //一级界面显示函数
 	void displayscreen_middle(void);
 	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
+<<<<<<< HEAD
+	void Raise_Mines(int num);
+=======
 	void Raise_Mines(void);
 	void Raise_Mines(int num);
 	void getNumMinesimple(void);
@@ -168,6 +176,7 @@ public:
 	void ExpandEmptyCells_simple(int y, int x);
 	void ExpandEmptyCells_middle(int y, int x);
 	void ExpandEmptyCells_difficult(int y, int x);
+>>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 };
 
 #endif
