@@ -1,7 +1,8 @@
 ﻿  fun.cpp
-D:\code2022\game\sweeper\fun.cpp(959,82): warning C4244: “参数”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\code2022\game\sweeper\fun.cpp(959,82): warning C4244:         with
-D:\code2022\game\sweeper\fun.cpp(959,82): warning C4244:         [
-D:\code2022\game\sweeper\fun.cpp(959,82): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\code2022\game\sweeper\fun.cpp(959,82): warning C4244:         ]
+D:\code2022\game\sweeper\fun.cpp(65,20): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+D:\code2022\game\sweeper\fun.cpp(891,82): warning C4244: “参数”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\code2022\game\sweeper\fun.cpp(891,82): warning C4244:         with
+D:\code2022\game\sweeper\fun.cpp(891,82): warning C4244:         [
+D:\code2022\game\sweeper\fun.cpp(891,82): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\code2022\game\sweeper\fun.cpp(891,82): warning C4244:         ]
   sweeper.vcxproj -> D:\code2022\game\sweeper\x64\Debug\sweeper.exe

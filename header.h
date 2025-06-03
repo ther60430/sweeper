@@ -15,8 +15,10 @@
 #include <conio.h>
 #include <random>
 #include <chrono>
-#include<string>
-#include<fstream>
+#include <ctime>
+#include <string>
+#include <iomanip>
+#include <thread>
 
 using namespace std;
 
