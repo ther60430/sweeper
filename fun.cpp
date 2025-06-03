@@ -835,58 +835,102 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
-void SweeperGame::Raise_Mines(int num)
+void SweeperGame::Raise_Mines(int num_)
 {
-    // 使用静态随机数生成器，避免重复初始化
-    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
-
-    vector<vector<Blanks>>* targetGrid = nullptr;
-    int rows = 0, cols = 0, mineCount = 0;
-
-    // 根据难度选择目标网格和配置
-    switch (num)
+   
+    switch (num_)
     {
         case 1:
-            targetGrid = &blank_simple;
-            rows = 9; cols = 9; mineCount = 12;
-            break;
+            {
+                int num = 12;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        
+                        if (vec[k++] == '1')
+                            blank_simple[i][j].IsMine = 1;
+                        if (k == 12)
+                            break;
+                    }
+                }
+
+            }break;
         case 2:
-            targetGrid = &blank_middle;
-            rows = 16; cols = 16; mineCount = 64;
-            break;
+            {
+                int num = 64;
+                vector<char> vec(324, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 323; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 18; i++)
+                {
+                    for (int j = 0; j < 18; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_middle[i][j].IsMine = 1;
+                    }
+                }
+            }break;
         case 3:
-            targetGrid = &blank_difficult;
-            rows = 16; cols = 30; mineCount = 120;
-            break;
-        default:
-            return; // 无效难度级别
-    }
+            {
+                int num = 120;
+                vector<char> vec(480, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 479; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
 
-    // 重置网格中的地雷
-    for (auto& row : *targetGrid)
-        for (auto& cell : row)
-            cell.IsMine = 0;
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
 
-    // Fisher-Yates 洗牌算法生成随机位置
-    vector<int> positions(rows * cols);
-    for (int i = 0; i < rows * cols; ++i)
-        positions[i] = i;
+                    // 生成并输出随机数
+                    int j = distribution(generator);
 
-    // 只需要打乱前mineCount个元素
-    for (int i = 0; i < mineCount; ++i)
-    {
-        uniform_int_distribution<int> distribution(i, rows * cols - 1);
-        int j = distribution(generator);
-        swap(positions[i], positions[j]);
-    }
-
-    // 设置地雷
-    for (int i = 0; i < mineCount; ++i)
-    {
-        int pos = positions[i];
-        int x = pos / cols + 1; // +1 因为网格从1开始
-        int y = pos % cols + 1;
-        (*targetGrid)[x][y].IsMine = 1;
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 16; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_difficult[i][j].IsMine = 1;
+                    }
+                }
+            }break;
     }
 }
 
