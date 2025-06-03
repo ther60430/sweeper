@@ -535,7 +535,14 @@ int SweeperGame::hoverstart_simple(void)
             {
                 return -1;
             }
-            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            if ((msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0))
+            {
+                return -2;
+            }
+        }
+        else if ((msg.message == WM_KEYDOWN))
+        {
+            if ((msg.vkcode == 'r' || msg.vkcode == 'R'))
             {
                 return -2;
             }

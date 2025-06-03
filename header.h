@@ -16,6 +16,7 @@
 #include <random>
 #include <chrono>
 #include<string>
+#include<fstream>
 
 using namespace std;
 
