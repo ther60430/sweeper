@@ -1,8 +1,10 @@
 ﻿  fun.cpp
-D:\sweeper\fun.cpp(66,20): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
-D:\sweeper\fun.cpp(1008,82): warning C4244: “参数”: 从“_Rep”转换到“unsigned int”，可能丢失数据
-D:\sweeper\fun.cpp(1008,82): warning C4244:         with
-D:\sweeper\fun.cpp(1008,82): warning C4244:         [
-D:\sweeper\fun.cpp(1008,82): warning C4244:             _Rep=std::chrono::system_clock::rep
-D:\sweeper\fun.cpp(1008,82): warning C4244:         ]
+D:\sweeper\fun.cpp(68,20): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+D:\sweeper\fun.cpp(898,82): warning C4244: “参数”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+D:\sweeper\fun.cpp(898,82): warning C4244:         with
+D:\sweeper\fun.cpp(898,82): warning C4244:         [
+D:\sweeper\fun.cpp(898,82): warning C4244:             _Rep=std::chrono::system_clock::rep
+D:\sweeper\fun.cpp(898,82): warning C4244:         ]
+  main.cpp
+  正在生成代码...
   sweeper.vcxproj -> D:\sweeper\x64\Debug\sweeper.exe
