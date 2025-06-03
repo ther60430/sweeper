@@ -3,6 +3,8 @@
 
 #include"header.h"
 #pragma once
+
+
 class Ccoordinate
 {
 public:
@@ -143,11 +145,13 @@ private:
 	bool firstclick_middle = false;//是否第一次点击
 	bool firstclick_difficult = false;//是否第一次点击
 	bool defeat = false;           //游戏是否失败
+	bool win = false;
+	bool replay = false;
+	bool back = false;
+	
+
 public:
 	void InitGame();                        //初始化游戏
-	void HandleInput();                  //处理输入
-	void reveal(int x, int y);             //揭开格子
-	void mark(int x, int y);              //标记雷
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
@@ -159,7 +163,6 @@ public:
 	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
-	void Raise_Mines(void);
 	void Raise_Mines(int num);
 	void getNumMinesimple(void);
 	void getNumMinemiddle(void);
@@ -169,6 +172,7 @@ public:
 	void ExpandEmptyCells_middle(int y, int x);
 	void ExpandEmptyCells_difficult(int y, int x);
 	void setdefeat(){defeat = false;};
+	void showtime(void);
 };
 
 #endif

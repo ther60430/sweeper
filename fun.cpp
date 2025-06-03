@@ -38,13 +38,41 @@ void SweeperGame::InitGame()
 	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //游戏胜利图片
 }
 
+void SweeperGame::showtime(void)
+{
+    time_t StartTime = time(nullptr);
+    while (1)
+    {
+        if (defeat == 1)
+            break;
+        if (win == 1)
+            break;
+        if (replay == 1)
+        {
+            win = false;
+            replay = false;
+            back = false;
+            break;
+        }
+        if (back == 1)
+            break;
+
+        time_t NowTime = time(nullptr);
+
+        int second = NowTime - StartTime;
+
+        string tim = to_string(second) + "s";
+        outtextxy(1000, 0, tim.c_str());
+    }
+}
+
 void SweeperGame::run_game(void)
 {
     int flag0 = -1;
     while (1)
     {
         displayscreen1();				//一级画面显示函数
-        flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
+        flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3       
         switch (flag0)
         {
         case 1:
@@ -54,6 +82,9 @@ void SweeperGame::run_game(void)
                 int flag1;
                 displayscreen2a();                   //二级画面显示函数
                 flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                win = false;
+                replay = false;
+                back = false;
                 switch (flag1)
                 {
                     case 1:
@@ -65,15 +96,20 @@ void SweeperGame::run_game(void)
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines(1);
                                 getNumMinesimple();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_simple();
                                 if(flag2 == -1) // 返回按钮被点击或游戏结束
                                 {
+                                    win = true;
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                     break;
 								}
                                 if (flag2 == -2)
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                 }
@@ -88,15 +124,20 @@ void SweeperGame::run_game(void)
                                 displayscreen_middle();
                                 Raise_Mines(2);
                                 getNumMinemiddle();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_middle();
                                 if (flag2 == -1) // 返回按钮被点击
                                 {
+                                    win = true;
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                     break;
                                 }
                                 if (flag2 == -2) // 返回按钮被点击
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                 }
@@ -111,15 +152,20 @@ void SweeperGame::run_game(void)
                                 displayscreen_difficult();
                                 Raise_Mines(3);
                                 getNumMinedifficult();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_difficult();
                                 if (flag2== -1)
                                 {
+                                    win = true;
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
 									break;
                                 }
                                 if (flag2 == -2)
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
                                 }
@@ -377,6 +423,8 @@ int SweeperGame::hoverstart_simple(void)
 {
     ExMessage msg;
     firstclick_simple = 0;
+
+    
     while (1)
     {
         msg = getmessage(EX_MOUSE); 
@@ -500,7 +548,8 @@ int SweeperGame::hoverstart_simple(void)
                         blank_simple[posY][posX].flag();
                     }break;
             }
-        }      
+        }
+
     }
     while (true)
     {
@@ -735,7 +784,7 @@ int SweeperGame::hoverstart_difficult(void)
             }
         }
 
-        if (countblank == 12) // 如果所有非雷格子都被揭开
+        if (countblank == 120) // 如果所有非雷格子都被揭开
         {
             putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
@@ -835,102 +884,58 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
-void SweeperGame::Raise_Mines(int num_)
+void SweeperGame::Raise_Mines(int num)
 {
-   
-    switch (num_)
+    // 使用静态随机数生成器，避免重复初始化
+    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
+
+    vector<vector<Blanks>> *targetGrid = nullptr;
+    int rows = 0, cols = 0, mineCount = 0;
+
+    // 根据难度选择目标网格和配置
+    switch (num)
     {
         case 1:
-            {
-                int num = 12;
-                vector<char> vec(81, '0');
-                for (int i = 0; i < num; i++)
-                    vec[i] = '1';
-                for (int i = 80; i > 0; i--)
-                {
-                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twister算法
-
-                    // 生成0-i的均匀分布整数
-                    uniform_int_distribution<int> distribution(0, i);
-
-                    // 生成并输出随机数
-                    int j = distribution(generator);
-
-                    swap(vec[i], vec[j]);
-                }
-                int k = 0;
-                for (int i = 0; i < 9; i++)
-                {
-                    for (int j = 0; j < 9; j++)
-                    {
-                        
-                        if (vec[k++] == '1')
-                            blank_simple[i][j].IsMine = 1;
-                        if (k == 12)
-                            break;
-                    }
-                }
-
-            }break;
+            targetGrid = &blank_simple;
+            rows = 9; cols = 9; mineCount = 12;
+            break;
         case 2:
-            {
-                int num = 64;
-                vector<char> vec(324, '0');
-                for (int i = 0; i < num; i++)
-                    vec[i] = '1';
-                for (int i = 323; i > 0; i--)
-                {
-                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twister算法
-
-                    // 生成0-i的均匀分布整数
-                    uniform_int_distribution<int> distribution(0, i);
-
-                    // 生成并输出随机数
-                    int j = distribution(generator);
-
-                    swap(vec[i], vec[j]);
-                }
-                int k = 0;
-                for (int i = 0; i < 18; i++)
-                {
-                    for (int j = 0; j < 18; j++)
-                    {
-                        if (vec[k++] == '1')
-                            blank_middle[i][j].IsMine = 1;
-                    }
-                }
-            }break;
+            targetGrid = &blank_middle;
+            rows = 16; cols = 16; mineCount = 64;
+            break;
         case 3:
-            {
-                int num = 120;
-                vector<char> vec(480, '0');
-                for (int i = 0; i < num; i++)
-                    vec[i] = '1';
-                for (int i = 479; i > 0; i--)
-                {
-                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-                    mt19937 generator(seed);  // Mersenne Twister算法
+            targetGrid = &blank_difficult;
+            rows = 16; cols = 30; mineCount = 120;
+            break;
+        default:
+            return; // 无效难度级别
+    }
 
-                    // 生成0-i的均匀分布整数
-                    uniform_int_distribution<int> distribution(0, i);
+    // 重置网格中的地雷
+    for (auto &row : *targetGrid)
+        for (auto &cell : row)
+            cell.IsMine = 0;
 
-                    // 生成并输出随机数
-                    int j = distribution(generator);
+    // Fisher-Yates 洗牌算法生成随机位置
+    vector<int> positions(rows * cols);
+    for (int i = 0; i < rows * cols; ++i)
+        positions[i] = i;
 
-                    swap(vec[i], vec[j]);
-                }
-                int k = 0;
-                for (int i = 0; i < 16; i++)
-                {
-                    for (int j = 0; j < 30; j++)
-                    {
-                        if (vec[k++] == '1')
-                            blank_difficult[i][j].IsMine = 1;
-                    }
-                }
-            }break;
+    // 只需要打乱前mineCount个元素
+    for (int i = 0; i < mineCount; ++i)
+    {
+        uniform_int_distribution<int> distribution(i, rows * cols - 1);
+        int j = distribution(generator);
+        swap(positions[i], positions[j]);
+    }
+
+    // 设置地雷
+    for (int i = 0; i < mineCount; ++i)
+    {
+        int pos = positions[i];
+        int x = pos / cols + 1; // +1 因为网格从1开始
+        int y = pos % cols + 1;
+        (*targetGrid)[x][y].IsMine = 1;
     }
 }
 

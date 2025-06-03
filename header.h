@@ -15,7 +15,10 @@
 #include <conio.h>
 #include <random>
 #include <chrono>
-
+#include <ctime>
+#include <string>
+#include <iomanip>
+#include <thread>
 using namespace std;
 
 #include"fun.h"
