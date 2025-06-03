@@ -41,37 +41,6 @@ void SweeperGame::InitGame()
     settextcolor(RED);
 }
 
-void SweeperGame::showtime(void)
-{
-    time_t StartTime = time(nullptr);
-    while (1)
-    {
-        if (defeat == 1)
-        {
-            break;
-        }
-        if (win == 1)
-        {
-            break;
-        }
-        if (replay == 1)
-        {
-            break;
-        }
-        if (back == 1)
-        {
-            break;
-        }
-
-        time_t NowTime = time(nullptr);
-
-        int second = NowTime - StartTime;
-
-        string tim = to_string(second) + "s";
-        outtextxy(1000, 0, tim.c_str());
-    }
-}
-
 void SweeperGame::run_game(void)
 {
     int flag0 = -1;
@@ -85,10 +54,6 @@ void SweeperGame::run_game(void)
         {
             while (1)
             {
-                defeat = false;
-                win = false;
-                replay = false;
-                back = false;
                 int flag1;
                 displayscreen2a();                   //二级画面显示函数
                 flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
@@ -98,31 +63,22 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
-                                defeat = false;
-                                win = false;
-                                replay = false;
-                                back = false;
                                 setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines(1);
                                 getNumMinesimple();
-                                thread t(&SweeperGame::showtime, this);
-                                t.detach();
                                 flag2 = hoverstart_simple();
                                 if(flag2 == -1) // 返回按钮被点击
                                 {
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                     break;
 								}
                                 if (flag2 == -2)
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
-                                    
                                 }
                             }
                         }break;
@@ -135,20 +91,15 @@ void SweeperGame::run_game(void)
                                 displayscreen_middle();
                                 Raise_Mines(2);
                                 getNumMinemiddle();
-                                thread t(&SweeperGame::showtime, this);
-                                t.detach();
                                 flag2 = hoverstart_middle();
                                 if (flag2 == -1) // 返回按钮被点击
                                 {
-                                    win = true;
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                     break;
                                 }
                                 if (flag2 == -2) // 返回按钮被点击
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                 }
@@ -163,20 +114,15 @@ void SweeperGame::run_game(void)
                                 displayscreen_difficult();
                                 Raise_Mines(3);
                                 getNumMinedifficult();
-                                thread t(&SweeperGame::showtime, this);
-                                t.detach();
                                 flag2 = hoverstart_difficult();
                                 if (flag2== -1)
                                 {
-                                    win = true;
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
 									break;
                                 }
                                 if (flag2 == -2)
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
                                 }
@@ -486,7 +432,6 @@ int SweeperGame::hoverstart_simple(void)
 
         if(countblank==12) // 如果所有非雷格子都被揭开
         {
-            win = 1;
             putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
             break;
