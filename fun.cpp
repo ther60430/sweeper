@@ -60,6 +60,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines(1);
@@ -82,6 +83,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_middle();
                                 Raise_Mines(2);
@@ -104,6 +106,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_difficult();
                                 Raise_Mines(3);
@@ -413,6 +416,25 @@ int SweeperGame::hoverstart_simple(void)
             break;
         }
 
+		int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 9; i++)
+        {
+            for (int j = 1; j <= 9; j++)
+            {
+                if (blank_simple[i][j].isRevealed == 0)
+                {
+					countblank++;
+                }
+            }
+        }
+
+        if(countblank==12) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+            defeat = 0;
+            break;
+		}
+
         if (msg.x > 435 && msg.y > 135 && msg.x < 735 && msg.y < 435)
         {
             int posX = (msg.x - 435) / 30;
@@ -548,6 +570,25 @@ int SweeperGame::hoverstart_middle(void)
             defeat = 0;
             break;
         }
+        int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 16; i++)
+        {
+            for (int j = 1; j <= 16; j++)
+            {
+                if (blank_middle[i][j].isRevealed == 0)
+                {
+                    countblank++;
+                }
+            }
+        }
+
+        if (countblank == 64) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+            defeat = 0;
+            break;
+        }
+
         if (msg.x >= 360 && msg.y >= 60 && msg.x <= 870 && msg.y <= 570)
         {
             int posX = (msg.x - 360) / 30;
@@ -678,6 +719,25 @@ int SweeperGame::hoverstart_difficult(void)
         if (defeat == 1)                           //展示失败界面
         {
             putimage(344, 0, &GameDefeat, SRCCOPY);
+            defeat = 0;
+            break;
+        }
+
+        int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 9; i++)
+        {
+            for (int j = 1; j <= 9; j++)
+            {
+                if (blank_difficult[i][j].isRevealed == 0)
+                {
+                    countblank++;
+                }
+            }
+        }
+
+        if (countblank == 12) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
             break;
         }
