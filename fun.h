@@ -145,9 +145,6 @@ private:
 	bool defeat = false;           //游戏是否失败
 public:
 	void InitGame();                        //初始化游戏
-	void HandleInput();                  //处理输入
-	void reveal(int x, int y);             //揭开格子
-	void mark(int x, int y);              //标记雷
 	void run_game(void);            //运行游戏
 	int hoverstart1(void);                           //一级界面悬停函数
 	int hoverstart2a(void);                           //二级界面悬停函数
