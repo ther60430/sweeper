@@ -1,4 +1,5 @@
 #include"header.h"
+
 void SweeperGame::InitGame()
 {
 	initgraph(setting.width, setting.height);                          //1200*600
@@ -215,8 +216,6 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
 }
 
 int SweeperGame::hoverstart2a(void)                               // 二级画面悬停及点击事件处理函数
-
-
 {
     ExMessage msg;
     while (true)
