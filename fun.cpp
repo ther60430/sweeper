@@ -11,10 +11,9 @@ void SweeperGame::InitGame()
 	loadimage(&history_scores, _T("images/history_scores.png"), 256, 64);         //分数图片
 	loadimage(&GameStart1, _T("images/start1.png"),256,64);              //游戏开始图片
 	loadimage(&GameStart, _T("images/start.png"), 256, 64);              //游戏开始悬停图片
-	loadimage(&Gamewithdraw, _T("images/withdraw.png"));                    //游戏返回图片
 	loadimage(&GamePause, _T("images/pause.png"));           //游戏暂停图片
 	loadimage(&GameContinue, _T("images/go.png"));            //继续游戏图片
-	loadimage(&GameRestart, _T("images/replay.png"));                   //重新开始图片
+	loadimage(&GameRestart, _T("images/replay.png"),64,64);                   //重新开始图片
 	loadimage(&GameExit1, _T("images/end1.png"),256,64);               //退出游戏按钮图片
 	loadimage(&GameExit, _T("images/end.png"), 256, 64);               //退出游戏按钮悬停图片
 	loadimage(&Flag, _T("images/flag.png"),30,30);             //旗帜图片
@@ -35,6 +34,8 @@ void SweeperGame::InitGame()
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮图片
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
+	loadimage(&GameDefeat, _T("images/Defeat.png"), 512, 128);                       //游戏失败图片
+	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //游戏胜利图片
 }
 
 void SweeperGame::run_game(void)
@@ -64,12 +65,17 @@ void SweeperGame::run_game(void)
                                 Raise_Mines(1);
                                 getNumMinesimple();
                                 flag2 = hoverstart_simple();
-                                if(flag2 == -1) // 返回按钮被点击
+                                if(flag2 == -1) // 返回按钮被点击或游戏结束
                                 {
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                     break;
 								}
+                                if (flag2 == -2)
+                                {
+                                    vector<vector<Blanks>> temp;
+                                    swap(temp, blank_simple);
+                                }
                             }
                         }break;
                     case 2:
@@ -86,6 +92,11 @@ void SweeperGame::run_game(void)
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                     break;
+                                }
+                                if (flag2 == -2) // 返回按钮被点击
+                                {
+                                    vector<vector<Blanks>> temp;
+                                    swap(temp, blank_middle);
                                 }
                             }
                         }break;
@@ -104,10 +115,15 @@ void SweeperGame::run_game(void)
                                     swap(temp, blank_difficult);
 									break;
                                 }
+                                if (flag2 == -2)
+                                {
+                                    vector<vector<Blanks>> temp;
+                                    swap(temp, blank_difficult);
+                                }
                             }
                         }break;
                 }
-                if (flag1 == 4)
+             if(flag1==4)
                     break;
              }
          }break;
@@ -146,23 +162,13 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
         // 检查鼠标是否在开始按钮上
         bool inStartButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
         // 检查鼠标是否在分数按钮上
-<<<<<<< HEAD
-=======
-
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
         // 检查鼠标是否在退出按钮上
         bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
         switch (msg.message)
         {
         case WM_MOUSEMOVE:
-<<<<<<< HEAD
             // 处理开始按钮悬停
-=======
-
-            // 处理开始按钮悬停
-
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             if (inStartButton)
             {
                 putimage(472, 300, &GameStart, SRCCOPY);
@@ -180,10 +186,6 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
             {
                 putimage(472, 380, &history_scores, SRCCOPY);
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             // 处理退出按钮悬停
             if (inExitButton)
             {
@@ -210,10 +212,8 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
 }
 
 int SweeperGame::hoverstart2a(void)                               // 二级画面悬停及点击事件处理函数
-<<<<<<< HEAD
-=======
 
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
+
 {
     ExMessage msg;
     while (true)
@@ -352,13 +352,6 @@ void SweeperGame::displayscreen_difficult(void)
             vector<Blanks> blank1;
             for (int j = 0; j < 32; j++)
             {
-<<<<<<< HEAD
-                Ccoordinate t_l(360 + j * 30, 60 + i * 30);
-                Ccoordinate b_r(390 + j * 30, 90 + i * 30);
-                Blanks blank2(UnCell, Cell, HoverCell, Landmine, Flag, t_l, b_r);
-                blank2.show();
-                blank1.push_back(blank2);
-=======
                 Ccoordinate t_l(150 + j * 30, 60 + i * 30);
                 Ccoordinate b_r(180 + j * 30, 90 + i * 30);
                 if (i == 0 || i == 17 || j == 0 || j == 31)           //边界格子不显示
@@ -371,7 +364,6 @@ void SweeperGame::displayscreen_difficult(void)
                 Blanks temp(&UnCell, &num[0], &num[1], &num[2], &num[3], &num[4], &num[5], &num[6], &num[7], &Cell, &HoverCell, &Landmine, &Flag, t_l, b_r);
                 temp.select_show();
                 blank1.push_back(temp);
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
             }
             blank_difficult.push_back(blank1);
         }
@@ -384,18 +376,8 @@ int SweeperGame::hoverstart_simple(void)
     firstclick_simple = 0;
     while (1)
     {
-        msg = getmessage(EX_MOUSE);
-<<<<<<< HEAD
-        bool inWithdrawButton = (msg.x >= 0 && msg.x <= 64) && (msg.y >= 0 && msg.y <= 64);
-
-        // 更新返回按钮状态
-        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
-
-        // 提前检查是否点击返回按钮
-        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
-            return -1;
-=======
-        
+        msg = getmessage(EX_MOUSE); 
+        putimage(70, 0, &GameRestart, SRCCOPY);
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
             putimage(0, 0, &Withdraw, SRCCOPY);
@@ -410,7 +392,10 @@ int SweeperGame::hoverstart_simple(void)
             {
                 return -1;
             }
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
+            }
         }
 
         for (int i = 0; i < 11; i++)
@@ -420,6 +405,14 @@ int SweeperGame::hoverstart_simple(void)
                 blank_simple[i][j].Unselect_show();
             }
         }
+
+        if (defeat == 1)                           //展示失败界面
+        {
+            putimage(344, 0, &GameDefeat, SRCCOPY);
+            defeat = 0;
+            break;
+        }
+
         if (msg.x > 435 && msg.y > 135 && msg.x < 735 && msg.y < 435)
         {
             int posX = (msg.x - 435) / 30;
@@ -454,8 +447,7 @@ int SweeperGame::hoverstart_simple(void)
 											}
                                         }
                                     }
-
-                                    return -1;
+                                    defeat = 1;                  //更改游戏状态为失败
 								}
                             }
                         }
@@ -486,27 +478,12 @@ int SweeperGame::hoverstart_simple(void)
                         blank_simple[posY][posX].flag();
                     }break;
             }
-        }
-            
+        }      
     }
-}
-
-int SweeperGame::hoverstart_middle(void)
-{
-    ExMessage msg;
-    firstclick_middle = 0;
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-
-<<<<<<< HEAD
-        // 更新返回按钮状态
-        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
-
-        // 提前检查是否点击返回按钮
-        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
-            return -1;
-=======
+        putimage(70, 0, &GameRestart, SRCCOPY);
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
             putimage(0, 0, &Withdraw, SRCCOPY);
@@ -521,17 +498,57 @@ int SweeperGame::hoverstart_middle(void)
             {
                 return -1;
             }
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
+            }
+        }
+    }
+}
+
+int SweeperGame::hoverstart_middle(void)
+{
+    ExMessage msg;
+    firstclick_middle = 0;
+    while (1)
+    {
+        msg = getmessage(EX_MOUSE);
+        putimage(70, 0, &GameRestart, SRCCOPY);
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+            {
+                return -1;
+            }
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
+            }
         }
 
         for (int i = 0; i < 18; i++)
         {
             for (int j = 0; j < 18; j++)
             {
-                    blank_middle[i][j].Unselect_show();
+                blank_middle[i][j].Unselect_show();
             }
         }
-        if (msg.x >=360 && msg.y >= 60 && msg.x <= 870&& msg.y <= 570)
+
+        if (defeat == 1)                           //展示失败界面
+        {
+            putimage(344, 0, &GameDefeat, SRCCOPY);
+            defeat = 0;
+            break;
+        }
+        if (msg.x >= 360 && msg.y >= 60 && msg.x <= 870 && msg.y <= 570)
         {
             int posX = (msg.x - 360) / 30;
             int posY = (msg.y - 60) / 30;
@@ -541,7 +558,6 @@ int SweeperGame::hoverstart_middle(void)
                     {
                         blank_middle[posY][posX].select_show();
                     }break;
-
                 case WM_LBUTTONDOWN:
                     {
                         if (firstclick_middle == 1)                //非第一次点击
@@ -553,60 +569,57 @@ int SweeperGame::hoverstart_middle(void)
                                 {
                                     ExpandEmptyCells_middle(posY, posX);
                                 }
+                                if (blank_middle[posY][posX].IsMine == 1) //如果点到雷
+                                {
+                                    for (int i = 1; i <= 16; i++)
+                                    {
+                                        for (int j = 1; j <= 16; j++)
+                                        {
+                                            if (blank_middle[i][j].IsMine == 1) //显示所有雷
+                                            {
+                                                blank_middle[i][j].isRevealed = 1;
+                                            }
+                                        }
+                                    }
+                                    defeat = 1;                  //更改游戏状态为失败
+                                }
                             }
                         }
-                        else if (firstclick_middle == 0 && blank_middle[posY][posX].isFlag == 0)                 //第一次左键点击
-                        {
-                            firstclick_middle = 1;
-                            if (blank_middle[posY][posX].NumMine != 0)
+                            else if (firstclick_middle == 0 && blank_middle[posY][posX].isFlag == 0)                 //第一次左键点击
                             {
-                                while (blank_middle[posY][posX].NumMine != 0 || blank_middle[posY][posX].IsMine == 1)
+                                firstclick_middle = 1;
+                                if (blank_middle[posY][posX].NumMine != 0)
                                 {
-                                    Raise_Mines(2);
-                                    getNumMinemiddle();
+                                    while (blank_middle[posY][posX].NumMine != 0 || blank_middle[posY][posX].IsMine == 1)
+                                    {
+                                        Raise_Mines(2);
+                                        getNumMinemiddle();
+                                    }
+                                    if (blank_middle[posY][posX].NumMine == 0)
+                                    {
+                                        ExpandEmptyCells_middle(posY, posX);
+                                    }
                                 }
-                                if (blank_middle[posY][posX].NumMine == 0)
+                                else
                                 {
                                     ExpandEmptyCells_middle(posY, posX);
                                 }
                             }
-                            else
-                            {
-                                ExpandEmptyCells_middle(posY, posX);
-                            }
-                        }
-                    }break;
-
+                        }break;
                 case WM_RBUTTONDOWN:
                     {
                         blank_middle[posY][posX].flag();
                     }break;
             }
         }
-        
     }
-}
-
-int SweeperGame::hoverstart_difficult(void)
-{
-    ExMessage msg;
-    firstclick_difficult = 0;
     while (true)
     {
         msg = getmessage(EX_MOUSE);
-
-<<<<<<< HEAD
-        // 更新返回按钮状态
-        putimage(0, 0, inWithdrawButton ? &Withdraw : &Withdraw1, SRCCOPY);
-
-        // 提前检查是否点击返回按钮
-        if (msg.message == WM_LBUTTONDOWN && inWithdrawButton) {
-            return -1;
-=======
+        putimage(70, 0, &GameRestart, SRCCOPY);
         if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
         {
             putimage(0, 0, &Withdraw, SRCCOPY);
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
         }
         else
         {
@@ -618,6 +631,40 @@ int SweeperGame::hoverstart_difficult(void)
             {
                 return -1;
             }
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
+            }
+        }
+    }
+}
+
+int SweeperGame::hoverstart_difficult(void)
+{
+    ExMessage msg;
+    firstclick_difficult = 0;
+    while (true)
+    {
+        msg = getmessage(EX_MOUSE);
+        putimage(70, 0, &GameRestart, SRCCOPY);
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+            {
+                return -1;
+            }
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
+            }
         }
 
         for (int i = 0; i < 18; i++)
@@ -627,6 +674,14 @@ int SweeperGame::hoverstart_difficult(void)
                 blank_difficult[i][j].Unselect_show();
             }
         }
+
+        if (defeat == 1)                           //展示失败界面
+        {
+            putimage(344, 0, &GameDefeat, SRCCOPY);
+            defeat = 0;
+            break;
+        }
+
         if (msg.x > 150 && msg.y > 60 && msg.x < 1080 && msg.y < 570)
         {
             int posX = (msg.x - 150) / 30;
@@ -648,6 +703,20 @@ int SweeperGame::hoverstart_difficult(void)
                                 if (blank_difficult[posY][posX].NumMine == 0)
                                 {
                                     ExpandEmptyCells_difficult(posY, posX);
+                                }
+                                if (blank_difficult[posY][posX].IsMine == 1)
+                                {
+                                    for (int i = 1; i <= 16; i++)
+                                    {
+                                        for (int j = 1; j <= 30; j++)
+                                        {
+                                            if (blank_difficult[i][j].IsMine == 1)
+                                            {
+                                                blank_difficult[i][j].isRevealed = 1;
+                                            }
+                                        }
+                                    }
+                                    defeat = 1;                  //更改游戏状态为失败
                                 }
                             }
                         }
@@ -677,6 +746,30 @@ int SweeperGame::hoverstart_difficult(void)
                     {
                         blank_difficult[posY][posX].flag();
                     }break;
+            }
+        }
+    }
+    while (true)
+    {
+        msg = getmessage(EX_MOUSE);
+        putimage(70, 0, &GameRestart, SRCCOPY);
+        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+        {
+            putimage(0, 0, &Withdraw, SRCCOPY);
+        }
+        else
+        {
+            putimage(0, 0, &Withdraw1, SRCCOPY);
+        }
+        if (msg.message == WM_LBUTTONDOWN)
+        {
+            if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+            {
+                return -1;
+            }
+            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            {
+                return -2;
             }
         }
     }

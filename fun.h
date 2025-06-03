@@ -114,8 +114,6 @@ public:
 class SweeperGame
 {
 private:
-	int count_thounder;               //雷数
-	bool is_game_over;               //游戏是否结束
 	vector<vector<Blanks>> blank_simple;
 	vector<vector<Blanks>> blank_middle;
 	vector<vector<Blanks>> blank_difficult;
@@ -126,7 +124,6 @@ private:
 	IMAGE HoverCell;   //鼠标悬停格子图片
 	IMAGE Landmine;   //雷图片
 	IMAGE Flag;            //旗帜图片
-	IMAGE Gamewithdraw; //游戏返回图片
 	IMAGE Win;            //游戏胜利图片
 	IMAGE GameStart, GameStart1;  //游戏开始图片
 	IMAGE GamePause;  //游戏暂停图片
@@ -140,9 +137,12 @@ private:
 	IMAGE Medium1, Medium;//中等模式
 	IMAGE Difficult1, Difficult;//困难模式
 	IMAGE Withdraw1, Withdraw;//返回上一页
+	IMAGE GameDefeat; //游戏失败图片
+	IMAGE GameWin; //游戏胜利图片
 	bool firstclick_simple = false; //是否第一次点击
 	bool firstclick_middle = false;//是否第一次点击
 	bool firstclick_difficult = false;//是否第一次点击
+	bool defeat = false;           //游戏是否失败
 public:
 	void InitGame();                        //初始化游戏
 	void HandleInput();                  //处理输入
@@ -154,19 +154,11 @@ public:
 	int hoverstart_simple(void);
 	int hoverstart_middle(void);
 	int hoverstart_difficult(void);
-<<<<<<< HEAD
-
-                                       
-=======
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 	void displayscreen1(void);                  //一级界面显示函数
 	void displayscreen_middle(void);
 	void displayscreen_difficult(void);
 	void displayscreen2a(void);                  //二级界面显示函数    
 	void displayscreen_simple(void);			//简单难度展示及Blank类生成
-<<<<<<< HEAD
-	void Raise_Mines(int num);
-=======
 	void Raise_Mines(void);
 	void Raise_Mines(int num);
 	void getNumMinesimple(void);
@@ -176,7 +168,6 @@ public:
 	void ExpandEmptyCells_simple(int y, int x);
 	void ExpandEmptyCells_middle(int y, int x);
 	void ExpandEmptyCells_difficult(int y, int x);
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 };
 
 #endif

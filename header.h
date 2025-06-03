@@ -19,30 +19,4 @@
 using namespace std;
 
 #include"fun.h"
-<<<<<<< HEAD
-
-
-extern IMAGE Title;            //标题
-extern IMAGE UnCell;         //未揭开格子图片
-extern IMAGE Cell;             //已揭开格子图片              
-extern IMAGE HoverCell;   //鼠标悬停格子图片
-extern IMAGE Landmine;   //雷图片
-extern IMAGE Flag;            //旗帜图片
-extern IMAGE Gamewithdraw; //游戏返回图片
-extern IMAGE Win;            //游戏胜利图片
-extern IMAGE GameStart, GameStart1;  //游戏开始图片
-extern IMAGE GamePause;  //游戏暂停图片
-extern IMAGE GameContinue; //继续游戏图片
-extern IMAGE GameRestart;  //重新开始图片
-extern IMAGE GameExit, GameExit1;    //退出游戏图片
-extern IMAGE num[8];     //数字图片1-8
-extern IMAGE history_scores, history_scores1;          //分数图片
-extern IMAGE BackGraound;//背景图片
-extern IMAGE Simple1,Simple;//简单模式
-extern IMAGE Medium1,Medium;//中等模式
-extern IMAGE Difficult1,Difficult;//困难模式
-extern IMAGE Withdraw1,Withdraw;//返回上一页
-
-=======
->>>>>>> ee2a68d697a3e81f13b0b2d0ba34e0ae8d4a7d38
 #endif
