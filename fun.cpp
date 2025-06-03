@@ -35,13 +35,16 @@ void SweeperGame::InitGame()
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //困难模式悬停图片
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //返回按钮图片
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
-	loadimage(&GameDefeat, _T("images/Defeat.png"), 512, 128);                       //游戏失败图片
+	loadimage(&GameDefeat, _T("images/Defeat.png"), 555, 128);                       //游戏失败图片
 	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //游戏胜利图片
     settextstyle(60, 60, _T("隶书"));
     settextcolor(RED);
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8b99ca2db75a78370159d54f52c822d260b6bf7e
 void SweeperGame::run_game(void)
 {
     int flag0 = -1;
@@ -64,9 +67,12 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+<<<<<<< HEAD
                                 win = false;
                                 replay = false;
                                 back = false;
+=======
+>>>>>>> 8b99ca2db75a78370159d54f52c822d260b6bf7e
                                 setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
@@ -75,17 +81,14 @@ void SweeperGame::run_game(void)
                                 flag2 = hoverstart_simple();
                                 if(flag2 == -1) // 返回按钮被点击
                                 {
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                     break;
 								}
                                 if (flag2 == -2)
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
-                                    
                                 }
                             }
                         }break;
@@ -101,15 +104,12 @@ void SweeperGame::run_game(void)
                                 flag2 = hoverstart_middle();
                                 if (flag2 == -1) // 返回按钮被点击
                                 {
-                                    win = true;
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                     break;
                                 }
                                 if (flag2 == -2) // 返回按钮被点击
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                 }
@@ -127,15 +127,12 @@ void SweeperGame::run_game(void)
                                 flag2 = hoverstart_difficult();
                                 if (flag2== -1)
                                 {
-                                    win = true;
-                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
 									break;
                                 }
                                 if (flag2 == -2)
                                 {
-                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
                                 }
@@ -445,7 +442,6 @@ int SweeperGame::hoverstart_simple(void)
 
         if(countblank==12) // 如果所有非雷格子都被揭开
         {
-            win = 1;
             putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
             break;

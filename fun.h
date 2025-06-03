@@ -145,10 +145,6 @@ private:
 	bool firstclick_middle = false;//是否第一次点击
 	bool firstclick_difficult = false;//是否第一次点击
 	bool defeat = false;           //游戏是否失败
-	bool win = false;
-	bool replay = false;
-	bool back = false;
-	
 
 public:
 	void InitGame();                        //初始化游戏

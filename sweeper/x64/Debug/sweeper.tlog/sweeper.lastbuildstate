@@ -1,2 +1,6 @@
 PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.44.35207:TargetPlatformVersion=10.0.26100.0:
+<<<<<<< HEAD
 Debug|x64|D:\code2022\game\sweeper\|
+=======
+Debug|x64|C:\Users\30900\Desktop\sweeper\|
+>>>>>>> 8b99ca2db75a78370159d54f52c822d260b6bf7e
