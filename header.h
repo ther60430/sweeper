@@ -15,15 +15,10 @@
 #include <conio.h>
 #include <random>
 #include <chrono>
-<<<<<<< HEAD
 #include <ctime>
 #include <string>
 #include <iomanip>
 #include <thread>
-=======
-#include<string>
-
->>>>>>> b1c261a8b4e72f4c56e36ae3fadeb0177fc94e9d
 using namespace std;
 
 #include"fun.h"

@@ -45,18 +45,21 @@ void SweeperGame::showtime(void)
     while (1)
     {
         if (defeat == 1)
+        {
             break;
+        }
         if (win == 1)
+        {
             break;
+        }
         if (replay == 1)
         {
-            win = false;
-            replay = false;
-            back = false;
             break;
         }
         if (back == 1)
+        {
             break;
+        }
 
         time_t NowTime = time(nullptr);
 
@@ -80,12 +83,13 @@ void SweeperGame::run_game(void)
         {
             while (1)
             {
-                int flag1;
-                displayscreen2a();                   //二级画面显示函数
-                flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
+                defeat = false;
                 win = false;
                 replay = false;
                 back = false;
+                int flag1;
+                displayscreen2a();                   //二级画面显示函数
+                flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
                 switch (flag1)
                 {
                     case 1:
@@ -100,9 +104,8 @@ void SweeperGame::run_game(void)
                                 thread t(&SweeperGame::showtime, this);
                                 t.detach();
                                 flag2 = hoverstart_simple();
-                                if(flag2 == -1) // 返回按钮被点击或游戏结束
+                                if(flag2 == -1) // 返回按钮被点击
                                 {
-                                    win = true;
                                     back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
@@ -113,6 +116,10 @@ void SweeperGame::run_game(void)
                                     replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
+                                    defeat = false;
+                                    win = false;
+                                    replay = false;
+                                    back = false;
                                 }
                             }
                         }break;
@@ -471,7 +478,6 @@ int SweeperGame::hoverstart_simple(void)
         if (defeat == 1)                           //展示失败界面
         {
             putimage(344, 0, &GameDefeat, SRCCOPY);
-            defeat = 0;
             settextstyle(60, 60, _T("隶书"));
             settextcolor(RED);
             string score_str = "SCORE:"+to_string(score);
@@ -493,6 +499,7 @@ int SweeperGame::hoverstart_simple(void)
 
         if(countblank==12) // 如果所有非雷格子都被揭开
         {
+            win = 1;
             putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
             break;
@@ -899,64 +906,6 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
-<<<<<<< HEAD
-void SweeperGame::Raise_Mines(int num)
-{
-    // 使用静态随机数生成器，避免重复初始化
-    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
-
-    vector<vector<Blanks>> *targetGrid = nullptr;
-    int rows = 0, cols = 0, mineCount = 0;
-
-    // 根据难度选择目标网格和配置
-    switch (num)
-    {
-        case 1:
-            targetGrid = &blank_simple;
-            rows = 9; cols = 9; mineCount = 12;
-            break;
-        case 2:
-            targetGrid = &blank_middle;
-            rows = 16; cols = 16; mineCount = 64;
-            break;
-        case 3:
-            targetGrid = &blank_difficult;
-            rows = 16; cols = 30; mineCount = 120;
-            break;
-        default:
-            return; // 无效难度级别
-    }
-
-    // 重置网格中的地雷
-    for (auto &row : *targetGrid)
-        for (auto &cell : row)
-            cell.IsMine = 0;
-
-    // Fisher-Yates 洗牌算法生成随机位置
-    vector<int> positions(rows * cols);
-    for (int i = 0; i < rows * cols; ++i)
-        positions[i] = i;
-
-    // 只需要打乱前mineCount个元素
-    for (int i = 0; i < mineCount; ++i)
-    {
-        uniform_int_distribution<int> distribution(i, rows * cols - 1);
-        int j = distribution(generator);
-        swap(positions[i], positions[j]);
-    }
-
-    // 设置地雷
-    for (int i = 0; i < mineCount; ++i)
-    {
-        int pos = positions[i];
-        int x = pos / cols + 1; // +1 因为网格从1开始
-        int y = pos % cols + 1;
-        (*targetGrid)[x][y].IsMine = 1;
-    }
-}
-
-=======
->>>>>>> b1c261a8b4e72f4c56e36ae3fadeb0177fc94e9d
 void SweeperGame::getNumMinesimple(void)
 {
     for (int i = 1; i <= 9; i++)
