@@ -37,14 +37,10 @@ void SweeperGame::InitGame()
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
 	loadimage(&GameDefeat, _T("images/Defeat.png"), 555, 128);                       //游戏失败图片
 	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //游戏胜利图片
-    settextstyle(60, 60, _T("隶书"));
-    settextcolor(RED);
+    settextcolor(WHITE);
+    settextstyle(50,50, _T("隶书"));
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8b99ca2db75a78370159d54f52c822d260b6bf7e
 void SweeperGame::run_game(void)
 {
     int flag0 = -1;
@@ -67,12 +63,6 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
-<<<<<<< HEAD
-                                win = false;
-                                replay = false;
-                                back = false;
-=======
->>>>>>> 8b99ca2db75a78370159d54f52c822d260b6bf7e
                                 setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
@@ -374,146 +364,168 @@ int SweeperGame::hoverstart_simple(void)
 {
     ExMessage msg;
     firstclick_simple = 0;
-
-    
+    bool isTimerRunning = false;
+    auto startTime = std::chrono::steady_clock::now();  // 游戏开始时记录
     while (1)
     {
-        msg = getmessage(EX_MOUSE); 
         putimage(70, 0, &GameRestart, SRCCOPY);
-        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+
+        if (isTimerRunning)
         {
-            putimage(0, 0, &Withdraw, SRCCOPY);
+            // 在游戏循环中更新计时器
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime);
+            int elapsedSeconds = elapsed.count();
+
+            // 显示 MM:SS
+            int minutes = elapsedSeconds / 60;
+            int seconds = elapsedSeconds % 60;
+            char timeStr[10];
+            sprintf_s(timeStr, "%02d:%02d", minutes, seconds);
+
+            // 在右上角绘制时间
+            settextcolor(WHITE);
+            outtextxy(950, 10, timeStr);
         }
-        else
-        {
-            putimage(0, 0, &Withdraw1, SRCCOPY);
-        }
-        if (msg.message == WM_LBUTTONDOWN)
+
+        if (peekmessage(&msg, EX_MOUSE))
         {
             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
             {
-                return -1;
+                putimage(0, 0, &Withdraw, SRCCOPY);
             }
-            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            else
             {
-                return -2;
+                putimage(0, 0, &Withdraw1, SRCCOPY);
             }
-        }
-
-        for (int i = 0; i < 11; i++)
-        {
-            for (int j = 0; j < 11; j++)
+            if (msg.message == WM_LBUTTONDOWN)
             {
-                blank_simple[i][j].Unselect_show();
-            }
-        }
-
-		int score = 0; // 初始化计数器
-        for (int i = 1; i <= 9; i++)
-        {
-            for (int j = 1; j <= 9; j++)
-            {
-                if (blank_simple[i][j].isRevealed == 1&&blank_simple[i][j].IsMine==0)
+                if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                 {
-                    score++;
+                    return -1;
+                }
+                if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+                {
+                    return -2;
                 }
             }
-        }
 
-        if (defeat == 1)                           //展示失败界面
-        {
-            putimage(344, 0, &GameDefeat, SRCCOPY);
-            string score_str = "SCORE:"+to_string(score);
-			outtextxy(400,540 , (score_str.c_str())); // 显示分数
-            break;
-        }
-
-		int countblank = 0; // 计数未揭开的格子
-        for (int i = 1; i <= 9; i++)
-        {
-            for (int j = 1; j <= 9; j++)
+            for (int i = 0; i < 11; i++)
             {
-                if (blank_simple[i][j].isRevealed == 0)
+                for (int j = 0; j < 11; j++)
                 {
-					countblank++;
+                    blank_simple[i][j].Unselect_show();
                 }
             }
-        }
 
-        if(countblank==12) // 如果所有非雷格子都被揭开
-        {
-            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
-            defeat = 0;
-            break;
-		}
-
-        if (msg.x > 435 && msg.y > 135 && msg.x < 735 && msg.y < 435)
-        {
-            int posX = (msg.x - 435) / 30;
-            int posY = (msg.y - 135) / 30;
-            switch (msg.message)
+            int score = 0; // 初始化计数器
+            for (int i = 1; i <= 9; i++)
             {
-                case WM_MOUSEMOVE:
+                for (int j = 1; j <= 9; j++)
+                {
+                    if (blank_simple[i][j].isRevealed == 1 && blank_simple[i][j].IsMine == 0)
                     {
-                        blank_simple[posY][posX].select_show();
-                    }break;
+                        score++;
+                    }
+                }
+            }
 
-                case WM_LBUTTONDOWN:
-                    { 
-                        if (firstclick_simple == 1)                //非第一次点击
+            if (defeat == 1)                           //展示失败界面
+            {
+                putimage(344, 0, &GameDefeat, SRCCOPY);
+                string score_str = "SCORE:" + to_string(score);
+                outtextxy(400, 550, (score_str.c_str())); // 显示分数
+                break;
+            }
+
+            int countblank = 0; // 计数未揭开的格子
+            for (int i = 1; i <= 9; i++)
+            {
+                for (int j = 1; j <= 9; j++)
+                {
+                    if (blank_simple[i][j].isRevealed == 0)
+                    {
+                        countblank++;
+                    }
+                }
+            }
+
+            if (countblank == 12) // 如果所有非雷格子都被揭开
+            {
+                putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+                defeat = 0;
+                break;
+            }
+
+            if (msg.x > 435 && msg.y > 135 && msg.x < 735 && msg.y < 435)
+            {
+                int posX = (msg.x - 435) / 30;
+                int posY = (msg.y - 135) / 30;
+                switch (msg.message)
+                {
+                    case WM_MOUSEMOVE:
                         {
-                            if (blank_simple[posY][posX].isFlag == 0)
+                            blank_simple[posY][posX].select_show();
+                        }break;
+
+                    case WM_LBUTTONDOWN:
+                        {
+                            if (firstclick_simple == 1)                //非第一次点击
                             {
-                                if (blank_simple[posY][posX].NumMine == 0)
+                                if (blank_simple[posY][posX].isFlag == 0)
                                 {
-                                    ExpandEmptyCells_simple(posY, posX);
-                                }
-                                blank_simple[posY][posX].isRevealed = 1;
-                                if(blank_simple[posY][posX].IsMine == 1) //如果点到雷
-                                {
-                                    for (int i = 1; i <= 9; i++)
+                                    if (blank_simple[posY][posX].NumMine == 0)
                                     {
-                                        for (int j = 1; j <= 9; j++)
-                                        {
-                                            if(blank_simple[i][j].IsMine == 1) //显示所有雷
-                                            {
-                                                blank_simple[i][j].isRevealed = 1;
-											}
-                                        }
+                                        ExpandEmptyCells_simple(posY, posX);
                                     }
-                                    defeat = 1;                  //更改游戏状态为失败
-								}
+                                    blank_simple[posY][posX].isRevealed = 1;
+                                    if (blank_simple[posY][posX].IsMine == 1) //如果点到雷
+                                    {
+                                        for (int i = 1; i <= 9; i++)
+                                        {
+                                            for (int j = 1; j <= 9; j++)
+                                            {
+                                                if (blank_simple[i][j].IsMine == 1) //显示所有雷
+                                                {
+                                                    blank_simple[i][j].isRevealed = 1;
+                                                }
+                                            }
+                                        }
+                                        defeat = 1;                  //更改游戏状态为失败
+                                    }
+                                }
                             }
-                        }
-                        else if (firstclick_simple == 0&& blank_simple[posY][posX].isFlag==0)                 //第一次左键点击
-                        {
-                            firstclick_simple = 1;
-                            if (blank_simple[posY][posX].NumMine != 0)
+                            else if (firstclick_simple == 0 && blank_simple[posY][posX].isFlag == 0)                 //第一次左键点击
                             {
-                                while (blank_simple[posY][posX].NumMine != 0 || blank_simple[posY][posX].IsMine == 1)
+                                firstclick_simple = 1;
+                                isTimerRunning = true;  // 启动计时
+                                startTime = std::chrono::steady_clock::now();  // 重置开始时间
+                                if (blank_simple[posY][posX].NumMine != 0)
                                 {
-                                    Raise_Mines(1);
-                                    getNumMinesimple();
-                                 }
-                                if (blank_simple[posY][posX].NumMine == 0)
+                                    while (blank_simple[posY][posX].NumMine != 0 || blank_simple[posY][posX].IsMine == 1)
+                                    {
+                                        Raise_Mines(1);
+                                        getNumMinesimple();
+                                    }
+                                    if (blank_simple[posY][posX].NumMine == 0)
+                                    {
+                                        ExpandEmptyCells_simple(posY, posX);
+                                    }
+                                }
+                                else
                                 {
                                     ExpandEmptyCells_simple(posY, posX);
                                 }
                             }
-                            else
-                            {
-                                ExpandEmptyCells_simple(posY, posX);
-                            }
-                        }
-                    }break;
+                        }break;
 
-                case WM_RBUTTONDOWN:
-                    {
-                        blank_simple[posY][posX].flag();
-                    }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            blank_simple[posY][posX].flag();
+                        }break;
+                }
             }
         }
-
     }
     while (true)
     {
@@ -545,120 +557,143 @@ int SweeperGame::hoverstart_middle(void)
 {
     ExMessage msg;
     firstclick_middle = 0;
+    bool isTimerRunning = false;
+    auto startTime = std::chrono::steady_clock::now();  // 游戏开始时记录
     while (1)
     {
-        msg = getmessage(EX_MOUSE);
-        putimage(70, 0, &GameRestart, SRCCOPY);
-        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+        if (isTimerRunning)
         {
-            putimage(0, 0, &Withdraw, SRCCOPY);
+            // 在游戏循环中更新计时器
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime);
+            int elapsedSeconds = elapsed.count();
+
+            // 显示 MM:SS
+            int minutes = elapsedSeconds / 60;
+            int seconds = elapsedSeconds % 60;
+            char timeStr[10];
+            sprintf_s(timeStr, "%02d:%02d", minutes, seconds);
+
+            // 在右上角绘制时间
+            settextcolor(WHITE);
+            outtextxy(950, 10, timeStr);
         }
-        else
+
+        if (peekmessage(&msg, EX_MOUSE))
         {
-            putimage(0, 0, &Withdraw1, SRCCOPY);
-        }
-        if (msg.message == WM_LBUTTONDOWN)
-        {
+            putimage(70, 0, &GameRestart, SRCCOPY);
             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
             {
-                return -1;
+                putimage(0, 0, &Withdraw, SRCCOPY);
             }
-            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            else
             {
-                return -2;
+                putimage(0, 0, &Withdraw1, SRCCOPY);
             }
-        }
-
-        for (int i = 0; i < 18; i++)
-        {
-            for (int j = 0; j < 18; j++)
+            if (msg.message == WM_LBUTTONDOWN)
             {
-                blank_middle[i][j].Unselect_show();
-            }
-        }
-
-        int score = 0; // 初始化计数器
-        for (int i = 1; i <= 16; i++)
-        {
-            for (int j = 1; j <= 16; j++)
-            {
-                if (blank_middle[i][j].isRevealed == 1 && blank_middle[i][j].IsMine == 0)
+                if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                 {
-                    score++;
+                    return -1;
+                }
+                if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+                {
+                    return -2;
                 }
             }
-        }
 
-        if (defeat == 1)                           //展示失败界面
-        {
-            putimage(344, 0, &GameDefeat, SRCCOPY);
-            string score_str = "SCORE:" + to_string(score);
-            outtextxy(400, 540, (score_str.c_str())); // 显示分数
-            break;
-        }
-
-        int countblank = 0; // 计数未揭开的格子
-        for (int i = 1; i <= 16; i++)
-        {
-            for (int j = 1; j <= 16; j++)
+            for (int i = 0; i < 18; i++)
             {
-                if (blank_middle[i][j].isRevealed == 0)
+                for (int j = 0; j < 18; j++)
                 {
-                    countblank++;
+                    blank_middle[i][j].Unselect_show();
                 }
             }
-        }
 
-        if (countblank == 64) // 如果所有非雷格子都被揭开
-        {
-            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
-            defeat = 0;
-            break;
-        }
-
-        if (msg.x >= 360 && msg.y >= 60 && msg.x <= 870 && msg.y <= 570)
-        {
-            int posX = (msg.x - 360) / 30;
-            int posY = (msg.y - 60) / 30;
-            switch (msg.message)
+            int score = 0; // 初始化计数器
+            for (int i = 1; i <= 16; i++)
             {
-                case WM_MOUSEMOVE:
+                for (int j = 1; j <= 16; j++)
+                {
+                    if (blank_middle[i][j].isRevealed == 1 && blank_middle[i][j].IsMine == 0)
                     {
-                        blank_middle[posY][posX].select_show();
-                    }break;
-                case WM_LBUTTONDOWN:
+                        score++;
+                    }
+                }
+            }
+
+            if (defeat == 1)                           //展示失败界面
+            {
+                putimage(344, 0, &GameDefeat, SRCCOPY);
+                string score_str = "SCORE:" + to_string(score);
+                outtextxy(400, 550, (score_str.c_str())); // 显示分数
+                break;
+            }
+
+            int countblank = 0; // 计数未揭开的格子
+            for (int i = 1; i <= 16; i++)
+            {
+                for (int j = 1; j <= 16; j++)
+                {
+                    if (blank_middle[i][j].isRevealed == 0)
                     {
-                        if (firstclick_middle == 1)                //非第一次点击
+                        countblank++;
+                    }
+                }
+            }
+
+            if (countblank == 64) // 如果所有非雷格子都被揭开
+            {
+                putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+                defeat = 0;
+                break;
+            }
+
+            if (msg.x >= 360 && msg.y >= 60 && msg.x <= 870 && msg.y <= 570)
+            {
+                int posX = (msg.x - 360) / 30;
+                int posY = (msg.y - 60) / 30;
+                switch (msg.message)
+                {
+                    case WM_MOUSEMOVE:
                         {
-                            if (blank_middle[posY][posX].isFlag == 0)
+                            blank_middle[posY][posX].select_show();
+                        }break;
+                    case WM_LBUTTONDOWN:
+                        {
+                            if (firstclick_middle == 1)                //非第一次点击
                             {
-                                if (blank_middle[posY][posX].NumMine != 0)
+                                if (blank_middle[posY][posX].isFlag == 0)
                                 {
-                                    blank_middle[posY][posX].isRevealed = 1;
-                                }
-                                if (blank_middle[posY][posX].NumMine == 0)
-                                {
-                                    ExpandEmptyCells_middle(posY, posX);
-                                }
-                                if (blank_middle[posY][posX].IsMine == 1) //如果点到雷
-                                {
-                                    for (int i = 1; i <= 16; i++)
+                                    if (blank_middle[posY][posX].NumMine != 0)
                                     {
-                                        for (int j = 1; j <= 16; j++)
+                                        blank_middle[posY][posX].isRevealed = 1;
+                                    }
+                                    if (blank_middle[posY][posX].NumMine == 0)
+                                    {
+                                        ExpandEmptyCells_middle(posY, posX);
+                                    }
+                                    if (blank_middle[posY][posX].IsMine == 1) //如果点到雷
+                                    {
+                                        for (int i = 1; i <= 16; i++)
                                         {
-                                            if (blank_middle[i][j].IsMine == 1) //显示所有雷
+                                            for (int j = 1; j <= 16; j++)
                                             {
-                                                blank_middle[i][j].isRevealed = 1;
+                                                if (blank_middle[i][j].IsMine == 1) //显示所有雷
+                                                {
+                                                    blank_middle[i][j].isRevealed = 1;
+                                                }
                                             }
                                         }
+                                        defeat = 1;                  //更改游戏状态为失败
                                     }
-                                    defeat = 1;                  //更改游戏状态为失败
                                 }
                             }
-                        }
                             else if (firstclick_middle == 0 && blank_middle[posY][posX].isFlag == 0)                 //第一次左键点击
                             {
                                 firstclick_middle = 1;
+                                isTimerRunning = true;  // 启动计时
+                                startTime = std::chrono::steady_clock::now();  // 重置开始时间
                                 if (blank_middle[posY][posX].NumMine != 0)
                                 {
                                     while (blank_middle[posY][posX].NumMine != 0 || blank_middle[posY][posX].IsMine == 1)
@@ -677,10 +712,11 @@ int SweeperGame::hoverstart_middle(void)
                                 }
                             }
                         }break;
-                case WM_RBUTTONDOWN:
-                    {
-                        blank_middle[posY][posX].flag();
-                    }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            blank_middle[posY][posX].flag();
+                        }break;
+                }
             }
         }
     }
@@ -714,144 +750,167 @@ int SweeperGame::hoverstart_difficult(void)
 {
     ExMessage msg;
     firstclick_difficult = 0;
-    while (true)
+    bool isTimerRunning = false;
+    auto startTime = std::chrono::steady_clock::now();  // 游戏开始时记录
+    while (1)
     {
-        msg = getmessage(EX_MOUSE);
-        putimage(70, 0, &GameRestart, SRCCOPY);
-        if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
+        if (isTimerRunning)
         {
-            putimage(0, 0, &Withdraw, SRCCOPY);
+            // 在游戏循环中更新计时器
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime);
+            int elapsedSeconds = elapsed.count();
+
+            // 显示 MM:SS
+            int minutes = elapsedSeconds / 60;
+            int seconds = elapsedSeconds % 60;
+            char timeStr[10];
+            sprintf_s(timeStr, "%02d:%02d", minutes, seconds);
+
+            // 在右上角绘制时间
+            outtextxy(950, 10, timeStr);
         }
-        else
+
+        if (peekmessage(&msg, EX_MOUSE))
         {
-            putimage(0, 0, &Withdraw1, SRCCOPY);
-        }
-        if (msg.message == WM_LBUTTONDOWN)
-        {
+            putimage(70, 0, &GameRestart, SRCCOPY);
             if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
             {
-                return -1;
+                putimage(0, 0, &Withdraw, SRCCOPY);
             }
-            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            else
             {
-                return -2;
+                putimage(0, 0, &Withdraw1, SRCCOPY);
             }
-        }
-
-        for (int i = 0; i < 18; i++)
-        {
-            for (int j = 0; j < 32; j++)
+            if (msg.message == WM_LBUTTONDOWN)
             {
-                blank_difficult[i][j].Unselect_show();
-            }
-        }
-
-        int score = 0; // 初始化计数器
-        for (int i = 1; i <= 16; i++)
-        {
-            for (int j = 1; j <= 30; j++)
-            {
-                if (blank_difficult[i][j].isRevealed == 1 && blank_difficult[i][j].IsMine == 0)
+                if (msg.x <= 64 && msg.x >= 0 && msg.y <= 64 && msg.y >= 0)//返回
                 {
-                    score++;
+                    return -1;
+                }
+                if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+                {
+                    return -2;
                 }
             }
-        }
 
-        if (defeat == 1)                           //展示失败界面
-        {
-            putimage(344, 0, &GameDefeat, SRCCOPY);
-            string score_str = "SCORE:" + to_string(score);
-            outtextxy(400, 540, (score_str.c_str())); // 显示分数
-            break;
-        }
-
-        int countblank = 0; // 计数未揭开的格子
-        for (int i = 1; i <= 9; i++)
-        {
-            for (int j = 1; j <= 9; j++)
+            for (int i = 0; i < 18; i++)
             {
-                if (blank_difficult[i][j].isRevealed == 0)
+                for (int j = 0; j < 32; j++)
                 {
-                    countblank++;
+                    blank_difficult[i][j].Unselect_show();
                 }
             }
-        }
 
-        if (countblank == 120) // 如果所有非雷格子都被揭开
-        {
-            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
-            defeat = 0;
-            break;
-        }
-
-        if (msg.x > 150 && msg.y > 60 && msg.x < 1080 && msg.y < 570)
-        {
-            int posX = (msg.x - 150) / 30;
-            int posY = (msg.y - 60) / 30;
-            switch (msg.message)
+            int score = 0; // 初始化计数器
+            for (int i = 1; i <= 16; i++)
             {
-                case WM_MOUSEMOVE:
+                for (int j = 1; j <= 30; j++)
+                {
+                    if (blank_difficult[i][j].isRevealed == 1 && blank_difficult[i][j].IsMine == 0)
                     {
-                        blank_difficult[posY][posX].select_show();
-                    }break;
+                        score++;
+                    }
+                }
+            }
 
-                case WM_LBUTTONDOWN:
+            if (defeat == 1)                           //展示失败界面
+            {
+                putimage(344, 0, &GameDefeat, SRCCOPY);
+                string score_str = "SCORE:" + to_string(score);
+                outtextxy(400, 550, (score_str.c_str())); // 显示分数
+                break;
+            }
+
+            int countblank = 0; // 计数未揭开的格子
+            for (int i = 1; i <= 9; i++)
+            {
+                for (int j = 1; j <= 9; j++)
+                {
+                    if (blank_difficult[i][j].isRevealed == 0)
                     {
-						if (firstclick_difficult == 1)                         //非第一次点击
+                        countblank++;
+                    }
+                }
+            }
+
+            if (countblank == 120) // 如果所有非雷格子都被揭开
+            {
+                putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+                defeat = 0;
+                break;
+            }
+
+            if (msg.x > 150 && msg.y > 60 && msg.x < 1080 && msg.y < 570)
+            {
+                int posX = (msg.x - 150) / 30;
+                int posY = (msg.y - 60) / 30;
+                switch (msg.message)
+                {
+                    case WM_MOUSEMOVE:
                         {
-                            if (blank_difficult[posY][posX].isFlag == 0)
+                            blank_difficult[posY][posX].select_show();
+                        }break;
+
+                    case WM_LBUTTONDOWN:
+                        {
+                            if (firstclick_difficult == 1)                         //非第一次点击
                             {
-                                if (blank_difficult[posY][posX].NumMine != 0)
+                                if (blank_difficult[posY][posX].isFlag == 0)
                                 {
-                                    blank_difficult[posY][posX].isRevealed = 1;
-                                }
-                                if (blank_difficult[posY][posX].NumMine == 0)
-                                {
-                                    ExpandEmptyCells_difficult(posY, posX);
-                                }
-                                if (blank_difficult[posY][posX].IsMine == 1)
-                                {
-                                    for (int i = 1; i <= 16; i++)
+                                    if (blank_difficult[posY][posX].NumMine != 0)
                                     {
-                                        for (int j = 1; j <= 30; j++)
+                                        blank_difficult[posY][posX].isRevealed = 1;
+                                    }
+                                    if (blank_difficult[posY][posX].NumMine == 0)
+                                    {
+                                        ExpandEmptyCells_difficult(posY, posX);
+                                    }
+                                    if (blank_difficult[posY][posX].IsMine == 1)
+                                    {
+                                        for (int i = 1; i <= 16; i++)
                                         {
-                                            if (blank_difficult[i][j].IsMine == 1)
+                                            for (int j = 1; j <= 30; j++)
                                             {
-                                                blank_difficult[i][j].isRevealed = 1;
+                                                if (blank_difficult[i][j].IsMine == 1)
+                                                {
+                                                    blank_difficult[i][j].isRevealed = 1;
+                                                }
                                             }
                                         }
+                                        defeat = 1;                  //更改游戏状态为失败
                                     }
-                                    defeat = 1;                  //更改游戏状态为失败
                                 }
                             }
-                        }
-                        else if (firstclick_difficult == 0 && blank_difficult[posY][posX].isFlag == 0)                 //第一次左键点击
-                        {
-                            firstclick_difficult = 1;
-                            if (blank_difficult[posY][posX].NumMine != 0)
+                            else if (firstclick_difficult == 0 && blank_difficult[posY][posX].isFlag == 0)                 //第一次左键点击
                             {
-                                while (blank_difficult[posY][posX].NumMine != 0 || blank_difficult[posY][posX].IsMine == 1)
+                                firstclick_difficult = 1;
+                                isTimerRunning = true;
+                                startTime = std::chrono::steady_clock::now();  // 重置开始时间
+                                if (blank_difficult[posY][posX].NumMine != 0)
                                 {
-                                    Raise_Mines(3);
-                                    getNumMinedifficult();
+                                    while (blank_difficult[posY][posX].NumMine != 0 || blank_difficult[posY][posX].IsMine == 1)
+                                    {
+                                        Raise_Mines(3);
+                                        getNumMinedifficult();
+                                    }
+                                    if (blank_difficult[posY][posX].NumMine == 0)
+                                    {
+                                        ExpandEmptyCells_difficult(posY, posX);
+                                    }
                                 }
-                                if (blank_difficult[posY][posX].NumMine == 0)
+                                else
                                 {
                                     ExpandEmptyCells_difficult(posY, posX);
                                 }
                             }
-                            else
-                            {
-                                ExpandEmptyCells_difficult(posY, posX);
-                            }
-                        }
-                    }break;
+                        }break;
 
-                case WM_RBUTTONDOWN:
-                    {
-                        blank_difficult[posY][posX].flag();
-                    }break;
+                    case WM_RBUTTONDOWN:
+                        {
+                            blank_difficult[posY][posX].flag();
+                        }break;
+                }
             }
         }
     }
