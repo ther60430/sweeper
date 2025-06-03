@@ -35,7 +35,7 @@ void SweeperGame::InitGame()
     loadimage(&Difficult, _T("images/Difficult1.png"), 256, 64);                                 //À§ÄÑÄ£Ê½ĞüÍ£Í¼Æ¬
 	loadimage(&Withdraw1, _T("images/Withdraw1.png"), 64, 64);                            //·µ»Ø°´Å¥Í¼Æ¬
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //·µ»Ø°´Å¥ĞüÍ£Í¼Æ¬
-	loadimage(&GameDefeat, _T("images/Defeat.png"), 512, 128);                       //ÓÎÏ·Ê§°ÜÍ¼Æ¬
+	loadimage(&GameDefeat, _T("images/Defeat.png"), 555, 128);                       //ÓÎÏ·Ê§°ÜÍ¼Æ¬
 	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //ÓÎÏ·Ê¤ÀûÍ¼Æ¬
 }
 
