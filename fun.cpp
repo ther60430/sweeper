@@ -98,6 +98,10 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                defeat = false;
+                                win = false;
+                                replay = false;
+                                back = false;
                                 setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
@@ -118,10 +122,7 @@ void SweeperGame::run_game(void)
                                     replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
-                                    defeat = false;
-                                    win = false;
-                                    replay = false;
-                                    back = false;
+                                    
                                 }
                             }
                         }break;
