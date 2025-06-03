@@ -37,6 +37,39 @@ void SweeperGame::InitGame()
     loadimage(&Withdraw, _T("images/Withdraw.png"), 64, 64);                            //返回按钮悬停图片
 	loadimage(&GameDefeat, _T("images/Defeat.png"), 555, 128);                       //游戏失败图片
 	loadimage(&GameWin, _T("images/Victory.png"), 512, 128);                            //游戏胜利图片
+    settextstyle(60, 60, _T("隶书"));
+    settextcolor(RED);
+}
+
+void SweeperGame::showtime(void)
+{
+    time_t StartTime = time(nullptr);
+    while (1)
+    {
+        if (defeat == 1)
+        {
+            break;
+        }
+        if (win == 1)
+        {
+            break;
+        }
+        if (replay == 1)
+        {
+            break;
+        }
+        if (back == 1)
+        {
+            break;
+        }
+
+        time_t NowTime = time(nullptr);
+
+        int second = NowTime - StartTime;
+
+        string tim = to_string(second) + "s";
+        outtextxy(1000, 0, tim.c_str());
+    }
 }
 
 void SweeperGame::run_game(void)
@@ -45,13 +78,17 @@ void SweeperGame::run_game(void)
     while (1)
     {
         displayscreen1();				//一级画面显示函数
-        flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3                    
+        flag0 = hoverstart1();     //一级画面悬停及点击事件处理函数       1/2/3       
         switch (flag0)
         {
         case 1:
         {
             while (1)
             {
+                defeat = false;
+                win = false;
+                replay = false;
+                back = false;
                 int flag1;
                 displayscreen2a();                   //二级画面显示函数
                 flag1 = hoverstart2a();                   // 二级画面悬停及点击事件处理函数             1/2/3/4
@@ -61,22 +98,31 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                defeat = false;
+                                win = false;
+                                replay = false;
+                                back = false;
                                 setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines(1);
                                 getNumMinesimple();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_simple();
-                                if(flag2 == -1) // 返回按钮被点击或游戏结束
+                                if(flag2 == -1) // 返回按钮被点击
                                 {
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
                                     break;
 								}
                                 if (flag2 == -2)
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_simple);
+                                    
                                 }
                             }
                         }break;
@@ -89,15 +135,20 @@ void SweeperGame::run_game(void)
                                 displayscreen_middle();
                                 Raise_Mines(2);
                                 getNumMinemiddle();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_middle();
                                 if (flag2 == -1) // 返回按钮被点击
                                 {
+                                    win = true;
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                     break;
                                 }
                                 if (flag2 == -2) // 返回按钮被点击
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_middle);
                                 }
@@ -112,15 +163,20 @@ void SweeperGame::run_game(void)
                                 displayscreen_difficult();
                                 Raise_Mines(3);
                                 getNumMinedifficult();
+                                thread t(&SweeperGame::showtime, this);
+                                t.detach();
                                 flag2 = hoverstart_difficult();
                                 if (flag2== -1)
                                 {
+                                    win = true;
+                                    back = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
 									break;
                                 }
                                 if (flag2 == -2)
                                 {
+                                    replay = true;
                                     vector<vector<Blanks>> temp;
                                     swap(temp, blank_difficult);
                                 }
@@ -142,8 +198,7 @@ void SweeperGame::displayscreen1(void)                //一级画面显示函数
     putimage(0, 0, &BackGraound, SRCCOPY);                  //背景图片
     putimage(200, 100, &Title, SRCCOPY);                    //标题图片
     putimage(472, 300, &GameStart1, SRCCOPY);               //游戏开始按钮
-    putimage(472, 380, &history_scores1, SRCCOPY);          //分数按钮
-    putimage(472, 460, &GameExit1, SRCCOPY);                //退出按钮
+    putimage(472, 400, &GameExit1, SRCCOPY);                //退出按钮
     FlushBatchDraw();                                       //刷新屏幕
 }
 
@@ -165,10 +220,8 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
         msg = getmessage(EX_MOUSE);
         // 检查鼠标是否在开始按钮上
         bool inStartButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 300 && msg.y <= 364);
-        // 检查鼠标是否在分数按钮上
-        bool inScoreButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 380 && msg.y <= 444);
         // 检查鼠标是否在退出按钮上
-        bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 460 && msg.y <= 524);
+        bool inExitButton = (msg.x >= 472 && msg.x <= 728) && (msg.y >= 400 && msg.y <= 464);
         switch (msg.message)
         {
         case WM_MOUSEMOVE:
@@ -181,23 +234,14 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
             {
                 putimage(472, 300, &GameStart1, SRCCOPY);
             }
-            // 处理分数按钮悬停
-            if (inScoreButton)
-            {
-                putimage(472, 380, &history_scores1, SRCCOPY);
-            }
-            else
-            {
-                putimage(472, 380, &history_scores, SRCCOPY);
-            }
             // 处理退出按钮悬停
             if (inExitButton)
             {
-                putimage(472, 460, &GameExit, SRCCOPY);
+                putimage(472, 400, &GameExit, SRCCOPY);
             }
             else
             {
-                putimage(472, 460, &GameExit1, SRCCOPY);
+                putimage(472, 400, &GameExit1, SRCCOPY);
             }
             break;
         case WM_LBUTTONDOWN:
@@ -205,8 +249,6 @@ int SweeperGame::hoverstart1(void)                      //一级画面悬停及点击事件
             // 处理点击事件
             if (inStartButton)
                 return 1;
-            else if (inScoreButton)
-                return 2;
             else if (inExitButton)
                 return 3;
             break;
@@ -376,6 +418,8 @@ int SweeperGame::hoverstart_simple(void)
 {
     ExMessage msg;
     firstclick_simple = 0;
+
+    
     while (1)
     {
         msg = getmessage(EX_MOUSE); 
@@ -423,9 +467,6 @@ int SweeperGame::hoverstart_simple(void)
         if (defeat == 1)                           //展示失败界面
         {
             putimage(344, 0, &GameDefeat, SRCCOPY);
-            defeat = 0;
-            settextstyle(60, 60, _T("隶书"));
-            settextcolor(RED);
             string score_str = "SCORE:"+to_string(score);
 			outtextxy(400,540 , (score_str.c_str())); // 显示分数
             break;
@@ -445,6 +486,7 @@ int SweeperGame::hoverstart_simple(void)
 
         if(countblank==12) // 如果所有非雷格子都被揭开
         {
+            win = 1;
             putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
             defeat = 0;
             break;
@@ -515,7 +557,8 @@ int SweeperGame::hoverstart_simple(void)
                         blank_simple[posY][posX].flag();
                     }break;
             }
-        }      
+        }
+
     }
     while (true)
     {
@@ -535,7 +578,7 @@ int SweeperGame::hoverstart_simple(void)
             {
                 return -1;
             }
-            if (msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0)
+            if ((msg.x <= 134 && msg.x >= 70 && msg.y <= 64 && msg.y >= 0))
             {
                 return -2;
             }
@@ -850,6 +893,61 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
+void SweeperGame::Raise_Mines(int num)
+{
+    // 使用静态随机数生成器，避免重复初始化
+    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
+
+    vector<vector<Blanks>> *targetGrid = nullptr;
+    int rows = 0, cols = 0, mineCount = 0;
+
+    // 根据难度选择目标网格和配置
+    switch (num)
+    {
+        case 1:
+            targetGrid = &blank_simple;
+            rows = 9; cols = 9; mineCount = 12;
+            break;
+        case 2:
+            targetGrid = &blank_middle;
+            rows = 16; cols = 16; mineCount = 64;
+            break;
+        case 3:
+            targetGrid = &blank_difficult;
+            rows = 16; cols = 30; mineCount = 120;
+            break;
+        default:
+            return; // 无效难度级别
+    }
+
+    // 重置网格中的地雷
+    for (auto &row : *targetGrid)
+        for (auto &cell : row)
+            cell.IsMine = 0;
+
+    // Fisher-Yates 洗牌算法生成随机位置
+    vector<int> positions(rows * cols);
+    for (int i = 0; i < rows * cols; ++i)
+        positions[i] = i;
+
+    // 只需要打乱前mineCount个元素
+    for (int i = 0; i < mineCount; ++i)
+    {
+        uniform_int_distribution<int> distribution(i, rows * cols - 1);
+        int j = distribution(generator);
+        swap(positions[i], positions[j]);
+    }
+
+    // 设置地雷
+    for (int i = 0; i < mineCount; ++i)
+    {
+        int pos = positions[i];
+        int x = pos / cols + 1; // +1 因为网格从1开始
+        int y = pos % cols + 1;
+        (*targetGrid)[x][y].IsMine = 1;
+    }
+}
+
 void SweeperGame::getNumMinesimple(void)
 {
     for (int i = 1; i <= 9; i++)
@@ -943,61 +1041,6 @@ void SweeperGame::getNumMinedifficult(void)
                 }
             }
         }
-    }
-}
-
-void SweeperGame::Raise_Mines(int num)
-{
-    // 使用静态随机数生成器，避免重复初始化
-    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
-
-    vector<vector<Blanks>>* targetGrid = nullptr;
-    int rows = 0, cols = 0, mineCount = 0;
-
-    // 根据难度选择目标网格和配置
-    switch (num)
-    {
-        case 1:
-            targetGrid = &blank_simple;
-            rows = 9; cols = 9; mineCount = 12;
-            break;
-        case 2:
-            targetGrid = &blank_middle;
-            rows = 16; cols = 16; mineCount = 64;
-            break;
-        case 3:
-            targetGrid = &blank_difficult;
-            rows = 16; cols = 30; mineCount = 120;
-            break;
-        default:
-            return; // 无效难度级别
-    }
-
-    // 重置网格中的地雷
-    for (auto& row : *targetGrid)
-        for (auto& cell : row)
-            cell.IsMine = 0;
-
-    // Fisher-Yates 洗牌算法生成随机位置
-    vector<int> positions(rows * cols);
-    for (int i = 0; i < rows * cols; ++i)
-        positions[i] = i;
-
-    // 只需要打乱前mineCount个元素
-    for (int i = 0; i < mineCount; ++i)
-    {
-        uniform_int_distribution<int> distribution(i, rows * cols - 1);
-        int j = distribution(generator);
-        swap(positions[i], positions[j]);
-    }
-
-    // 设置地雷
-    for (int i = 0; i < mineCount; ++i)
-    {
-        int pos = positions[i];
-        int x = pos / cols + 1; // +1 因为网格从1开始
-        int y = pos % cols + 1;
-        (*targetGrid)[x][y].IsMine = 1;
     }
 }
 
