@@ -61,6 +61,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_simple();//简单难度展示及Blank类生成
                                 Raise_Mines(1);
@@ -83,6 +84,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_middle();
                                 Raise_Mines(2);
@@ -105,6 +107,7 @@ void SweeperGame::run_game(void)
                         {
                             while (1)
                             {
+                                setdefeat();
                                 int flag2;
                                 displayscreen_difficult();
                                 Raise_Mines(3);
@@ -412,6 +415,25 @@ int SweeperGame::hoverstart_simple(void)
             break;
         }
 
+		int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 9; i++)
+        {
+            for (int j = 1; j <= 9; j++)
+            {
+                if (blank_simple[i][j].isRevealed == 0)
+                {
+					countblank++;
+                }
+            }
+        }
+
+        if(countblank==12) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+            defeat = 0;
+            break;
+		}
+
         if (msg.x > 435 && msg.y > 135 && msg.x < 735 && msg.y < 435)
         {
             int posX = (msg.x - 435) / 30;
@@ -547,6 +569,25 @@ int SweeperGame::hoverstart_middle(void)
             defeat = 0;
             break;
         }
+        int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 16; i++)
+        {
+            for (int j = 1; j <= 16; j++)
+            {
+                if (blank_middle[i][j].isRevealed == 0)
+                {
+                    countblank++;
+                }
+            }
+        }
+
+        if (countblank == 64) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+            defeat = 0;
+            break;
+        }
+
         if (msg.x >= 360 && msg.y >= 60 && msg.x <= 870 && msg.y <= 570)
         {
             int posX = (msg.x - 360) / 30;
@@ -681,6 +722,25 @@ int SweeperGame::hoverstart_difficult(void)
             break;
         }
 
+        int countblank = 0; // 计数未揭开的格子
+        for (int i = 1; i <= 9; i++)
+        {
+            for (int j = 1; j <= 9; j++)
+            {
+                if (blank_difficult[i][j].isRevealed == 0)
+                {
+                    countblank++;
+                }
+            }
+        }
+
+        if (countblank == 12) // 如果所有非雷格子都被揭开
+        {
+            putimage(344, 0, &GameWin, SRCCOPY); // 显示胜利界面
+            defeat = 0;
+            break;
+        }
+
         if (msg.x > 150 && msg.y > 60 && msg.x < 1080 && msg.y < 570)
         {
             int posX = (msg.x - 150) / 30;
@@ -774,58 +834,102 @@ int SweeperGame::hoverstart_difficult(void)
     }
 }
 
-void SweeperGame::Raise_Mines(int num)
+void SweeperGame::Raise_Mines(int num_)
 {
-    // 使用静态随机数生成器，避免重复初始化
-    static mt19937 generator(chrono::system_clock::now().time_since_epoch().count());
-
-    vector<vector<Blanks>>* targetGrid = nullptr;
-    int rows = 0, cols = 0, mineCount = 0;
-
-    // 根据难度选择目标网格和配置
-    switch (num)
+   
+    switch (num_)
     {
         case 1:
-            targetGrid = &blank_simple;
-            rows = 9; cols = 9; mineCount = 12;
-            break;
+            {
+                int num = 12;
+                vector<char> vec(81, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 80; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        
+                        if (vec[k++] == '1')
+                            blank_simple[i][j].IsMine = 1;
+                        if (k == 12)
+                            break;
+                    }
+                }
+
+            }break;
         case 2:
-            targetGrid = &blank_middle;
-            rows = 16; cols = 16; mineCount = 64;
-            break;
+            {
+                int num = 64;
+                vector<char> vec(324, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 323; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
+
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
+
+                    // 生成并输出随机数
+                    int j = distribution(generator);
+
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 18; i++)
+                {
+                    for (int j = 0; j < 18; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_middle[i][j].IsMine = 1;
+                    }
+                }
+            }break;
         case 3:
-            targetGrid = &blank_difficult;
-            rows = 16; cols = 30; mineCount = 120;
-            break;
-        default:
-            return; // 无效难度级别
-    }
+            {
+                int num = 120;
+                vector<char> vec(480, '0');
+                for (int i = 0; i < num; i++)
+                    vec[i] = '1';
+                for (int i = 479; i > 0; i--)
+                {
+                    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+                    mt19937 generator(seed);  // Mersenne Twister算法
 
-    // 重置网格中的地雷
-    for (auto& row : *targetGrid)
-        for (auto& cell : row)
-            cell.IsMine = 0;
+                    // 生成0-i的均匀分布整数
+                    uniform_int_distribution<int> distribution(0, i);
 
-    // Fisher-Yates 洗牌算法生成随机位置
-    vector<int> positions(rows * cols);
-    for (int i = 0; i < rows * cols; ++i)
-        positions[i] = i;
+                    // 生成并输出随机数
+                    int j = distribution(generator);
 
-    // 只需要打乱前mineCount个元素
-    for (int i = 0; i < mineCount; ++i)
-    {
-        uniform_int_distribution<int> distribution(i, rows * cols - 1);
-        int j = distribution(generator);
-        swap(positions[i], positions[j]);
-    }
-
-    // 设置地雷
-    for (int i = 0; i < mineCount; ++i)
-    {
-        int pos = positions[i];
-        int x = pos / cols + 1; // +1 因为网格从1开始
-        int y = pos % cols + 1;
-        (*targetGrid)[x][y].IsMine = 1;
+                    swap(vec[i], vec[j]);
+                }
+                int k = 0;
+                for (int i = 0; i < 16; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        if (vec[k++] == '1')
+                            blank_difficult[i][j].IsMine = 1;
+                    }
+                }
+            }break;
     }
 }
 

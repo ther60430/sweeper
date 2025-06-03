@@ -168,6 +168,7 @@ public:
 	void ExpandEmptyCells_simple(int y, int x);
 	void ExpandEmptyCells_middle(int y, int x);
 	void ExpandEmptyCells_difficult(int y, int x);
+	void setdefeat(){defeat = false;};
 };
 
 #endif
