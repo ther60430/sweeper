@@ -15,6 +15,7 @@
 #include <conio.h>
 #include <random>
 #include <chrono>
+#include<string>
 
 using namespace std;
 
